@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="anim.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="ytg-stage" id="bg"></div>
+  <header>
+    <div class="logo" id="logo">&#10022;</div>
+    <h1>Gold <span>Glass</span></h1>
+    <span class="toast" id="toast"></span>
+    <span class="grow"></span>
+    <button class="devbtn" id="devbtn">&#9881; Customize</button>
+    <label class="sw" title="Turn the theme on / off"><input type="checkbox" data-k="enabled"><i></i></label>
+  </header>
+
+  <main>
+    <!-- LEFT: live preview + horizontal theme slider underneath -->
+    <div class="left">
+      <div class="pv" id="pv">
+        <div class="ytg-stage" id="stage"></div>
+        <div class="mock">
+          <div class="mtop"><i class="mmenu"></i><b class="mlogo"></b><i class="msearch"></i><i class="mbtn"></i><i class="mav"></i></div>
+          <div class="mchips"><i class="on"></i><i></i><i></i><i></i></div>
+          <div class="mside"><i></i><i></i><i></i><i></i></div>
+          <div class="mgrid">
+            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+          </div>
+          <div class="flash" id="flash"></div>
+          <div class="mpop"><b></b><i></i><i></i><i class="s"></i></div>
+        </div>
+      </div>
+      <div class="cur"><b id="curName"></b><span id="curAnim"></span></div>
+
+      <!-- THEMES: row-wise carousel with large navigation arrows -->
+      <div class="themes-header">
+        <h2>Themes</h2>
+        <span class="hint">Click arrows or cards to switch</span>
+      </div>
+      <div class="themes-carousel-container">
+        <button class="carousel-nav-btn prev" id="themePrev" title="Previous theme" aria-label="Previous theme">&#10094;</button>
+        <div class="themes-track-wrap">
+          <div class="themes-track" id="grid"></div>
+        </div>
+        <button class="carousel-nav-btn next" id="themeNext" title="Next theme" aria-label="Next theme">&#10095;</button>
+      </div>
+      <input type="file" id="file" accept="image/*" hidden>
+      <div id="msg"></div>
+    </div>
+
+    <!-- RIGHT: vertical scroll pickers for Animation and Speed -->
+    <div class="right">
+      <section id="viewGallery">
+        <div class="wheel-section">
+          <div class="wheel-col">
+            <div class="head"><h2>Animation</h2></div>
+            <div class="wheel-picker" id="motionWheel">
+              <div class="wheel-list" id="pills"></div>
+            </div>
+          </div>
+          <div class="wheel-col">
+            <div class="head"><h2>Speed</h2></div>
+            <div class="wheel-picker" id="speedWheel">
+              <div class="wheel-list" id="speedList"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="viewDev" hidden>
+        <div class="head"><button class="back" id="exitDev">&#8592; Back</button><h2>Customize</h2><span></span></div>
+        <div class="tabs" id="tabs"></div>
+        <div class="devbody" id="devBody"></div>
+        <button id="reset" class="ghost wide">Reset everything</button>
+      </section>
+    </div>
+  </main>
+
+  <script src="themes.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

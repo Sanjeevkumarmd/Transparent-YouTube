@@ -1,0 +1,69 @@
+{
+  "manifest_version": 3,
+  "name": "YT Gold Glass",
+  "version": "10.0.6",
+  "description": "Visual themes for YouTube: liquid-glass look, animated wallpapers, gold titles, video-matched colours and ambient light.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://m.youtube.com/*",
+    "https://sponsor.ajay.app/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "YT Gold Glass",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://m.youtube.com/*"
+      ],
+      "css": [
+        "anim.css",
+        "content.css"
+      ],
+      "js": [
+        "themes.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://m.youtube.com/*"
+      ],
+      "js": [
+        "pageworld.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ads",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  }
+}

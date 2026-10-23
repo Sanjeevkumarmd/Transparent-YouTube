@@ -1,0 +1,4 @@
+Single purpose: visual themes for youtube.com (glass look, wallpapers, animations, colours).
+Permissions: storage (saves your settings), unlimitedStorage (saves the photo you upload as wallpaper).
+Data: nothing is collected, sent or shared. A tiny 8x8 copy of the playing video is read locally only to pick colours.
+Does not block, skip or change ads. Does not use remote code.
