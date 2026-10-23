@@ -152,22 +152,97 @@ html[data-ytg-on] :is(yt-related-chip-cloud-renderer, ytd-feed-filter-chip-bar-r
   display: none !important;
 }
 
-/* ---------- LIQUID GLASS: buttons, search ---------- */
-html[data-ytg-on] .yt-spec-button-shape-next--tonal,
-html[data-ytg-on] .yt-spec-button-shape-next--outline,
-html[data-ytg-on] yt-searchbox .ytSearchboxComponentInputBox,
-html[data-ytg-on] ytd-searchbox #container,
-html[data-ytg-on] .ytSearchboxComponentSearchButton,
-html[data-ytg-on] #search-icon-legacy {
-  background: var(--ytg-fill) !important;
-  border: 1px solid var(--ytg-edge) !important;
-  box-shadow: var(--ytg-shine) !important;
-  color: var(--ytg-text) !important;
+/* ---------- Frosted Liquid Glass Search Bar: High Contrast in All Themes ---------- */
+html[data-ytg-on] :is(
+  yt-searchbox .ytSearchboxComponentInputBox,
+  ytd-searchbox #container,
+  .ytSearchboxComponentInputBox
+) {
+  background: color-mix(in srgb, var(--ytg-bg1) 70%, rgba(18, 14, 8, 0.72)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 70%, rgba(18, 14, 8, 0.72)) !important;
+  border: 1.5px solid color-mix(in srgb, var(--ytg-a) 48%, rgba(255, 255, 255, 0.22)) !important;
+  border-right: none !important;
+  border-radius: 999px 0 0 999px !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  transition: border-color .25s ease, box-shadow .25s ease !important;
 }
-html[data-ytg-on] yt-searchbox .ytSearchboxComponentInputBox,
-html[data-ytg-on] ytd-searchbox #container { border-radius: 999px 0 0 999px !important; border-right: 0 !important; }
-html[data-ytg-on] .ytSearchboxComponentSearchButton,
-html[data-ytg-on] #search-icon-legacy { border-radius: 0 999px 999px 0 !important; }
+
+html[data-ytg-on] :is(
+  .ytSearchboxComponentSearchButton,
+  #search-icon-legacy
+) {
+  background: color-mix(in srgb, var(--ytg-bg1) 78%, rgba(25, 20, 12, 0.85)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 78%, rgba(25, 20, 12, 0.85)) !important;
+  border: 1.5px solid color-mix(in srgb, var(--ytg-a) 48%, rgba(255, 255, 255, 0.22)) !important;
+  border-radius: 0 999px 999px 0 !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  transition: border-color .25s ease, box-shadow .25s ease, background-color .25s ease !important;
+}
+
+html[data-ytg-on] :is(
+  .ytSearchboxComponentSearchButton:hover,
+  #search-icon-legacy:hover
+) {
+  background: color-mix(in srgb, var(--ytg-a) 25%, rgba(25, 20, 12, 0.9)) !important;
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
+}
+
+html[data-ytg-on] :is(
+  yt-searchbox:focus-within .ytSearchboxComponentInputBox,
+  ytd-searchbox:focus-within #container,
+  yt-searchbox:focus-within .ytSearchboxComponentSearchButton,
+  ytd-searchbox:focus-within #search-icon-legacy
+) {
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--ytg-a) 60%, transparent), 0 4px 18px rgba(0,0,0,0.5) !important;
+}
+
+/* Voice search & Search clear button */
+html[data-ytg-on] :is(#voice-search-button, .ytSearchboxComponentMicButton) {
+  background: color-mix(in srgb, var(--ytg-bg1) 70%, rgba(18, 14, 8, 0.72)) !important;
+  border: 1.5px solid color-mix(in srgb, var(--ytg-a) 48%, rgba(255, 255, 255, 0.22)) !important;
+  border-radius: 50% !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease !important;
+}
+html[data-ytg-on] :is(#voice-search-button:hover, .ytSearchboxComponentMicButton:hover) {
+  transform: scale(1.08) !important;
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--ytg-a) 60%, transparent) !important;
+}
+
+/* Search input text and placeholder: crisp high contrast */
+html[data-ytg-on] :is(yt-searchbox input, input#search, .ytSearchboxComponentInput) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+  font-weight: 500 !important;
+}
+html[data-ytg-on] :is(yt-searchbox input::placeholder, input#search::placeholder, .ytSearchboxComponentInput::placeholder) {
+  color: rgba(255, 255, 255, 0.75) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.75) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Search, Clear & Mic Icons: vibrant theme color */
+html[data-ytg-on] :is(
+  #search-icon-legacy,
+  .ytSearchboxComponentSearchButton,
+  #voice-search-button,
+  .ytSearchboxComponentMicButton,
+  #clear-button
+) :is(svg, path, yt-icon) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.85)) !important;
+}
 
 /* ---------- Suggestion Chips: Pill Shape, NO Borders, Subtle Glass (Main & Watch Screens) ---------- */
 html[data-ytg-on] :is(
@@ -302,12 +377,125 @@ html[data-ytg-on] ytd-playlist-panel-renderer {
 html[data-ytg-on] ytd-comments#comments,
 html[data-ytg-on] ytd-engagement-panel-section-list-renderer { padding: 12px 16px; }
 
-/* Sidebar items */
-html[data-ytg-on] ytd-guide-entry-renderer a.yt-simple-endpoint { border-radius: 12px; }
-html[data-ytg-on] ytd-guide-entry-renderer a.yt-simple-endpoint:hover,
-html[data-ytg-on] ytd-guide-entry-renderer[active] a.yt-simple-endpoint,
-html[data-ytg-on] ytd-mini-guide-entry-renderer:hover {
-  background: var(--ytg-fill) !important; box-shadow: inset 0 1px 0 var(--ytg-edge);
+/* Sidebar items & container: Frosted Liquid Glass with High Contrast in All Themes */
+html[data-ytg-on] :is(
+  ytd-guide-renderer #guide-content,
+  #guide-content.ytd-app,
+  ytd-mini-guide-renderer
+) {
+  background: color-mix(in srgb, var(--ytg-bg1) 40%, rgba(15, 12, 8, 0.65)) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-right: 1px solid color-mix(in srgb, var(--ytg-a) 25%, rgba(255, 255, 255, 0.12)) !important;
+}
+
+html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer) a.yt-simple-endpoint {
+  border-radius: 12px;
+  transition: all .2s ease !important;
+}
+
+html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer) :is(yt-formatted-string, .title, span) {
+  color: #f2ede2 !important;
+  -webkit-text-fill-color: #f2ede2 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+  font-weight: 500 !important;
+}
+
+html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer) :is(yt-icon, .yt-spec-button-shape-next__icon) svg :is(path, circle, rect, polygon) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7)) !important;
+  transition: fill .3s ease !important;
+}
+
+html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer):hover a.yt-simple-endpoint {
+  background: color-mix(in srgb, var(--ytg-a) 20%, rgba(255, 255, 255, 0.08)) !important;
+}
+
+html[data-ytg-on] :is(ytd-guide-entry-renderer[active], ytd-mini-guide-entry-renderer[active]) a.yt-simple-endpoint {
+  background: color-mix(in srgb, var(--ytg-a) 28%, rgba(255, 255, 255, 0.12)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--ytg-a) 40%, transparent) !important;
+}
+
+html[data-ytg-on] :is(ytd-guide-entry-renderer[active], ytd-mini-guide-entry-renderer[active]) :is(yt-formatted-string, .title) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 700 !important;
+}
+
+html[data-ytg-on] ytd-guide-section-renderer #guide-section-title {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* ========== High-Contrast Theme Arrows & Navigation Across YouTube ========== */
+html[data-ytg-on] :is(
+  #chips-wrapper #left-arrow button,
+  #chips-wrapper #right-arrow button,
+  yt-chip-cloud-renderer #left-arrow button,
+  yt-chip-cloud-renderer #right-arrow button,
+  ytd-rich-shelf-renderer #arrow-left button,
+  ytd-rich-shelf-renderer #arrow-right button,
+  ytd-guide-collapsible-section-entry-renderer #expander-item,
+  ytd-playlist-panel-renderer :is(#previous-button, #next-button, #expand-button) button,
+  ytd-shorts :is(#navigation-button-up, #navigation-button-down) button
+) {
+  background: color-mix(in srgb, var(--ytg-bg1) 68%, rgba(18, 14, 8, 0.75)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 68%, rgba(18, 14, 8, 0.75)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 45%, rgba(255, 255, 255, 0.22)) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html[data-ytg-on] :is(
+  #chips-wrapper #left-arrow,
+  #chips-wrapper #right-arrow,
+  yt-chip-cloud-renderer #left-arrow,
+  yt-chip-cloud-renderer #right-arrow,
+  ytd-rich-shelf-renderer #arrow-left,
+  ytd-rich-shelf-renderer #arrow-right,
+  ytd-guide-collapsible-section-entry-renderer #expander-item,
+  ytd-playlist-panel-renderer :is(#previous-button, #next-button, #expand-button),
+  ytd-shorts :is(#navigation-button-up, #navigation-button-down)
+) :is(svg, path, yt-icon, .yt-spec-button-shape-next__icon) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.85)) !important;
+}
+
+html[data-ytg-on] :is(
+  #chips-wrapper #left-arrow button:hover,
+  #chips-wrapper #right-arrow button:hover,
+  yt-chip-cloud-renderer #left-arrow button:hover,
+  yt-chip-cloud-renderer #right-arrow button:hover,
+  ytd-rich-shelf-renderer #arrow-left button:hover,
+  ytd-rich-shelf-renderer #arrow-right button:hover,
+  ytd-playlist-panel-renderer :is(#previous-button, #next-button, #expand-button) button:hover,
+  ytd-shorts :is(#navigation-button-up, #navigation-button-down) button:hover
+) {
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--ytg-a) 60%, transparent), 0 4px 18px rgba(0,0,0,0.6) !important;
+  transform: scale(1.1) !important;
+}
+
+/* Masthead Top Icons (Burger menu, notifications bell, avatar) */
+html[data-ytg-on] ytd-masthead :is(
+  #guide-button,
+  ytd-notification-topbar-button-renderer,
+  #notification-button,
+  #buttons yt-icon-button
+) :is(svg, path, yt-icon, .yt-spec-button-shape-next__icon) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.75)) !important;
 }
 
 /* Thumbnails */
@@ -1203,13 +1391,13 @@ html[data-ytg-on] ytd-shorts :is(#actions, #overlay, [class*="sound-button"], [c
 html[data-ytg-on] ytd-shorts .ytp-play-progress { background: var(--ytg-a) !important; }
 html[data-ytg-on] ytd-shorts .html5-video-player, html[data-ytg-on] ytd-reel-video-renderer { background: var(--ytg-fill) !important; }
 html[data-ytg-on] ytd-reel-video-renderer #player-container, html[data-ytg-on] ytd-reel-video-renderer .player-container { transition: opacity .35s ease; }
-/* gold accents: search + mic icons, selected sidebar item, YouTube wordmark */
+/* Vibrant active theme accents: search + mic icons, selected sidebar item */
 html[data-ytg-on] #search-icon-legacy svg, html[data-ytg-on] .ytSearchboxComponentSearchButton svg, html[data-ytg-on] #voice-search-button svg,
-html[data-ytg-on] #search-icon-legacy path, html[data-ytg-on] .ytSearchboxComponentSearchButton path, html[data-ytg-on] #voice-search-button path { fill: var(--ytg-gold-eff) !important; }
+html[data-ytg-on] #search-icon-legacy path, html[data-ytg-on] .ytSearchboxComponentSearchButton path, html[data-ytg-on] #voice-search-button path { fill: var(--ytg-a) !important; color: var(--ytg-a) !important; }
 html[data-ytg-on] ytd-guide-entry-renderer[active] :is(yt-formatted-string, .title), html[data-ytg-on] ytd-mini-guide-entry-renderer[active] .title {
-  color: var(--ytg-gold-eff) !important; -webkit-text-fill-color: var(--ytg-gold-eff) !important; font-weight: 700;
+  color: var(--ytg-a) !important; -webkit-text-fill-color: var(--ytg-a) !important; font-weight: 700;
 }
-html[data-ytg-on] ytd-guide-entry-renderer[active] svg path, html[data-ytg-on] ytd-mini-guide-entry-renderer[active] svg path { fill: var(--ytg-gold-eff) !important; }
+html[data-ytg-on] ytd-guide-entry-renderer[active] svg path, html[data-ytg-on] ytd-mini-guide-entry-renderer[active] svg path { fill: var(--ytg-a) !important; color: var(--ytg-a) !important; }
 
 /* ---------- fullscreen: smooth, instant, completely like native YouTube ---------- */
 html[data-ytg-fs] #ytg-stage .a1, html[data-ytg-fs] #ytg-stage .a2, html[data-ytg-fs] #ytg-stage .wall { animation-play-state: paused !important; }
@@ -1288,12 +1476,12 @@ html[data-ytg-on] ytd-rich-item-renderer:hover ytd-thumbnail, html[data-ytg-on] 
 @property --ytg-edge { syntax: "<color>"; inherits: true; initial-value: rgba(255,255,255,.3); }
 @property --ytg-pop { syntax: "<color>"; inherits: true; initial-value: rgba(40,30,10,.3); }
 /* easy-to-read card text: titles, channel, views, posted */
-html[data-ytg-on] { --ytg-tsh: 0 1px 3px rgba(0,0,0,.55); --ytg-icon-soft: color-mix(in srgb, var(--ytg-a) 62%, var(--ytg-text)); }
+html[data-ytg-on] { --ytg-tsh: 0 1px 3px rgba(0,0,0,.55); --ytg-icon-soft: var(--ytg-a); }
 html[data-ytg-on][data-ytg-mode="light"] { --ytg-tsh: 0 1px 2px rgba(255,255,255,.7); }
 html[data-ytg-on] :is(#metadata-line span, ytd-video-meta-block, #channel-name a, .yt-content-metadata-view-model-wiz__metadata-text, .yt-content-metadata-view-model__metadata-text, #owner-sub-count) { color: color-mix(in srgb, var(--ytg-text) 88%, transparent) !important; }
 /* watch title backing: very soft dark haze, no edges */
-/* premium soft-gold icons: share, more (...), sidebar, top bar, menus */
-html[data-ytg-on] :is(ytd-watch-metadata, ytd-menu-renderer, ytd-guide-renderer, ytd-mini-guide-renderer, ytd-masthead #end, ytd-popup-container, #above-the-fold, ytd-comments) :is(yt-icon, .yt-spec-button-shape-next__icon, button) svg :is(path, circle, rect) { fill: var(--ytg-icon-soft); }
+/* premium theme icons: share, more (...), sidebar, top bar, menus */
+html[data-ytg-on] :is(ytd-watch-metadata, ytd-menu-renderer, ytd-guide-renderer, ytd-mini-guide-renderer, ytd-masthead #end, ytd-popup-container, #above-the-fold, ytd-comments) :is(yt-icon, .yt-spec-button-shape-next__icon, button) svg :is(path, circle, rect) { fill: var(--ytg-a) !important; color: var(--ytg-a) !important; }
 html[data-ytg-on] ytd-topbar-logo-renderer svg path { fill: revert-layer; }
 
 html[data-ytg-on] ytd-watch-metadata #title { background: none !important; padding: 0 !important; border-radius: 0 !important; display: block !important; }
@@ -1343,9 +1531,9 @@ html[data-ytg-on] :is(ytd-watch-metadata #description, ytd-watch-metadata #descr
 }
 html[data-ytg-on] :is(ytd-text-inline-expander, #description, ytd-structured-description-content-renderer) :is(yt-attributed-string, span, yt-formatted-string) { color: var(--ytg-text) !important; }
 html[data-ytg-on] :is(ytd-text-inline-expander, #description) a { color: var(--ytg-meta) !important; }
-/* every top-bar icon (menu, search, mic, bell, create) in the theme tint */
-html[data-ytg-on] ytd-masthead :is(#center, #end) :is(yt-icon, button, .yt-spec-button-shape-next__icon) svg :is(path, circle, rect),
-html[data-ytg-on] #search-icon-legacy svg path, html[data-ytg-on] .ytSearchboxComponentSearchButton svg path, html[data-ytg-on] #voice-search-button svg path { fill: var(--ytg-icon-soft) !important; }
+/* every top-bar icon (menu, search, mic, bell, create) in the vibrant theme tint */
+html[data-ytg-on] ytd-masthead :is(#start, #center, #end) :is(yt-icon, button, .yt-spec-button-shape-next__icon) svg :is(path, circle, rect):not(ytd-topbar-logo-renderer *):not(#logo *),
+html[data-ytg-on] #search-icon-legacy svg path, html[data-ytg-on] .ytSearchboxComponentSearchButton svg path, html[data-ytg-on] #voice-search-button svg path { fill: var(--ytg-a) !important; color: var(--ytg-a) !important; }
 html[data-ytg-on] ytd-masthead ytd-topbar-logo-renderer svg path { fill: revert-layer !important; }
 
 /* Real video ad skip button: prominently visible, enabled, and styled with theme glow */
@@ -1741,7 +1929,10 @@ html[data-ytg-on] :is(
   -webkit-text-fill-color: var(--ytg-text) !important;
   text-decoration: none !important;
 }
-html[data-ytg-on] ytd-masthead :is(#start, #center, #end) :is(yt-icon, button, .yt-spec-button-shape-next__icon) svg :is(path, circle, rect):not(ytd-topbar-logo-renderer *):not(#logo *) { fill: var(--ytg-icon-soft) !important; }
+html[data-ytg-on] ytd-masthead :is(#start, #center, #end) :is(yt-icon, button, .yt-spec-button-shape-next__icon) svg :is(path, circle, rect):not(ytd-topbar-logo-renderer *):not(#logo *) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
 
 /* ========== Player settings menu & quality selection ========== */
 /* Ultra-transparent liquid frosted glass with strong backdrop blur — NOT heavy dark black */

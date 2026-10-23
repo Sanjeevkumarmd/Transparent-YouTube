@@ -7,9 +7,10 @@
   position: absolute; inset: 0; overflow: hidden; pointer-events: none;
   contain: strict; isolation: isolate;
   background: linear-gradient(135deg, var(--ytg-bg1), var(--ytg-bg2));
+  transition: background 0.5s cubic-bezier(.2,.8,.2,1);
 }
 .ytg-stage > div { position: absolute; inset: 0; }
-.ytg-stage .a1, .ytg-stage .a2 { display: none; will-change: transform; isolation: isolate; }
+.ytg-stage .a1, .ytg-stage .a2 { display: none; will-change: transform, opacity; isolation: isolate; transition: opacity 0.5s cubic-bezier(.2,.8,.2,1); }
 .ytg-stage.busy .a1, .ytg-stage.busy .a2, .ytg-stage.busy .wall { animation-play-state: paused !important; }
 
 /* wallpaper + slow colour drift (every theme moves a little, all the time) */

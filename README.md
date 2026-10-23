@@ -1,7 +1,7 @@
 # ✨ Transparent YouTube (YT Gold Glass)
 
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-gold?style=for-the-badge&logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/mv3/intro/)
-[![Version](https://img.shields.io/badge/Version-10.0.16-d4af37?style=for-the-badge)](manifest.json)
+[![Version](https://img.shields.io/badge/Version-10.0.17-d4af37?style=for-the-badge)](manifest.json)
 [![Platform](https://img.shields.io/badge/Browser-Chrome%20%7C%20Edge%20%7C%20Brave-blue?style=for-the-badge)](https://www.google.com/chrome/)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge)](LICENSE)
 

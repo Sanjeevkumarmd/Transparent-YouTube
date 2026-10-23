@@ -138,18 +138,39 @@
     const r = resolve(s), wall = el.children[0], im = el.children[1];
     const key = r.wall + "|" + r.anim + "|" + (img ? img.length : 0) + "|" + s.theme;
     const bv = vars(s, mode), cur = { w: (r.wall !== "image" && r.wall !== "none" ? WALLS[r.wall] : ""), a: bv["--ytg-bg1"], b: bv["--ytg-bg2"] };
-    if (el._key && el._key !== key && el._cur && !el.closest(".tc") && el.id !== "bg") {
-      // silky smooth crossfade between themes
-      let old = el.querySelector(".old"); if (old) old.remove();
-      old = document.createElement("div"); old.className = "old";
-      const p = el._cur;
-      old.style.cssText = `background:${p.w ? p.w + "," : ""}linear-gradient(135deg,${p.a},${p.b});background-size:cover;opacity:1;transition:none;will-change:opacity;z-index:5`;
-      el.appendChild(old);
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        old.style.transition = "opacity 0.5s cubic-bezier(.2,.8,.2,1)";
-        old.style.opacity = "0";
-      }));
-      setTimeout(() => old.remove(), 520);
+    const oldAnim = el.dataset.anim;
+    const isAnimChange = oldAnim && oldAnim !== r.anim;
+    const isThemeChange = el._cur && (el._cur.a !== cur.a || el._cur.b !== cur.b || el._cur.w !== cur.w);
+
+    if (el._key && el._key !== key && !el.closest(".tc") && el.id !== "bg") {
+      if (isAnimChange) {
+        // Silky smooth crossfade between animations
+        let oldA = el.querySelector(".old-anim"); if (oldA) oldA.remove();
+        oldA = document.createElement("div");
+        oldA.className = "old-anim";
+        const a1 = el.querySelector(".a1"), a2 = el.querySelector(".a2");
+        if (a1) oldA.appendChild(a1.cloneNode(true));
+        if (a2) oldA.appendChild(a2.cloneNode(true));
+        oldA.style.cssText = "position:absolute;inset:0;pointer-events:none;z-index:3;opacity:1;transition:opacity 0.5s cubic-bezier(.2,.8,.2,1);will-change:opacity;";
+        el.appendChild(oldA);
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          oldA.style.opacity = "0";
+        }));
+        setTimeout(() => oldA.remove(), 520);
+      }
+      if (isThemeChange && el._cur) {
+        // Silky smooth crossfade between themes
+        let old = el.querySelector(".old"); if (old) old.remove();
+        old = document.createElement("div"); old.className = "old";
+        const p = el._cur;
+        old.style.cssText = `background:${p.w ? p.w + "," : ""}linear-gradient(135deg,${p.a},${p.b});background-size:cover;opacity:1;transition:none;will-change:opacity;z-index:1`;
+        el.appendChild(old);
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          old.style.transition = "opacity 0.5s cubic-bezier(.2,.8,.2,1)";
+          old.style.opacity = "0";
+        }));
+        setTimeout(() => old.remove(), 520);
+      }
     }
     el._cur = cur;
     el._key = key;
