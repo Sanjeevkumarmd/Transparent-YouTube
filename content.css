@@ -1663,10 +1663,49 @@ html[data-ytg-on] :is(.ytp-autonav-toggle-button, .ytp-button[data-tooltip-targe
 html[data-ytg-on] ytd-compact-autoplay-renderer tp-yt-paper-toggle-button[checked] :is(#toggleBar, #toggleButton) {
   background-color: var(--ytg-a) !important;
 }
-html[data-ytg-on] .ytp-bezel { background: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 38%, rgba(20,20,20,.25)) !important;
-  border: 1px solid var(--ytg-edge); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-html[data-ytg-on] .ytp-bezel-text-wrapper { background: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 38%, rgba(20,20,20,.25)) !important; }
-html[data-ytg-on] .ytp-bezel svg path, html[data-ytg-on] .ytp-bezel svg use { fill: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 40%, #fff) !important; }
+/* Video seek skipping indicator (e.g. < - 15, doubletap seek bezel): text & icon in active theme */
+html[data-ytg-on] :is(
+  .ytp-bezel,
+  .ytp-bezel-text-wrapper,
+  .ytp-doubletap-ui,
+  .ytp-doubletap-seek-info,
+  [class*="ytp-doubletap"],
+  [class*="ytp-bezel"]
+) {
+  background: color-mix(in srgb, var(--ytg-bg1) 45%, rgba(15, 12, 8, 0.45)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 45%, rgba(255, 255, 255, 0.2)) !important;
+  border-radius: 999px !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  backdrop-filter: blur(14px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 12px color-mix(in srgb, var(--ytg-a) 40%, transparent) !important;
+}
+
+html[data-ytg-on] :is(
+  .ytp-bezel-text,
+  .ytp-bezel-text-wrapper,
+  .ytp-doubletap-seek-info-text,
+  .ytp-doubletap-seek-info span,
+  [class*="ytp-doubletap"] span,
+  [class*="ytp-bezel"] span
+) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 10px color-mix(in srgb, var(--ytg-a) 60%, transparent) !important;
+}
+
+html[data-ytg-on] :is(
+  .ytp-bezel,
+  .ytp-doubletap-ui,
+  .ytp-doubletap-seek-info,
+  [class*="ytp-doubletap"],
+  [class*="ytp-bezel"]
+) :is(svg, path, use, polygon) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9)) !important;
+}
 html[data-ytg-on] .ytp-large-play-button svg path { fill: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 40%, #fff) !important; }
 /* smooth sidebar open/close */
 html[data-ytg-on] tp-yt-app-drawer { transition: transform .38s cubic-bezier(.2,.8,.2,1), visibility .38s !important; }
@@ -1680,10 +1719,16 @@ html[data-ytg-on] tp-yt-app-drawer #contentContainer {
   -webkit-backdrop-filter: blur(26px) saturate(1.3); backdrop-filter: blur(26px) saturate(1.3);
   border-radius: 0 22px 22px 0 !important;
 }
-/* description + metadata: glass, never black */
+/* description + metadata: glass, never black; #meta must remain 100% transparent */
+html[data-ytg-on] ytd-watch-flexy #meta {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
 html[data-ytg-on] ytd-watch-metadata #description, html[data-ytg-on] ytd-watch-metadata #description-inner,
 html[data-ytg-on] ytd-text-inline-expander, html[data-ytg-on] #description.ytd-watch-metadata, html[data-ytg-on] #snippet,
-html[data-ytg-on] ytd-watch-metadata #bottom-row, html[data-ytg-on] ytd-watch-flexy #meta, html[data-ytg-on] ytd-structured-description-content-renderer {
+html[data-ytg-on] ytd-watch-metadata #bottom-row, html[data-ytg-on] ytd-structured-description-content-renderer {
   background: var(--ytg-fill) !important; border: 0 !important; box-shadow: none !important; border-radius: 16px;
 }
 /* carousel / shelf scroll buttons */
@@ -1990,7 +2035,7 @@ html[data-ytg-on] :is(
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
 }
 
-/* Real video ad skip button: prominently visible, enabled, and styled with theme glow */
+/* Real video ad skip button: prominently visible, enabled, styled with theme glow, theme font & theme icon */
 html[data-ytg-on] :is(
   .ytp-skip-ad-button,
   .ytp-ad-skip-button,
@@ -2002,7 +2047,9 @@ html[data-ytg-on] :is(
 ) {
   opacity: 1 !important;
   pointer-events: auto !important;
-  display: flex !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
   visibility: visible !important;
   z-index: 2147483647 !important;
 }
@@ -2013,14 +2060,66 @@ html[data-ytg-on] :is(
   .ytp-ad-skip-button-modern,
   .ytp-ad-skip-button-container button
 ) {
-  background: rgba(18, 14, 8, 0.9) !important;
-  border: 1px solid var(--ytg-edge) !important;
-  color: var(--ytg-text) !important;
+  background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.85)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 55%, rgba(255, 255, 255, 0.25)) !important;
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
   border-radius: 999px !important;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.6), 0 0 12px color-mix(in srgb, var(--ytg-a) 45%, transparent) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.6), 0 0 14px color-mix(in srgb, var(--ytg-a) 45%, transparent) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   font-weight: 700 !important;
+  padding: 6px 14px !important;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease !important;
+}
+
+html[data-ytg-on] :is(
+  .ytp-skip-ad-button,
+  .ytp-ad-skip-button,
+  .ytp-ad-skip-button-modern,
+  .ytp-ad-skip-button-container button
+):hover {
+  transform: translateY(-1px) scale(1.04) !important;
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--ytg-a) 65%, transparent), 0 4px 18px rgba(0,0,0,0.7) !important;
+}
+
+/* Ad Skip Button Text & Icons: both styled in active theme */
+html[data-ytg-on] :is(
+  .ytp-skip-ad-button,
+  .ytp-ad-skip-button,
+  .ytp-ad-skip-button-modern,
+  .ytp-ad-skip-button-container,
+  .ytp-skip-ad
+) :is(
+  .ytp-ad-text,
+  .ytp-ad-skip-button-text,
+  span,
+  div
+) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+}
+
+html[data-ytg-on] :is(
+  .ytp-skip-ad-button,
+  .ytp-ad-skip-button,
+  .ytp-ad-skip-button-modern,
+  .ytp-ad-skip-button-container,
+  .ytp-skip-ad
+) :is(
+  .ytp-ad-skip-button-icon,
+  yt-icon,
+  svg,
+  path,
+  use,
+  polygon
+) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.8)) !important;
 }
 
 /* icons inside the player: clean SVG fill, themed to active theme, no boxy button backgrounds */
@@ -2492,7 +2591,7 @@ html[data-ytg-on] .ytp-caption-segment {
   box-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
 }
 
-/* In-video Sponsor / Paid Promotion Skip button */
+/* In-video Sponsor / Paid Promotion Skip button: theme font & theme icon */
 #ytg-skip-sponsor {
   position: absolute;
   right: 24px;
@@ -2503,9 +2602,10 @@ html[data-ytg-on] .ytp-caption-segment {
   gap: 8px;
   padding: 8px 16px;
   border-radius: 999px;
-  background: linear-gradient(145deg, rgba(20,16,8,.82), rgba(10,8,4,.92)) !important;
-  color: var(--ytg-a, #f6dd93) !important;
-  border: 1px solid var(--ytg-a, #d4af37) !important;
+  background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.88)) !important;
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 55%, rgba(255, 255, 255, 0.25)) !important;
   box-shadow: 0 4px 20px rgba(0,0,0,.6), 0 0 14px color-mix(in srgb, var(--ytg-a) 40%, transparent) !important;
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
@@ -2515,7 +2615,7 @@ html[data-ytg-on] .ytp-caption-segment {
   cursor: pointer;
   opacity: 0;
   transform: translateY(8px) scale(0.95);
-  transition: opacity .25s ease, transform .25s cubic-bezier(.2,.8,.2,1), background-color .2s ease;
+  transition: opacity .25s ease, transform .25s cubic-bezier(.2,.8,.2,1), background-color .2s ease, border-color .2s ease;
   pointer-events: auto;
 }
 #ytg-skip-sponsor.on {
@@ -2525,11 +2625,26 @@ html[data-ytg-on] .ytp-caption-segment {
 #ytg-skip-sponsor:hover {
   background: linear-gradient(135deg, color-mix(in srgb, var(--ytg-a) 45%, #000), color-mix(in srgb, var(--ytg-a) 70%, #000)) !important;
   color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 6px 24px rgba(0,0,0,.7), 0 0 20px color-mix(in srgb, var(--ytg-a) 60%, transparent) !important;
 }
+#ytg-skip-sponsor span {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 700;
+}
+#ytg-skip-sponsor:hover span {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
 #ytg-skip-sponsor svg {
-  fill: currentColor;
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
+#ytg-skip-sponsor:hover svg {
+  fill: #fff !important;
+  color: #fff !important;
 }
 
 /* Smooth buttery 0.5s global theme color transitions */

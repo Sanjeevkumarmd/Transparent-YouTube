@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "YT Gold Glass",
-  "version": "10.0.21",
+  "version": "10.0.22",
   "description": "Visual themes for YouTube: liquid-glass look, animated wallpapers, gold titles, video-matched colours and ambient light.",
   "permissions": [
     "storage",
