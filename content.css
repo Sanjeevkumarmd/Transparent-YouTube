@@ -152,20 +152,20 @@ html[data-ytg-on] :is(yt-related-chip-cloud-renderer, ytd-feed-filter-chip-bar-r
   display: none !important;
 }
 
-/* ---------- Frosted Liquid Glass Search Bar: High Contrast in All Themes ---------- */
+/* ---------- Frosted Liquid Glass Search Bar: 10% Slightly Transparent & Themed Icons ---------- */
 html[data-ytg-on] :is(
   yt-searchbox .ytSearchboxComponentInputBox,
   ytd-searchbox #container,
   .ytSearchboxComponentInputBox
 ) {
-  background: color-mix(in srgb, var(--ytg-bg1) 70%, rgba(18, 14, 8, 0.72)) !important;
-  background-color: color-mix(in srgb, var(--ytg-bg1) 70%, rgba(18, 14, 8, 0.72)) !important;
-  border: 1.5px solid color-mix(in srgb, var(--ytg-a) 48%, rgba(255, 255, 255, 0.22)) !important;
+  background: color-mix(in srgb, var(--ytg-bg1) 12%, rgba(18, 14, 8, 0.10)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 12%, rgba(18, 14, 8, 0.10)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 35%, rgba(255, 255, 255, 0.15)) !important;
   border-right: none !important;
   border-radius: 999px 0 0 999px !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
   transition: border-color .25s ease, box-shadow .25s ease !important;
 }
 
@@ -173,13 +173,13 @@ html[data-ytg-on] :is(
   .ytSearchboxComponentSearchButton,
   #search-icon-legacy
 ) {
-  background: color-mix(in srgb, var(--ytg-bg1) 78%, rgba(25, 20, 12, 0.85)) !important;
-  background-color: color-mix(in srgb, var(--ytg-bg1) 78%, rgba(25, 20, 12, 0.85)) !important;
-  border: 1.5px solid color-mix(in srgb, var(--ytg-a) 48%, rgba(255, 255, 255, 0.22)) !important;
+  background: color-mix(in srgb, var(--ytg-bg1) 14%, rgba(25, 20, 12, 0.12)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 14%, rgba(25, 20, 12, 0.12)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 35%, rgba(255, 255, 255, 0.15)) !important;
   border-radius: 0 999px 999px 0 !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
   transition: border-color .25s ease, box-shadow .25s ease, background-color .25s ease !important;
 }
 
@@ -187,7 +187,7 @@ html[data-ytg-on] :is(
   .ytSearchboxComponentSearchButton:hover,
   #search-icon-legacy:hover
 ) {
-  background: color-mix(in srgb, var(--ytg-a) 25%, rgba(25, 20, 12, 0.9)) !important;
+  background: color-mix(in srgb, var(--ytg-a) 25%, rgba(25, 20, 12, 0.25)) !important;
   border-color: var(--ytg-a) !important;
   box-shadow: 0 0 14px color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
 }
@@ -202,14 +202,15 @@ html[data-ytg-on] :is(
   box-shadow: 0 0 18px color-mix(in srgb, var(--ytg-a) 60%, transparent), 0 4px 18px rgba(0,0,0,0.5) !important;
 }
 
-/* Voice search & Search clear button */
+/* Voice search & Search clear button: 10% slightly transparent with themed icon */
 html[data-ytg-on] :is(#voice-search-button, .ytSearchboxComponentMicButton) {
-  background: color-mix(in srgb, var(--ytg-bg1) 70%, rgba(18, 14, 8, 0.72)) !important;
-  border: 1.5px solid color-mix(in srgb, var(--ytg-a) 48%, rgba(255, 255, 255, 0.22)) !important;
+  background: color-mix(in srgb, var(--ytg-bg1) 12%, rgba(18, 14, 8, 0.10)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 12%, rgba(18, 14, 8, 0.10)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 35%, rgba(255, 255, 255, 0.15)) !important;
   border-radius: 50% !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease !important;
 }
 html[data-ytg-on] :is(#voice-search-button:hover, .ytSearchboxComponentMicButton:hover) {
@@ -238,13 +239,13 @@ html[data-ytg-on] :is(
   #voice-search-button,
   .ytSearchboxComponentMicButton,
   #clear-button
-) :is(svg, path, yt-icon) {
+) :is(svg, path, yt-icon, .yt-icon-shape, .yt-spec-button-shape-next__icon) {
   fill: var(--ytg-a) !important;
   color: var(--ytg-a) !important;
   filter: drop-shadow(0 1px 3px rgba(0,0,0,0.85)) !important;
 }
 
-/* ---------- Suggestion Chips: Pill-Curved, ZERO Outer Border, Themed Typography & Subtle Shadow ---------- */
+/* ---------- Suggestion Chips: Pill-Curved, ZERO Outer Border, NO Selection/Hover Jump Animation ---------- */
 html[data-ytg-on] :is(
   yt-chip-cloud-chip-renderer,
   chip-shape,
@@ -268,9 +269,10 @@ html[data-ytg-on] :is(
   border-color: transparent !important;
   outline: none !important;
   border-radius: 999px !important;
+  transform: none !important;
 }
 
-/* Inactive suggestion chips: smooth pill-curved background, soft shadow, NO outer border */
+/* Inactive suggestion chips: smooth pill-curved background, soft shadow, NO outer border, NO jump */
 html[data-ytg-on] :is(
   .ytChipShapeInactive,
   yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
@@ -285,10 +287,11 @@ html[data-ytg-on] :is(
   border-color: transparent !important;
   outline: none !important;
   border-radius: 999px !important;
+  transform: none !important;
   -webkit-backdrop-filter: blur(14px) !important;
   backdrop-filter: blur(14px) !important;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35), 0 0 6px color-mix(in srgb, var(--ytg-a) 20%, transparent) !important;
-  transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease !important;
+  transition: background-color .2s ease, box-shadow .2s ease !important;
 }
 
 /* Suggestion chips text: Theme-wise text color matching the active theme */
@@ -308,14 +311,14 @@ html[data-ytg-on] :is(
   transition: color .2s ease !important;
 }
 
-/* Hover state: gentle scale, brighter theme text, warm glow, NO border */
+/* Hover state: steady background tint, NO scaling or jump animation */
 html[data-ytg-on] :is(
   .ytChipShapeInactive,
   yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
   chip-shape:not([selected]),
   ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer:not([selected])
 ):hover :is(button, .ytChipShapeChip, .yt-spec-button-shape-next, chip-shape, yt-chip-cloud-chip-renderer) {
-  transform: translateY(-1.5px) scale(1.03) !important;
+  transform: none !important;
   background: color-mix(in srgb, var(--ytg-a) 25%, rgba(20, 16, 10, 0.65)) !important;
   border: none !important;
   border-width: 0 !important;
@@ -333,7 +336,7 @@ html[data-ytg-on] :is(
   -webkit-text-fill-color: #ffffff !important;
 }
 
-/* Active / Selected suggestion chip (e.g. "All"): Vibrant theme pill, NO border */
+/* Active / Selected suggestion chip (e.g. "All"): Vibrant theme pill, NO border, NO jump animation */
 html[data-ytg-on] :is(
   .ytChipShapeActive,
   [aria-selected="true"],
@@ -357,6 +360,7 @@ html[data-ytg-on] :is(
   border: none !important;
   border-width: 0 !important;
   outline: none !important;
+  transform: none !important;
   box-shadow: 0 3px 12px color-mix(in srgb, var(--ytg-a) 55%, transparent), 0 2px 6px rgba(0,0,0,0.3) !important;
   border-radius: 999px !important;
 }
@@ -496,11 +500,34 @@ html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer) :
   font-weight: 500 !important;
 }
 
-html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer) :is(yt-icon, .yt-spec-button-shape-next__icon) svg :is(path, circle, rect, polygon) {
+html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer):not(:has(a[href*="premium"])):not(:has(a[href*="kids"])):not(:has(a[href*="music"])) :is(yt-icon, .yt-spec-button-shape-next__icon) svg :is(path, circle, rect, polygon) {
   fill: var(--ytg-a) !important;
   color: var(--ytg-a) !important;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7)) !important;
   transition: fill .3s ease !important;
+}
+
+/* Official Icons & Colors for YouTube Premium, YouTube Kids & Music in Sidebar */
+html[data-ytg-on] :is(
+  ytd-guide-entry-renderer:has(a[href*="premium"]),
+  ytd-guide-entry-renderer:has(a[href*="kids"]),
+  ytd-guide-entry-renderer:has(a[href*="music"]),
+  ytd-mini-guide-entry-renderer:has(a[href*="premium"]),
+  ytd-mini-guide-entry-renderer:has(a[href*="kids"]),
+  ytd-mini-guide-entry-renderer:has(a[href*="music"]),
+  [aria-label*="YouTube Premium" i],
+  [aria-label*="YouTube Kids" i],
+  [aria-label*="YouTube Music" i],
+  [title*="YouTube Premium" i],
+  [title*="YouTube Kids" i],
+  [title*="YouTube Music" i],
+  a[href*="premium"],
+  a[href*="kids"],
+  a[href*="music"]
+) :is(yt-icon, yt-icon-shape, svg) :is(path, polygon, circle, rect, g) {
+  fill: revert-layer !important;
+  color: revert-layer !important;
+  filter: none !important;
 }
 
 html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer):hover a.yt-simple-endpoint {
@@ -741,73 +768,69 @@ html[data-ytg-on] :is(
   filter: drop-shadow(0 0 6px var(--ytg-a)) !important;
 }
 
-/* ========== YouTube Masthead "+ Create" Button: Animated & Theme-Wise ========== */
-@keyframes ytg-create-pulse {
+/* ========== YouTube Masthead "+ Create" Button: Smoothly Emits Theme Light Only ========== */
+@keyframes ytg-create-glow {
   0%, 100% {
     transform: translateY(0) scale(1);
-    box-shadow: 0 0 6px color-mix(in srgb, var(--ytg-a) 25%, transparent);
-    border-color: color-mix(in srgb, var(--ytg-a) 40%, rgba(255, 255, 255, 0.18));
+    box-shadow: 0 0 8px color-mix(in srgb, var(--ytg-a) 30%, transparent), 0 2px 8px rgba(0,0,0,0.3);
+    border-color: color-mix(in srgb, var(--ytg-a) 45%, rgba(255, 255, 255, 0.20));
   }
   50% {
-    transform: translateY(-1px) scale(1.03);
-    box-shadow: 0 0 14px color-mix(in srgb, var(--ytg-a) 55%, transparent), 0 2px 8px rgba(0,0,0,0.25);
-    border-color: color-mix(in srgb, var(--ytg-a) 75%, rgba(255, 255, 255, 0.35));
+    transform: translateY(-0.5px) scale(1.025);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--ytg-a) 70%, transparent), 0 0 34px color-mix(in srgb, var(--ytg-a) 35%, transparent), 0 2px 12px rgba(0,0,0,0.4);
+    border-color: color-mix(in srgb, var(--ytg-a) 90%, rgba(255, 255, 255, 0.45));
   }
 }
 
-html[data-ytg-on] :is(
-  ytd-masthead,
-  #masthead-container,
-  #masthead,
-  ytd-shorts,
-  ytd-reel-video-renderer,
-  ytd-reel-player-overlay-renderer,
-  #actions,
-  ytd-app
-) :is(
+/* Masthead Create Button: Smooth light emission matching active theme */
+html[data-ytg-on] ytd-masthead :is(
   ytd-button-renderer:has(yt-icon[icon*="create"], svg path[d*="M14 10H3v2h11v-2zm0-4H3v2h11V6zM3 16h7v-2H3v2zm11.5-6"]),
   ytd-button-renderer:has(path[d*="M14 10"]),
   yt-button-view-model:has(path[d*="M14 10"]),
   yt-button-shape:has(path[d*="M14 10"]),
   [aria-label*="Create" i],
-  button[aria-label*="Create" i],
-  #remix-button button,
-  [aria-label*="Remix" i] button
+  button[aria-label*="Create" i]
 ) {
-  background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.45)) !important;
-  background-color: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.45)) !important;
-  border: 1px solid color-mix(in srgb, var(--ytg-a) 40%, rgba(255, 255, 255, 0.18)) !important;
+  background: color-mix(in srgb, var(--ytg-a) 18%, rgba(20, 16, 12, 0.45)) !important;
+  background-color: color-mix(in srgb, var(--ytg-a) 18%, rgba(20, 16, 12, 0.45)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 45%, rgba(255, 255, 255, 0.20)) !important;
   border-radius: 999px !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  animation: ytg-create-pulse 3.8s ease-in-out infinite !important;
+  animation: ytg-create-glow 3.5s ease-in-out infinite !important;
   transition: transform .28s cubic-bezier(.2,.8,.2,1), border-color .28s ease, box-shadow .28s ease !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
 
-html[data-ytg-on] :is(
-  ytd-masthead,
-  #masthead-container,
-  #masthead,
-  ytd-shorts,
-  ytd-reel-video-renderer,
-  ytd-reel-player-overlay-renderer,
-  #actions,
-  ytd-app
-) :is(
+html[data-ytg-on] ytd-masthead :is(
   ytd-button-renderer:has(path[d*="M14 10"]),
   yt-button-view-model:has(path[d*="M14 10"]),
   yt-button-shape:has(path[d*="M14 10"]),
   [aria-label*="Create" i],
-  button[aria-label*="Create" i],
-  #remix-button button,
-  [aria-label*="Remix" i] button
+  button[aria-label*="Create" i]
 ):hover {
   animation: none !important;
-  transform: translateY(-2px) scale(1.06) !important;
+  transform: translateY(-1.5px) scale(1.05) !important;
   border-color: var(--ytg-a) !important;
-  box-shadow: 0 0 18px color-mix(in srgb, var(--ytg-a) 65%, transparent), 0 4px 14px rgba(0,0,0,0.35) !important;
+  box-shadow: 0 0 24px color-mix(in srgb, var(--ytg-a) 80%, transparent), 0 0 38px color-mix(in srgb, var(--ytg-a) 40%, transparent) !important;
+}
+
+/* Shorts Remix Button: Steady theme glass without light emission animation */
+html[data-ytg-on] :is(
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer,
+  #actions
+) :is(
+  #remix-button button,
+  [aria-label*="Remix" i] button
+) {
+  background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.45)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 40%, rgba(255, 255, 255, 0.18)) !important;
+  border-radius: 999px !important;
+  animation: none !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
 }
 
 html[data-ytg-on] :is(
@@ -1317,33 +1340,91 @@ html[data-ytg-on] :is(
   text-shadow: 0 0 10px color-mix(in srgb, var(--ytg-a) 60%, transparent) !important;
 }
 
-/* Big watch page hero title */
-html[data-ytg-on] h1.ytd-watch-metadata,
-html[data-ytg-on] h1.ytd-watch-metadata yt-formatted-string,
-html[data-ytg-on] .ytp-title-link {
+/* Watch Page Hero Title: 100% transparent, ZERO background/rectangle, clean drop shadow */
+html[data-ytg-on] :is(
+  ytd-watch-metadata #title,
+  h1.ytd-watch-metadata,
+  #title.ytd-watch-metadata,
+  ytd-watch-metadata h1,
+  ytd-watch-metadata yt-formatted-string,
+  ytd-watch-metadata #title-text,
+  #above-the-fold #title,
+  #above-the-fold h1,
+  #above-the-fold yt-formatted-string
+),
+html[data-ytg-on] :is(
+  ytd-watch-metadata #title,
+  h1.ytd-watch-metadata,
+  #title.ytd-watch-metadata
+) * {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+html[data-ytg-on] :is(
+  h1.ytd-watch-metadata,
+  h1.ytd-watch-metadata yt-formatted-string,
+  #title.ytd-watch-metadata yt-formatted-string,
+  .ytp-title-link
+) {
   color: color-mix(in srgb, var(--ytg-a) 75%, #ffffff) !important;
   -webkit-text-fill-color: color-mix(in srgb, var(--ytg-a) 75%, #ffffff) !important;
   font-weight: 700 !important;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.85);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 0, 0, 0.75) !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9)) !important;
+  animation: none !important;
 }
 
-html[data-ytg-on][data-ytg-shimmer] h1.ytd-watch-metadata yt-formatted-string {
-  background-image: linear-gradient(90deg, color-mix(in srgb, var(--ytg-a) 75%, #ffffff), #ffffff 50%, color-mix(in srgb, var(--ytg-a) 75%, #ffffff)) !important;
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent !important;
-  animation: ytg-shimmer var(--ytg-shimmer, 14s) linear infinite;
+/* Playing Video Channel Name ONLY: theme color with subtle shadow */
+html[data-ytg-on] ytd-watch-flexy :is(
+  #owner #channel-name,
+  ytd-video-owner-renderer #channel-name,
+  ytd-watch-metadata #owner #channel-name,
+  #owner ytd-channel-name
+) :is(a, yt-formatted-string, span) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.85) !important;
 }
-html:not([data-ytg-shimmer]) h1.ytd-watch-metadata yt-formatted-string { animation: none; }
 
-/* Metadata lines (views, date, channel name) - high-contrast clear readability */
+/* Video chapters in player & video info: theme matched */
+html[data-ytg-on] :is(
+  .ytp-chapter-title,
+  .ytp-chapter-title-content,
+  .ytp-chapter-container button,
+  .ytp-chapter-hover-container
+) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+}
+
+html[data-ytg-on] :is(
+  ytd-macro-markers-list-item-renderer #details #title,
+  ytd-macro-markers-list-item-renderer #time,
+  ytd-macro-markers-list-item-renderer[active] #details #title
+) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 600 !important;
+}
+
+/* Metadata lines (views, date, card channel name) - clean readable white, not forced theme everywhere */
 html[data-ytg-on] :is(
   ytd-video-meta-block,
   #metadata-line,
   #metadata-line span,
-  #channel-name a,
-  #channel-name yt-formatted-string,
+  ytd-compact-video-renderer #channel-name a,
+  ytd-rich-grid-media #channel-name a,
+  ytd-grid-video-renderer #channel-name a,
   .yt-content-metadata-view-model-wiz__metadata-text,
   .yt-content-metadata-view-model__metadata-text,
   ytd-grid-video-renderer #metadata,
@@ -1565,10 +1646,23 @@ html[data-ytg-on] .ytp-play-progress, html[data-ytg-on] .ytp-swatch-background-c
   background: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 72%, #fff) !important; background-image: none !important;
 }
 html[data-ytg-on] .ytp-scrubber-button { background: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 60%, #fff) !important; }
-/* autoplay switch + centre pause/play flash follow the video colour */
-html[data-ytg-on] .ytp-autonav-toggle-button[aria-checked="true"] { background: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 80%, #fff) !important; }
-html[data-ytg-on] .ytp-autonav-toggle-button { background: rgba(255,255,255,.35) !important; }
-html[data-ytg-on] .ytp-autonav-toggle-button::after, html[data-ytg-on] .ytp-autonav-toggle-button-container { color: #fff; }
+/* autoplay switch & icon: follow active theme color */
+html[data-ytg-on] .ytp-autonav-toggle-button[aria-checked="true"] {
+  background: var(--ytg-a) !important;
+}
+html[data-ytg-on] .ytp-autonav-toggle-button[aria-checked="true"]::after {
+  background: #ffffff !important;
+}
+html[data-ytg-on] .ytp-autonav-toggle-button {
+  background: rgba(255,255,255,.32) !important;
+}
+html[data-ytg-on] :is(.ytp-autonav-toggle-button, .ytp-button[data-tooltip-target-id="ytp-autonav-toggle-button"]) svg path {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
+html[data-ytg-on] ytd-compact-autoplay-renderer tp-yt-paper-toggle-button[checked] :is(#toggleBar, #toggleButton) {
+  background-color: var(--ytg-a) !important;
+}
 html[data-ytg-on] .ytp-bezel { background: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 38%, rgba(20,20,20,.25)) !important;
   border: 1px solid var(--ytg-edge); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 html[data-ytg-on] .ytp-bezel-text-wrapper { background: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 38%, rgba(20,20,20,.25)) !important; }
@@ -1727,7 +1821,25 @@ html[data-ytg-on] :is(#metadata-line span, ytd-video-meta-block, #channel-name a
 /* watch title backing: very soft dark haze, no edges */
 /* premium theme icons: share, more (...), sidebar, top bar, menus */
 html[data-ytg-on] :is(ytd-watch-metadata, ytd-menu-renderer, ytd-guide-renderer, ytd-mini-guide-renderer, ytd-masthead #end, ytd-popup-container, #above-the-fold, ytd-comments) :is(yt-icon, .yt-spec-button-shape-next__icon, button) svg :is(path, circle, rect) { fill: var(--ytg-a) !important; color: var(--ytg-a) !important; }
-html[data-ytg-on] ytd-topbar-logo-renderer svg path { fill: revert-layer; }
+
+/* YouTube Logo: Keep official red play button, theme the wordmark "YouTube" and country code "IN" font */
+html[data-ytg-on] ytd-topbar-logo-renderer #country-code {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 700 !important;
+}
+
+html[data-ytg-on] ytd-topbar-logo-renderer :is(#youtube-paths, g[id*="paths"], g:not(:first-child)) path,
+html[data-ytg-on] ytd-topbar-logo-renderer svg path:not([fill*="red" i]):not([fill="#FF0000"]):not([fill="#ff0000"]):not([fill="#f00"]):not([d*="M27.97"]) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
+
+html[data-ytg-on] ytd-topbar-logo-renderer svg path[fill="#FF0000"],
+html[data-ytg-on] ytd-topbar-logo-renderer svg path[fill="#ff0000"],
+html[data-ytg-on] ytd-topbar-logo-renderer svg path[fill*="red" i] {
+  fill: #FF0000 !important;
+}
 
 html[data-ytg-on] ytd-watch-metadata #title { background: none !important; padding: 0 !important; border-radius: 0 !important; display: block !important; }
 
@@ -1779,7 +1891,104 @@ html[data-ytg-on] :is(ytd-text-inline-expander, #description) a { color: var(--y
 /* every top-bar icon (menu, search, mic, bell, create) in the vibrant theme tint */
 html[data-ytg-on] ytd-masthead :is(#start, #center, #end) :is(yt-icon, button, .yt-spec-button-shape-next__icon) svg :is(path, circle, rect):not(ytd-topbar-logo-renderer *):not(#logo *),
 html[data-ytg-on] #search-icon-legacy svg path, html[data-ytg-on] .ytSearchboxComponentSearchButton svg path, html[data-ytg-on] #voice-search-button svg path { fill: var(--ytg-a) !important; color: var(--ytg-a) !important; }
-html[data-ytg-on] ytd-masthead ytd-topbar-logo-renderer svg path { fill: revert-layer !important; }
+
+/* ========== Channel Join / Sponsor Button: Themed Liquid Glass Pill ========== */
+html[data-ytg-on] :is(
+  #sponsor-button,
+  ytd-button-renderer#sponsor-button,
+  ytd-watch-metadata #sponsor-button,
+  ytd-watch-metadata yt-button-shape:has(button[aria-label*="Join" i]),
+  button[aria-label*="Join this channel" i],
+  button[aria-label*="Join" i]
+) {
+  background: color-mix(in srgb, var(--ytg-a) 15%, rgba(20, 16, 12, 0.40)) !important;
+  background-color: color-mix(in srgb, var(--ytg-a) 15%, rgba(20, 16, 12, 0.40)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 55%, rgba(255, 255, 255, 0.20)) !important;
+  border-radius: 999px !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), 0 0 8px color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
+  transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease !important;
+}
+
+html[data-ytg-on] :is(
+  #sponsor-button,
+  ytd-button-renderer#sponsor-button,
+  ytd-watch-metadata #sponsor-button,
+  ytd-watch-metadata yt-button-shape:has(button[aria-label*="Join" i]),
+  button[aria-label*="Join this channel" i],
+  button[aria-label*="Join" i]
+) :is(span, .yt-spec-button-shape-next__button-text-content, yt-formatted-string, [role="text"]) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 600 !important;
+}
+
+html[data-ytg-on] :is(
+  #sponsor-button,
+  ytd-button-renderer#sponsor-button,
+  ytd-watch-metadata #sponsor-button,
+  button[aria-label*="Join this channel" i],
+  button[aria-label*="Join" i]
+):hover {
+  background: color-mix(in srgb, var(--ytg-a) 28%, rgba(20, 16, 12, 0.50)) !important;
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--ytg-a) 55%, transparent), 0 2px 12px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ========== Like & Dislike Buttons: Normal Frosted Pill (NO Neon Animation), Themed Icons & Liked Count ========== */
+html[data-ytg-on] :is(
+  ytd-segmented-like-dislike-button-renderer,
+  segmented-like-dislike-button-view-model,
+  ytd-like-button-renderer,
+  like-button-view-model,
+  dislike-button-view-model
+) {
+  animation: none !important;
+  box-shadow: none !important;
+}
+
+html[data-ytg-on] :is(
+  ytd-segmented-like-dislike-button-renderer,
+  segmented-like-dislike-button-view-model
+) :is(
+  button,
+  yt-button-shape button,
+  .yt-spec-button-shape-next
+) {
+  animation: none !important;
+  box-shadow: none !important;
+}
+
+/* Thumbs Up & Thumbs Down Icons: Clean Active Theme Color */
+html[data-ytg-on] :is(
+  ytd-segmented-like-dislike-button-renderer,
+  segmented-like-dislike-button-view-model,
+  ytd-like-button-renderer,
+  like-button-view-model,
+  dislike-button-view-model,
+  #top-level-buttons-computed ytd-segmented-like-dislike-button-renderer
+) :is(yt-icon, .yt-spec-button-shape-next__icon, svg) :is(path, polygon, circle, rect) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
+
+/* Liked Counts: Theme-tinted text color */
+html[data-ytg-on] :is(
+  ytd-segmented-like-dislike-button-renderer,
+  segmented-like-dislike-button-view-model,
+  ytd-like-button-renderer,
+  like-button-view-model
+) :is(
+  span,
+  .yt-spec-button-shape-next__button-text-content,
+  yt-formatted-string
+) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
 
 /* Real video ad skip button: prominently visible, enabled, and styled with theme glow */
 html[data-ytg-on] :is(
@@ -2072,19 +2281,9 @@ html[data-ytg-on] :is(
   .yt-lockup-metadata-view-model-wiz__title,
   .ytLockupMetadataViewModelTitle,
   .ytLockupMetadataViewModelTitle span,
-  #channel-name a,
-  #owner #channel-name,
-  ytd-video-owner-renderer #channel-name,
-  ytd-channel-name yt-formatted-string,
-  ytd-watch-metadata #title,
-  h1.ytd-watch-metadata,
   h1.title,
-  #title.ytd-watch-metadata,
-  yt-formatted-string,
-  .yt-core-attributed-string,
   ytd-menu-renderer button,
-  ytd-segmented-like-dislike-button-renderer button,
-  #top-level-buttons-computed button
+  #top-level-buttons-computed button:not(ytd-segmented-like-dislike-button-renderer *)
 ) {
   color: var(--ytg-text) !important;
   -webkit-text-fill-color: var(--ytg-text) !important;
