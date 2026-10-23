@@ -470,11 +470,25 @@ html[data-ytg-on] :is(
   filter: drop-shadow(0 0 6px var(--ytg-a)) !important;
 }
 
-/* ========== YouTube Masthead "+ Create" Button: Theme-Wise ========== */
+/* ========== YouTube Masthead "+ Create" Button: Animated & Theme-Wise ========== */
+@keyframes ytg-create-pulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--ytg-a) 25%, transparent);
+    border-color: color-mix(in srgb, var(--ytg-a) 40%, rgba(255, 255, 255, 0.18));
+  }
+  50% {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--ytg-a) 55%, transparent), 0 2px 8px rgba(0,0,0,0.25);
+    border-color: color-mix(in srgb, var(--ytg-a) 75%, rgba(255, 255, 255, 0.35));
+  }
+}
+
 html[data-ytg-on] ytd-masthead :is(
   ytd-button-renderer:has(yt-icon[icon*="create"], svg path[d*="M14 10H3v2h11v-2zm0-4H3v2h11V6zM3 16h7v-2H3v2zm11.5-6"]),
   ytd-button-renderer:has(path[d*="M14 10"]),
   yt-button-view-model:has(path[d*="M14 10"]),
+  yt-button-shape:has(path[d*="M14 10"]),
   [aria-label*="Create" i],
   button[aria-label*="Create" i]
 ) {
@@ -483,38 +497,56 @@ html[data-ytg-on] ytd-masthead :is(
   border-radius: 999px !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  transition: all .2s ease !important;
+  animation: ytg-create-pulse 3.8s ease-in-out infinite !important;
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), border-color .28s ease, box-shadow .28s ease !important;
 }
 
 html[data-ytg-on] ytd-masthead :is(
   ytd-button-renderer:has(path[d*="M14 10"]),
   yt-button-view-model:has(path[d*="M14 10"]),
+  yt-button-shape:has(path[d*="M14 10"]),
   [aria-label*="Create" i],
   button[aria-label*="Create" i]
 ):hover {
+  animation: none !important;
+  transform: translateY(-2px) scale(1.06) !important;
   border-color: var(--ytg-a) !important;
-  box-shadow: 0 0 14px color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--ytg-a) 65%, transparent), 0 4px 14px rgba(0,0,0,0.35) !important;
 }
 
 html[data-ytg-on] ytd-masthead :is(
   ytd-button-renderer:has(path[d*="M14 10"]),
   yt-button-view-model:has(path[d*="M14 10"]),
+  yt-button-shape:has(path[d*="M14 10"]),
   [aria-label*="Create" i],
   button[aria-label*="Create" i]
 ) :is(span, .yt-spec-button-shape-next__button-text-content, .yt-core-attributed-string) {
   color: var(--ytg-a) !important;
   -webkit-text-fill-color: var(--ytg-a) !important;
   font-weight: 600 !important;
+  transition: color .25s ease !important;
 }
 
 html[data-ytg-on] ytd-masthead :is(
   ytd-button-renderer:has(path[d*="M14 10"]),
   yt-button-view-model:has(path[d*="M14 10"]),
+  yt-button-shape:has(path[d*="M14 10"]),
   [aria-label*="Create" i],
   button[aria-label*="Create" i]
 ) :is(svg, path, yt-icon, .yt-spec-button-shape-next__icon) {
   fill: var(--ytg-a) !important;
   color: var(--ytg-a) !important;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), fill .25s ease !important;
+}
+
+html[data-ytg-on] ytd-masthead :is(
+  ytd-button-renderer:has(path[d*="M14 10"]),
+  yt-button-view-model:has(path[d*="M14 10"]),
+  yt-button-shape:has(path[d*="M14 10"]),
+  [aria-label*="Create" i],
+  button[aria-label*="Create" i]
+):hover :is(svg, yt-icon, .yt-spec-button-shape-next__icon) {
+  transform: rotate(90deg) scale(1.15) !important;
 }
 
 /* inner layers see-through, notification cards are flat rows (no boxes) */
