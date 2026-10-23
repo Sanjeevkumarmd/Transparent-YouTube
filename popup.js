@@ -1,4 +1,4 @@
-const { DEFAULTS: D, THEMES, ANIMS, vars, stage, resolve } = YTG;
+﻿const { DEFAULTS: D, THEMES, ANIMS, vars, stage, resolve } = YTG;
 let s = { ...D, bgImage: "" };
 const $ = id => document.getElementById(id);
 const dq = matchMedia("(prefers-color-scheme: dark)");
@@ -334,7 +334,7 @@ function paint() {
   paint.lastAnim = s.anim;
 
   if ($("curName")) $("curName").textContent = nm;
-  if ($("curAnim")) $("curAnim").textContent = "· " + animNm;
+  if ($("curAnim")) $("curAnim").textContent = "• " + animNm;
   paintControls();
   updateCarouselArrows();
   updateSpeedArrows();
@@ -434,10 +434,102 @@ $("file").addEventListener("change", async e => {
   } catch { $("msg").textContent = "Could not load that image."; }
 });
 
+// ---------- Mouse scroll wheel support: select one by one ----------
+function initWheelNavigation() {
+  const themeSection = document.querySelector(".themes-section-wide");
+  const animSection = document.querySelector(".anim-col-wide");
+  const speedSection = document.querySelector(".speed-col-vertical");
+
+  let themeWheelCooldown = 0;
+  if (themeSection) {
+    themeSection.addEventListener("wheel", e => {
+      e.preventDefault();
+      const now = Date.now();
+      if (now - themeWheelCooldown < 140) return;
+      const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      if (Math.abs(delta) < 4) return;
+      themeWheelCooldown = now;
+
+      const themeKeys = Object.keys(THEMES);
+      const curIdx = themeKeys.indexOf(s.theme);
+      const dir = delta > 0 ? 1 : -1;
+      let nextIdx = curIdx + dir;
+      if (nextIdx < 0) nextIdx = 0;
+      if (nextIdx >= themeKeys.length) nextIdx = themeKeys.length - 1;
+
+      if (nextIdx !== curIdx) {
+        const nextTheme = themeKeys[nextIdx];
+        save({ theme: nextTheme, wall: "auto" });
+        const targetBtn = document.querySelector(`#grid .tc.theme[data-id="${nextTheme}"]`);
+        if (targetBtn) {
+          targetBtn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        }
+        setTimeout(updateCarouselArrows, 320);
+      }
+    }, { passive: false });
+  }
+
+  let animWheelCooldown = 0;
+  if (animSection) {
+    animSection.addEventListener("wheel", e => {
+      e.preventDefault();
+      const now = Date.now();
+      if (now - animWheelCooldown < 140) return;
+      const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      if (Math.abs(delta) < 4) return;
+      animWheelCooldown = now;
+
+      const curAnimId = resolve(s).anim;
+      let curIdx = ANIMS.findIndex(a => a.id === s.anim || a.id === curAnimId);
+      if (curIdx === -1) curIdx = 0;
+      const dir = delta > 0 ? 1 : -1;
+      let nextIdx = curIdx + dir;
+      if (nextIdx < 0) nextIdx = 0;
+      if (nextIdx >= ANIMS.length) nextIdx = ANIMS.length - 1;
+
+      if (nextIdx !== curIdx) {
+        const nextAnim = ANIMS[nextIdx];
+        save({ anim: nextAnim.id });
+        flashText(nextAnim.name);
+      }
+    }, { passive: false });
+  }
+
+  let speedWheelCooldown = 0;
+  if (speedSection) {
+    speedSection.addEventListener("wheel", e => {
+      e.preventDefault();
+      const now = Date.now();
+      if (now - speedWheelCooldown < 140) return;
+      if (Math.abs(e.deltaY) < 4) return;
+      speedWheelCooldown = now;
+
+      const cur = parseFloat(s.speed || 1);
+      let curIdx = SPEEDS.findIndex(sp => Math.abs(sp.v - cur) < 0.15);
+      if (curIdx === -1) curIdx = 2; // 1.0x default
+      const dir = e.deltaY > 0 ? 1 : -1;
+      let nextIdx = curIdx + dir;
+      if (nextIdx < 0) nextIdx = 0;
+      if (nextIdx >= SPEEDS.length) nextIdx = SPEEDS.length - 1;
+
+      if (nextIdx !== curIdx) {
+        save({ speed: SPEEDS[nextIdx].v });
+        const track = $("speedList");
+        if (track && track.children[nextIdx]) {
+          track.children[nextIdx].scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        updateSpeedArrows();
+      }
+    }, { passive: false });
+  }
+}
+
 // ---------- Init ----------
 buildMotionWheel();
 buildSpeedWheel();
 initCarouselArrows();
 initSpeedArrows();
+initWheelNavigation();
 chrome.storage.local.get({ ...D, bgImage: "" }, v => { s = { ...D, ...v }; paint(); });
 dq.addEventListener("change", () => { lastImg = null; paint(); });
+
