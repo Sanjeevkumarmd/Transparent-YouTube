@@ -146,10 +146,10 @@
       old.style.cssText = `background:${p.w ? p.w + "," : ""}linear-gradient(135deg,${p.a},${p.b});background-size:cover;opacity:1;transition:none;will-change:opacity;z-index:5`;
       el.appendChild(old);
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        old.style.transition = "opacity 0.8s cubic-bezier(.2,.8,.2,1)";
+        old.style.transition = "opacity 0.5s cubic-bezier(.2,.8,.2,1)";
         old.style.opacity = "0";
       }));
-      setTimeout(() => old.remove(), 850);
+      setTimeout(() => old.remove(), 520);
     }
     el._cur = cur;
     el._key = key;

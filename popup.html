@@ -17,70 +17,71 @@
   </header>
 
   <main>
-    <!-- LEFT: live preview + horizontal theme slider underneath -->
-    <div class="left">
-      <div class="pv" id="pv">
-        <div class="ytg-stage" id="stage"></div>
-        <div class="mock">
-          <div class="mtop"><i class="mmenu"></i><b class="mlogo"></b><i class="msearch"></i><i class="mbtn"></i><i class="mav"></i></div>
-          <div class="mchips"><i class="on"></i><i></i><i></i><i></i></div>
-          <div class="mside"><i></i><i></i><i></i><i></i></div>
-          <div class="mgrid">
-            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-            <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-          </div>
-          <div class="flash" id="flash"></div>
-          <div class="mpop"><b></b><i></i><i></i><i class="s"></i></div>
-        </div>
-      </div>
-      <div class="cur"><b id="curName"></b><span id="curAnim"></span></div>
-
-      <!-- THEMES: row-wise carousel with large navigation arrows -->
-      <div class="themes-header">
-        <h2>Themes</h2>
-        <span class="hint">Click arrows or cards to switch</span>
-      </div>
-      <div class="themes-carousel-container">
-        <button class="carousel-nav-btn prev" id="themePrev" title="Previous theme" aria-label="Previous theme">&#10094;</button>
-        <div class="themes-track-wrap">
-          <div class="themes-track" id="grid"></div>
-        </div>
-        <button class="carousel-nav-btn next" id="themeNext" title="Next theme" aria-label="Next theme">&#10095;</button>
-      </div>
-      <input type="file" id="file" accept="image/*" hidden>
-      <div id="msg"></div>
-    </div>
-
-    <!-- RIGHT: vertical scroll pickers for Animation and Speed -->
-    <div class="right">
-      <section id="viewGallery">
-        <div class="wheel-section">
-          <div class="wheel-col">
-            <div class="head"><h2>Animation</h2></div>
-            <div class="wheel-picker" id="motionWheel">
-              <div class="wheel-list" id="pills"></div>
+    <section id="viewGallery" class="gallery-layout">
+      <!-- TOP: Live 16:9 Preview and Current Theme indicator -->
+      <div class="preview-center-wrap">
+        <div class="pv" id="pv">
+          <div class="ytg-stage" id="stage"></div>
+          <div class="mock">
+            <div class="mtop"><i class="mmenu"></i><b class="mlogo"></b><i class="msearch"></i><i class="mbtn"></i><i class="mav"></i></div>
+            <div class="mchips"><i class="on"></i><i></i><i></i><i></i></div>
+            <div class="mside"><i></i><i></i><i></i><i></i></div>
+            <div class="mgrid">
+              <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+              <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+              <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+              <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+              <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+              <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
             </div>
-          </div>
-          <div class="wheel-col">
-            <div class="head"><h2>Speed</h2></div>
-            <div class="wheel-picker" id="speedWheel">
-              <div class="wheel-list" id="speedList"></div>
-            </div>
+            <div class="flash" id="flash"></div>
+            <div class="mpop"><b></b><i></i><i></i><i class="s"></i></div>
           </div>
         </div>
-      </section>
+        <div class="cur"><b id="curName"></b><span id="curAnim"></span></div>
+      </div>
 
-      <section id="viewDev" hidden>
-        <div class="head"><button class="back" id="exitDev">&#8592; Back</button><h2>Customize</h2><span></span></div>
-        <div class="tabs" id="tabs"></div>
-        <div class="devbody" id="devBody"></div>
-        <button id="reset" class="ghost wide">Reset everything</button>
-      </section>
-    </div>
+      <!-- MIDDLE: Full-width Themes Carousel with smart conditional arrows -->
+      <div class="themes-section-wide">
+        <div class="themes-header">
+          <h2>Themes</h2>
+          <span class="hint">Click arrows or cards to switch</span>
+        </div>
+        <div class="themes-carousel-container">
+          <button class="carousel-nav-btn prev" id="themePrev" title="Previous theme" aria-label="Previous theme">&#10094;</button>
+          <div class="themes-track-wrap">
+            <div class="themes-track" id="grid"></div>
+          </div>
+          <button class="carousel-nav-btn next" id="themeNext" title="Next theme" aria-label="Next theme">&#10095;</button>
+        </div>
+        <input type="file" id="file" accept="image/*" hidden>
+        <div id="msg"></div>
+      </div>
+
+      <!-- BOTTOM: Animations (wide) and Speed (vertical mobile-alarm wheel with up/down arrows) -->
+      <div class="bottom-controls-bar">
+        <div class="anim-col-wide">
+          <div class="head"><h2>Animation</h2></div>
+          <div class="anim-cards-row" id="pills"></div>
+        </div>
+        <div class="speed-col-vertical">
+          <div class="head"><h2>Speed</h2></div>
+          <div class="speed-wheel-container">
+            <button class="speed-nav-btn up" id="speedUp" title="Increase speed" aria-label="Increase speed">&#9650;</button>
+            <div class="speed-wheel-track" id="speedList"></div>
+            <button class="speed-nav-btn down" id="speedDown" title="Decrease speed" aria-label="Decrease speed">&#9660;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEVELOPER CUSTOMIZATION VIEW -->
+    <section id="viewDev" hidden>
+      <div class="head"><button class="back" id="exitDev">&#8592; Back</button><h2>Customize</h2><span></span></div>
+      <div class="tabs" id="tabs"></div>
+      <div class="devbody" id="devBody"></div>
+      <button id="reset" class="ghost wide">Reset everything</button>
+    </section>
   </main>
 
   <script src="themes.js"></script>

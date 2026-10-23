@@ -169,7 +169,7 @@ html[data-ytg-on] ytd-searchbox #container { border-radius: 999px 0 0 999px !imp
 html[data-ytg-on] .ytSearchboxComponentSearchButton,
 html[data-ytg-on] #search-icon-legacy { border-radius: 0 999px 999px 0 !important; }
 
-/* ---------- Suggestion Chips: Inactive state (True Pill Shape, Translucent Liquid Frosted Glass) ---------- */
+/* ---------- Suggestion Chips: Pill Shape, NO Borders, Subtle Glass (Main & Watch Screens) ---------- */
 html[data-ytg-on] :is(
   yt-chip-cloud-chip-renderer,
   chip-shape,
@@ -187,30 +187,34 @@ html[data-ytg-on] :is(
   yt-chip-cloud-chip-renderer
 ) {
   border-radius: 999px !important;
+  border: none !important;
+  outline: none !important;
 }
 
+/* Inactive chips: smooth pill shape, translucent dark/theme-tinted backing, ZERO border */
 html[data-ytg-on] :is(
   .ytChipShapeInactive,
-  yt-chip-cloud-chip-renderer:not([selected]),
+  yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
   chip-shape:not([selected]),
-  #chips yt-chip-cloud-chip-renderer:not([selected])
+  #chips yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected)
 ) :is(button, .ytChipShapeChip, .yt-spec-button-shape-next) {
-  background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.50)) !important;
-  background-color: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.50)) !important;
-  border: 1px solid color-mix(in srgb, var(--ytg-a) 42%, rgba(255, 255, 255, 0.20)) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  background: color-mix(in srgb, var(--ytg-bg1) 50%, rgba(20, 16, 10, 0.40)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 50%, rgba(20, 16, 10, 0.40)) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   -webkit-backdrop-filter: blur(12px) !important;
   backdrop-filter: blur(12px) !important;
   border-radius: 999px !important;
-  transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .15s ease !important;
+  transition: background-color .2s ease, transform .15s ease !important;
 }
 
-/* Inactive chips text: crisp, bright, theme-matched */
+/* Inactive chips text: clean, readable theme typography */
 html[data-ytg-on] :is(
   .ytChipShapeInactive,
-  yt-chip-cloud-chip-renderer:not([selected]),
+  yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
   chip-shape:not([selected]),
-  #chips yt-chip-cloud-chip-renderer:not([selected])
+  #chips yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected)
 ) :is(*, span, .ytChipShapeText, #text, yt-formatted-string) {
   color: var(--ytg-text) !important;
   -webkit-text-fill-color: var(--ytg-text) !important;
@@ -219,18 +223,19 @@ html[data-ytg-on] :is(
   background: transparent !important;
 }
 
-/* Suggestion chips hover */
+/* Suggestion chips hover: soft gentle highlight without harsh borders */
 html[data-ytg-on] :is(
   .ytChipShapeInactive,
-  yt-chip-cloud-chip-renderer:not([selected]),
+  yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
   chip-shape:not([selected])
 ):hover :is(button, .ytChipShapeChip, .yt-spec-button-shape-next) {
-  background: color-mix(in srgb, var(--ytg-a) 30%, rgba(255, 255, 255, 0.18)) !important;
-  border-color: var(--ytg-a) !important;
-  box-shadow: 0 0 12px color-mix(in srgb, var(--ytg-a) 45%, transparent) !important;
+  background: color-mix(in srgb, var(--ytg-a) 18%, rgba(255, 255, 255, 0.08)) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-/* ---------- Suggestion Chips: Active / Selected state (Vibrant Theme Accent Pill, Never Black) ---------- */
+/* ---------- Suggestion Chips: Active / Selected state (Vibrant Theme Accent Pill, NO Border, Never Black) ---------- */
 html[data-ytg-on] :is(
   .ytChipShapeActive,
   [aria-selected="true"],
@@ -249,7 +254,8 @@ html[data-ytg-on] :is(
 ) :is(button, .ytChipShapeChip, .yt-spec-button-shape-next, yt-chip-cloud-chip-renderer, chip-shape) {
   background: linear-gradient(135deg, color-mix(in srgb, var(--ytg-a) 60%, #fff), var(--ytg-a) 70%, color-mix(in srgb, var(--ytg-a) 70%, #000)) !important;
   background-color: var(--ytg-a) !important;
-  border: 1px solid var(--ytg-edge) !important;
+  border: none !important;
+  outline: none !important;
   box-shadow: 0 2px 10px color-mix(in srgb, var(--ytg-a) 45%, transparent) !important;
   border-radius: 999px !important;
 }
@@ -458,7 +464,22 @@ html[data-ytg-on] :is(tp-yt-paper-dialog, ytd-confirm-dialog-renderer, yt-confir
   color: var(--ytg-text) !important;
 }
 
-html[data-ytg-on] tp-yt-iron-overlay-backdrop.opened {
+/* Guide drawer & hamburger menu opening: NEVER darken the theme background to pitch black */
+html[data-ytg-on] tp-yt-app-drawer #scrim,
+html[data-ytg-on] #scrim.tp-yt-app-drawer,
+html[data-ytg-on] tp-yt-app-drawer[opened] #scrim {
+  background: transparent !important;
+  background-color: transparent !important;
+  opacity: 0 !important;
+  pointer-events: auto;
+}
+
+/* Ensure backdrop only darkens on actual confirmation dialogs, not guide drawer */
+html[data-ytg-on] tp-yt-iron-overlay-backdrop:not(:has(~ tp-yt-paper-dialog)) {
+  background: transparent !important;
+  opacity: 0 !important;
+}
+html[data-ytg-on] tp-yt-iron-overlay-backdrop:has(~ tp-yt-paper-dialog).opened {
   background: rgba(0, 0, 0, 0.65) !important;
   backdrop-filter: blur(5px) !important;
   -webkit-backdrop-filter: blur(5px) !important;
@@ -539,33 +560,56 @@ html[data-ytg-on] ytd-shorts #navigation-button-down button {
   background: var(--ytg-fill) !important; border: 1px solid var(--ytg-edge) !important; box-shadow: var(--ytg-shine) !important;
 }
 
-/* ---------- GOLD = the title of the video you are watching (on a soft backing so it is easy to read) ---------- */
+/* ---------- Video titles: styled according to specific theme, slightly brighter for high readability ---------- */
+html[data-ytg-on] :is(
+  h1.ytd-watch-metadata,
+  h1.ytd-watch-metadata yt-formatted-string,
+  ytd-watch-metadata #title,
+  ytd-watch-metadata #title yt-formatted-string,
+  .ytp-title-link,
+  #video-title,
+  a#video-title,
+  yt-formatted-string#video-title,
+  ytd-compact-video-renderer #video-title,
+  ytd-rich-grid-media #video-title,
+  .yt-lockup-metadata-view-model-wiz__title,
+  .yt-lockup-metadata-view-model__title,
+  .ytLockupMetadataViewModelTitle,
+  .ytLockupMetadataViewModelTitle span,
+  ytd-playlist-renderer .title,
+  ytd-shelf-renderer #title,
+  ytd-rich-shelf-renderer #title,
+  ytd-engagement-panel-title-header-renderer #title-text
+) {
+  color: color-mix(in srgb, var(--ytg-a) 78%, #ffffff) !important;
+  -webkit-text-fill-color: color-mix(in srgb, var(--ytg-a) 78%, #ffffff) !important;
+  background: none !important;
+  font-weight: 600;
+}
+
 html[data-ytg-on] h1.ytd-watch-metadata,
+html[data-ytg-on] h1.ytd-watch-metadata yt-formatted-string,
 html[data-ytg-on] .ytp-title-link {
-  color: var(--ytg-gold-eff) !important;
-  background-image: var(--ytg-gold-grad) !important;
+  font-weight: 700 !important;
+}
+
+html[data-ytg-on][data-ytg-shimmer] h1.ytd-watch-metadata yt-formatted-string {
+  background-image: linear-gradient(90deg, color-mix(in srgb, var(--ytg-a) 75%, #ffffff), #ffffff 50%, color-mix(in srgb, var(--ytg-a) 75%, #ffffff)) !important;
   background-size: 220% 100%;
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent !important;
   animation: ytg-shimmer var(--ytg-shimmer, 14s) linear infinite;
 }
-html:not([data-ytg-shimmer]) h1.ytd-watch-metadata, html:not([data-ytg-shimmer]) .ytp-title-link { animation: none; }
-/* every other title: bright and easy to read */
-html[data-ytg-on] #video-title, html[data-ytg-on] a#video-title, html[data-ytg-on] yt-formatted-string#video-title,
-html[data-ytg-on] .yt-lockup-metadata-view-model-wiz__title, html[data-ytg-on] .yt-lockup-metadata-view-model__title,
-html[data-ytg-on] .ytLockupMetadataViewModelTitle, html[data-ytg-on] .ytLockupMetadataViewModelTitle span,
-html[data-ytg-on] ytd-playlist-renderer .title, html[data-ytg-on] ytd-shelf-renderer #title,
-html[data-ytg-on] ytd-rich-shelf-renderer #title, html[data-ytg-on] ytd-engagement-panel-title-header-renderer #title-text {
-  color: var(--ytg-text) !important; -webkit-text-fill-color: var(--ytg-text) !important; background: none !important; font-weight: 600;
-}
+html:not([data-ytg-shimmer]) h1.ytd-watch-metadata yt-formatted-string { animation: none; }
+
 html[data-ytg-on] ytd-video-meta-block, html[data-ytg-on] #metadata-line span, html[data-ytg-on] #channel-name a,
 html[data-ytg-on] .yt-content-metadata-view-model-wiz__metadata-text, html[data-ytg-on] .yt-content-metadata-view-model__metadata-text {
   color: var(--ytg-sub) !important;
 }
 @keyframes ytg-shimmer { to { background-position: 220% 0; } }
 
-/* ---------- Progress bar: simple, theme colour ---------- */
+/* ---------- Progress bar & Volume bar: theme colours ---------- */
 html[data-ytg-on] .ytp-progress-bar-container { height: 4px; }
 html[data-ytg-on] .ytp-progress-bar { background: transparent !important; }
 html[data-ytg-on] .ytp-progress-list { background: rgba(255,255,255,.22) !important; border-radius: 4px; overflow: hidden; }
@@ -576,6 +620,20 @@ html[data-ytg-on] .ytp-scrubber-button { background: var(--ytg-a) !important; }
 html[data-ytg-on] .ytp-gradient-bottom { background-image: linear-gradient(transparent, rgba(0,0,0,.14)) !important; }
 html[data-ytg-on] #progress.ytd-thumbnail-overlay-resume-playback-renderer,
 html[data-ytg-on] .ytThumbnailOverlayProgressBarHostWatchedProgressBarSegment { background: var(--ytg-a) !important; }
+
+/* Themed Volume Bar */
+html[data-ytg-on] .ytp-volume-slider-handle,
+html[data-ytg-on] .ytp-volume-slider-handle::before {
+  background: var(--ytg-a) !important;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
+}
+html[data-ytg-on] .ytp-volume-slider-handle::after {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+html[data-ytg-on] .ytp-volume-slider-handle:hover,
+html[data-ytg-on] .ytp-volume-slider:hover .ytp-volume-slider-handle {
+  filter: brightness(1.18);
+}
 
 /* ---------- Video colours: progress bar + player icons follow the playing video ---------- */
 html[data-ytg-on] .ytp-play-progress, html[data-ytg-on] .ytp-swatch-background-color,
@@ -645,8 +703,12 @@ html[data-ytg-on] ytd-guide-section-renderer:not(:last-child)::after, html[data-
 }
 html[data-ytg-on] ytd-popup-container ytd-notification-renderer { border-bottom: 0 !important; }
 html[data-ytg-on] tp-yt-app-drawer #contentContainer {
-  border: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: transparent !important;
-  -webkit-backdrop-filter: none; backdrop-filter: none;
+  background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(15,12,7,0.40)) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.4) !important;
+  backdrop-filter: blur(24px) saturate(1.4) !important;
+  border-right: 1px solid color-mix(in srgb, var(--ytg-a) 30%, rgba(255,255,255,0.15)) !important;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.35) !important;
+}
 }
 html[data-ytg-on] ytd-popup-container tp-yt-iron-dropdown #contentWrapper, html[data-ytg-on] .ytp-popup, html[data-ytg-on] .ytp-settings-menu {
   background:
@@ -930,7 +992,7 @@ html[data-ytg-on] :is(
   font-weight: 700 !important;
 }
 
-/* 2. Subscribed State: clean translucent frosted pill with theme-colored bell icon & chevron (NEVER plain white) */
+/* 2. Subscribed & Notification Bell State: clean translucent frosted pill with theme-colored bell icon & chevron (NEVER plain white) */
 html[data-ytg-on] [data-ytg-sub-state="subscribed"],
 html[data-ytg-on] :is(
   #subscribe-button,
@@ -938,15 +1000,23 @@ html[data-ytg-on] :is(
   yt-subscribe-button-view-model,
   ytd-subscription-notification-toggle-button-renderer-next,
   yt-subscription-notification-toggle-button-renderer-next,
-  #notification-preference-button
+  subscription-notification-toggle-button-shape-renderer,
+  #notification-preference-button,
+  #owner ytd-subscription-notification-toggle-button-renderer-next,
+  #owner yt-subscription-notification-toggle-button-renderer-next,
+  #owner #notification-preference-button,
+  ytd-subscribe-button-renderer ~ *,
+  ytd-subscribe-button-renderer ~ ytd-subscription-notification-toggle-button-renderer-next
 ) :is(
-  button.yt-spec-button-shape-next--tonal,
-  button.yt-spec-button-shape-next--mono,
+  button,
+  .yt-spec-button-shape-next,
+  .yt-spec-button-shape-next--tonal,
+  .yt-spec-button-shape-next--mono,
+  .yt-spec-button-shape-next--filled,
   button[aria-label*="Subscribed" i],
   button[aria-label*="notification" i],
   button[aria-label*="Unsubscribe" i],
-  ytd-subscription-notification-toggle-button-renderer-next button,
-  yt-subscription-notification-toggle-button-renderer-next button
+  button[aria-label*="setting" i]
 ) {
   background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.45)) !important;
   background-color: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.45)) !important;
@@ -955,6 +1025,8 @@ html[data-ytg-on] :is(
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
   border-radius: 999px !important;
+  color: var(--ytg-text) !important;
+  -webkit-text-fill-color: var(--ytg-text) !important;
 }
 
 html[data-ytg-on] [data-ytg-sub-state="subscribed"] :is(*, span, .yt-core-attributed-string),
@@ -964,15 +1036,11 @@ html[data-ytg-on] :is(
   yt-subscribe-button-view-model,
   ytd-subscription-notification-toggle-button-renderer-next,
   yt-subscription-notification-toggle-button-renderer-next,
+  subscription-notification-toggle-button-shape-renderer,
   #notification-preference-button
 ) :is(
-  button.yt-spec-button-shape-next--tonal,
-  button.yt-spec-button-shape-next--mono,
-  button[aria-label*="Subscribed" i],
-  button[aria-label*="notification" i],
-  button[aria-label*="Unsubscribe" i],
-  ytd-subscription-notification-toggle-button-renderer-next button,
-  yt-subscription-notification-toggle-button-renderer-next button
+  button,
+  .yt-spec-button-shape-next
 ) :is(*, span, .yt-core-attributed-string, .yt-spec-button-shape-next__button-text-content) {
   color: var(--ytg-text) !important;
   -webkit-text-fill-color: var(--ytg-text) !important;
@@ -987,16 +1055,11 @@ html[data-ytg-on] :is(
   yt-subscribe-button-view-model,
   ytd-subscription-notification-toggle-button-renderer-next,
   yt-subscription-notification-toggle-button-renderer-next,
-  #notification-preference-button
-) :is(
-  button.yt-spec-button-shape-next--tonal,
-  button.yt-spec-button-shape-next--mono,
-  button[aria-label*="Subscribed" i],
-  button[aria-label*="notification" i],
-  button[aria-label*="Unsubscribe" i],
-  ytd-subscription-notification-toggle-button-renderer-next button,
-  yt-subscription-notification-toggle-button-renderer-next button
-) :is(yt-icon, svg, path) {
+  subscription-notification-toggle-button-shape-renderer,
+  #notification-preference-button,
+  #owner ytd-subscription-notification-toggle-button-renderer-next,
+  #owner yt-subscription-notification-toggle-button-renderer-next
+) :is(yt-icon, svg, path, .yt-spec-button-shape-next__icon) {
   fill: var(--ytg-a) !important;
   color: var(--ytg-a) !important;
   opacity: 1 !important;
@@ -1096,18 +1159,13 @@ html[data-ytg-on] :is(
   -webkit-backdrop-filter: none !important;
 }
 
-/* Ensure suggested videos sidebar (#secondary) is ALWAYS displayed and visible */
-html[data-ytg-on] :is(
-  ytd-watch-flexy #secondary,
-  ytd-watch-flexy #secondary-inner,
-  #related,
-  ytd-watch-next-secondary-results-renderer,
-  ytd-watch-next-secondary-results-renderer #items,
-  ytd-compact-video-renderer
-) {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+/* Do not force skeleton or secondary items to overlay during loading time */
+html[data-ytg-on] [hidden] {
+  display: none !important;
+}
+html[data-ytg-on] :is(ytd-watch-flexy, ytd-page-manager)[loading] :is(#secondary, #related, ytd-watch-next-secondary-results-renderer) {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 html[data-ytg-on] ytd-comments#comments {
   background: rgba(0, 0, 0, 0.15) !important;
@@ -1297,9 +1355,9 @@ html[data-ytg-on] .ytp-caption-segment {
   fill: currentColor;
 }
 
-/* Smooth global theme color transitions */
-html[data-ytg-on], html[data-ytg-on] body, #ytg-stage {
-  transition: background-color 0.8s ease, color 0.8s ease;
+/* Smooth buttery 0.5s global theme color transitions */
+html[data-ytg-on], html[data-ytg-on] body, #ytg-stage, #ytg-canvas, .ytg-stage {
+  transition: background-color 0.5s cubic-bezier(.25,.8,.25,1), color 0.5s ease;
 }
 
 /* Light theme text readability across the app */

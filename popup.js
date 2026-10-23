@@ -110,6 +110,7 @@ function buildGrid() {
     b.addEventListener("click", () => {
       save({ theme: id, wall: "auto" });
       b.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      setTimeout(updateCarouselArrows, 300);
     });
     grid.appendChild(b);
   }
@@ -120,16 +121,26 @@ function buildGrid() {
     const mine = tile("mine", `<span class="lbl">Your photo</span>`);
     mine.dataset.id = "image";
     mine.style.background = `center/cover url("${s.bgImage}")`;
-    mine.addEventListener("click", () => save({ wall: "image" }));
+    mine.addEventListener("click", () => {
+      save({ wall: "image" });
+      mine.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      setTimeout(updateCarouselArrows, 300);
+    });
     grid.appendChild(mine);
   } else {
     const none = tile("clear", `<span class="lbl">None</span>`);
-    none.dataset.id = "none"; none.addEventListener("click", () => save({ wall: "none" }));
+    none.dataset.id = "none";
+    none.addEventListener("click", () => {
+      save({ wall: "none" });
+      none.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      setTimeout(updateCarouselArrows, 300);
+    });
     grid.appendChild(none);
   }
+  setTimeout(updateCarouselArrows, 60);
 }
 
-// ---------- Vertical wheel pickers for Animation (with live preview) and Speed ----------
+// ---------- Horizontal controls for Animation (with live preview) and Speed ----------
 function buildMotionWheel() {
   const list = $("pills"); if (!list) return;
   list.innerHTML = "";
@@ -148,7 +159,6 @@ function buildMotionWheel() {
     `;
     b.addEventListener("click", () => {
       save({ anim: a.id });
-      b.scrollIntoView({ behavior: "smooth", block: "center" });
     });
     list.appendChild(b);
   }
@@ -157,10 +167,12 @@ function buildMotionWheel() {
 function buildSpeedWheel() {
   const list = $("speedList"); if (!list) return;
   list.innerHTML = "";
-  for (const sp of SPEEDS) {
+  for (let i = 0; i < SPEEDS.length; i++) {
+    const sp = SPEEDS[i];
     const b = document.createElement("button");
-    b.className = "wheel-item";
+    b.className = "wheel-item speed-wheel-item";
     b.dataset.speed = String(sp.v);
+    b.dataset.index = i;
     b.textContent = sp.label;
     b.addEventListener("click", () => {
       save({ speed: sp.v });
@@ -170,18 +182,72 @@ function buildSpeedWheel() {
   }
 }
 
+function initSpeedArrows() {
+  const up = $("speedUp"), down = $("speedDown"), track = $("speedList");
+  if (!track) return;
+  if (up) {
+    up.addEventListener("click", () => {
+      const cur = parseFloat(s.speed || 1);
+      const idx = SPEEDS.findIndex(sp => Math.abs(sp.v - cur) < 0.15);
+      if (idx > 0) {
+        save({ speed: SPEEDS[idx - 1].v });
+        const target = track.children[idx - 1];
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  }
+  if (down) {
+    down.addEventListener("click", () => {
+      const cur = parseFloat(s.speed || 1);
+      const idx = SPEEDS.findIndex(sp => Math.abs(sp.v - cur) < 0.15);
+      if (idx < SPEEDS.length - 1) {
+        save({ speed: SPEEDS[idx + 1].v });
+        const target = track.children[idx + 1];
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  }
+}
+
+function updateCarouselArrows() {
+  const prev = $("themePrev"), next = $("themeNext"), track = $("grid");
+  if (!track || !prev || !next) return;
+  const sl = track.scrollLeft;
+  const max = track.scrollWidth - track.clientWidth;
+  
+  // When at start (first theme displayed), hide backward arrow
+  if (sl <= 6) {
+    prev.classList.add("hidden");
+  } else {
+    prev.classList.remove("hidden");
+  }
+  
+  // When at end (last theme displayed), hide forward arrow
+  if (sl >= max - 6) {
+    next.classList.add("hidden");
+  } else {
+    next.classList.remove("hidden");
+  }
+}
+
 function initCarouselArrows() {
   const prev = $("themePrev"), next = $("themeNext"), track = $("grid");
-  if (prev && track) {
+  if (!track) return;
+  if (prev) {
     prev.addEventListener("click", () => {
-      track.scrollBy({ left: -110, behavior: "smooth" });
+      track.scrollBy({ left: -200, behavior: "smooth" });
+      setTimeout(updateCarouselArrows, 200);
+      setTimeout(updateCarouselArrows, 450);
     });
   }
-  if (next && track) {
+  if (next) {
     next.addEventListener("click", () => {
-      track.scrollBy({ left: 110, behavior: "smooth" });
+      track.scrollBy({ left: 200, behavior: "smooth" });
+      setTimeout(updateCarouselArrows, 200);
+      setTimeout(updateCarouselArrows, 450);
     });
   }
+  track.addEventListener("scroll", updateCarouselArrows, { passive: true });
 }
 
 // ---------- Paint ----------
@@ -210,12 +276,16 @@ function paint() {
     if (st) setVars(st, vars(s, m));
   });
 
-  // Highlight active speed wheel item
+  // Highlight active speed wheel item and scroll into center
   const currentSpeed = parseFloat(s.speed || 1);
   document.querySelectorAll("#speedList .wheel-item").forEach(b => {
     const sv = parseFloat(b.dataset.speed);
     const isActive = Math.abs(sv - currentSpeed) < 0.15;
     b.classList.toggle("on", isActive);
+    if (isActive && !paint._speedScrolled) {
+      paint._speedScrolled = true;
+      setTimeout(() => b.scrollIntoView({ behavior: "smooth", block: "center" }), 80);
+    }
   });
 
   const r = resolve(s), an = ANIMS.find(a => a.id === r.anim);
@@ -233,6 +303,7 @@ function paint() {
   if ($("curName")) $("curName").textContent = nm;
   if ($("curAnim")) $("curAnim").textContent = "· " + (r.name || (an ? an.name : ""));
   paintControls();
+  updateCarouselArrows();
 }
 
 // ---------- Save ----------
@@ -322,5 +393,6 @@ $("file").addEventListener("change", async e => {
 buildMotionWheel();
 buildSpeedWheel();
 initCarouselArrows();
+initSpeedArrows();
 chrome.storage.local.get({ ...D, bgImage: "" }, v => { s = { ...D, ...v }; paint(); });
 dq.addEventListener("change", () => { lastImg = null; paint(); });
