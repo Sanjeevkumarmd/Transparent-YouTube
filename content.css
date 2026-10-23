@@ -929,18 +929,23 @@ html[data-ytg-on] .ytp-volume-slider:hover .ytp-volume-slider-handle {
   filter: brightness(1.18);
 }
 
-/* ---------- Video colours: progress bar + player icons follow the playing video ---------- */
+/* ---------- Video colours: progress bar + player icons follow the active theme ---------- */
 html[data-ytg-on] .ytp-play-progress, html[data-ytg-on] .ytp-swatch-background-color,
-html[data-ytg-on] .ytp-scrubber-button { background: var(--ytg-p, var(--ytg-a)) !important; transition: background-color .8s ease; }
-html[data-ytg-on] .ytp-hover-progress { background: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 45%, transparent) !important; }
-html[data-ytg-on]:not([data-ytg-icons="gold"]):not([data-ytg-icons="white"]) .ytp-chrome-controls .ytp-button svg path,
-html[data-ytg-on]:not([data-ytg-icons="gold"]):not([data-ytg-icons="white"]) .ytp-chrome-controls .ytp-button svg use { fill: color-mix(in srgb, var(--ytg-p, #fff) 78%, #fff); transition: fill .8s ease; }
+html[data-ytg-on] .ytp-scrubber-button { background: var(--ytg-a) !important; transition: background-color .4s ease; }
+html[data-ytg-on] .ytp-hover-progress { background: color-mix(in srgb, var(--ytg-a) 45%, transparent) !important; }
+html[data-ytg-on] .ytp-chrome-controls .ytp-button svg path,
+html[data-ytg-on] .ytp-chrome-controls .ytp-button svg use,
+html[data-ytg-on] .ytp-chrome-controls .ytp-button svg polygon,
+html[data-ytg-on] .ytp-chrome-controls .ytp-button svg {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+  transition: fill .4s ease, color .4s ease;
+}
 html[data-ytg-on] .ytp-chrome-controls .ytp-time-display,
-html[data-ytg-on] .ytp-chrome-controls .ytp-time-display span { color: var(--ytg-a) !important; -webkit-text-fill-color: var(--ytg-a) !important; }
-html[data-ytg-on][data-ytg-icons="gold"] .ytp-chrome-controls .ytp-button svg path,
-html[data-ytg-on][data-ytg-icons="gold"] .ytp-chrome-controls .ytp-button svg use { fill: var(--ytg-icon-gold) !important; }
-html[data-ytg-on][data-ytg-icons="white"] .ytp-chrome-controls .ytp-button svg path,
-html[data-ytg-on][data-ytg-icons="white"] .ytp-chrome-controls .ytp-button svg use { fill: #fff !important; }
+html[data-ytg-on] .ytp-chrome-controls .ytp-time-display span {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+}
 
 /* Player menus (quality, speed...): see-through glass tinted live by the video that is playing */
 html[data-ytg-on] .ytp-popup, html[data-ytg-on] .ytp-settings-menu {
@@ -1151,10 +1156,19 @@ html[data-ytg-on] button.yt-spec-button-shape-next--tonal, html[data-ytg-on] but
 html[data-ytg-on] button.yt-spec-button-shape-next--overlay, html[data-ytg-on] button.yt-spec-button-shape-next--mono:not(.yt-spec-button-shape-next--text):not(.yt-spec-button-shape-next--filled) {
   background: var(--ytg-fill) !important; border: 1px solid var(--ytg-edge) !important; box-shadow: var(--ytg-shine) !important;
 }
-/* Shorts: icons, progress and controls follow the video colour; a glass base while the next one loads */
-html[data-ytg-on] ytd-shorts #actions :is(svg path, yt-icon svg path), html[data-ytg-on] ytd-shorts .ytp-button svg path,
-html[data-ytg-on] ytd-shorts yt-icon-button svg path { fill: var(--ytg-p, #fff) !important; }
-html[data-ytg-on] ytd-shorts .ytp-play-progress { background: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 72%, #fff) !important; }
+/* Shorts: icons, progress and controls follow the active theme colour */
+html[data-ytg-on] ytd-shorts #actions :is(svg, path, yt-icon, .yt-spec-button-shape-next__icon),
+html[data-ytg-on] ytd-shorts #actions svg :is(path, circle, rect, polygon, use),
+html[data-ytg-on] ytd-shorts .ytp-button svg :is(path, use, polygon),
+html[data-ytg-on] ytd-shorts yt-icon-button svg :is(path, use),
+html[data-ytg-on] ytd-shorts :is(#navigation-button-up, #navigation-button-down) :is(svg, path, yt-icon),
+html[data-ytg-on] ytd-shorts :is(#actions, #overlay, [class*="sound-button"], [class*="sound-metadata"]) :is(svg, yt-icon, .yt-icon-shape),
+html[data-ytg-on] ytd-shorts :is(#actions, #overlay, [class*="sound-button"], [class*="sound-metadata"]) svg :is(path, circle, rect, polygon, use) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+  transition: fill .3s ease, color .3s ease;
+}
+html[data-ytg-on] ytd-shorts .ytp-play-progress { background: var(--ytg-a) !important; }
 html[data-ytg-on] ytd-shorts .html5-video-player, html[data-ytg-on] ytd-reel-video-renderer { background: var(--ytg-fill) !important; }
 html[data-ytg-on] ytd-reel-video-renderer #player-container, html[data-ytg-on] ytd-reel-video-renderer .player-container { transition: opacity .35s ease; }
 /* gold accents: search + mic icons, selected sidebar item, YouTube wordmark */
@@ -1192,9 +1206,17 @@ ytd-watch-flexy[theater] .ytg-amb {
 /* ---------- player controls: always bright, clear, theme-tinted icons ---------- */
 html[data-ytg-on] .ytp-chrome-controls .ytp-button svg path,
 html[data-ytg-on] .ytp-chrome-controls .ytp-button svg use,
+html[data-ytg-on] .ytp-chrome-controls .ytp-button svg polygon,
+html[data-ytg-on] .ytp-chrome-controls .ytp-button svg,
 html[data-ytg-on] .ytp-bezel svg path,
+html[data-ytg-on] .ytp-bezel svg use,
 html[data-ytg-on] ytd-shorts #actions svg path,
-html[data-ytg-on] ytd-shorts .ytp-button svg path { fill: var(--ytg-ui, #fff) !important; filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); transition: fill .2s ease; }
+html[data-ytg-on] ytd-shorts .ytp-button svg path {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.6));
+  transition: fill .3s ease, color .3s ease;
+}
 html[data-ytg-on] .ytp-chrome-controls :is(.ytp-time-display, .ytp-time-current, .ytp-time-duration, .ytp-time-separator, .ytp-time-display span) {
   color: var(--ytg-a) !important;
   -webkit-text-fill-color: var(--ytg-a) !important;
@@ -1327,8 +1349,11 @@ html[data-ytg-on] :is(
   font-weight: 700 !important;
 }
 
-/* icons inside the player: clean SVG fill, no boxy button backgrounds */
-html[data-ytg-on] .html5-video-player :is(like-button-view-model, dislike-button-view-model, segmented-like-dislike-button-view-model, button-view-model, yt-button-shape, button) svg :is(path, circle, rect) { fill: var(--ytg-ui, #fff) !important; }
+/* icons inside the player: clean SVG fill, themed to active theme, no boxy button backgrounds */
+html[data-ytg-on] .html5-video-player :is(like-button-view-model, dislike-button-view-model, segmented-like-dislike-button-view-model, button-view-model, yt-button-shape, button) svg :is(path, circle, rect) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
 html[data-ytg-on] .html5-video-player :is([class*="overlay-bottom-right"], [class*="engagement"], [class*="fullscreen-action"], [class*="ytp-fullerscreen"]) { background: transparent !important; box-shadow: none !important; }
 
 /* ========== YouTube Subscribe & Notification Buttons - 100% Transparent Glass for EVERY Theme ========== */

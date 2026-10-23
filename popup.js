@@ -140,6 +140,17 @@ function buildGrid() {
   setTimeout(updateCarouselArrows, 60);
 }
 
+function flashText(text) {
+  const f = $("flash");
+  if (!f || !text) return;
+  f.textContent = text;
+  f.classList.remove("on");
+  void f.offsetWidth;
+  f.classList.add("on");
+  clearTimeout(f._t);
+  f._t = setTimeout(() => f.classList.remove("on"), 1200);
+}
+
 // ---------- Horizontal controls for Animation (with live preview) and Speed ----------
 function buildMotionWheel() {
   const list = $("pills"); if (!list) return;
@@ -157,6 +168,7 @@ function buildMotionWheel() {
     `;
     b.addEventListener("click", () => {
       save({ anim: a.id });
+      flashText(a.name);
     });
     list.appendChild(b);
   }
@@ -311,18 +323,18 @@ function paint() {
 
   const r = resolve(s), an = ANIMS.find(a => a.id === r.anim);
   const nm = (YTG.THEMES[s.theme] || THEMES.gold).name;
-  if (paint.last && paint.last !== nm + s.anim) {
-    const f = $("flash");
-    if (f) {
-      f.textContent = nm;
-      f.classList.add("on");
-      clearTimeout(f._t);
-      f._t = setTimeout(() => f.classList.remove("on"), 1200);
-    }
+  const animNm = an ? an.name : (r.name || r.anim);
+
+  if (paint.lastTheme !== undefined && paint.lastTheme !== s.theme) {
+    flashText(nm);
+  } else if (paint.lastAnim !== undefined && paint.lastAnim !== s.anim) {
+    flashText(animNm);
   }
-  paint.last = nm + s.anim;
+  paint.lastTheme = s.theme;
+  paint.lastAnim = s.anim;
+
   if ($("curName")) $("curName").textContent = nm;
-  if ($("curAnim")) $("curAnim").textContent = "· " + (r.name || (an ? an.name : ""));
+  if ($("curAnim")) $("curAnim").textContent = "· " + animNm;
   paintControls();
   updateCarouselArrows();
   updateSpeedArrows();
