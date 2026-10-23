@@ -150,12 +150,10 @@ function buildMotionWheel() {
     b.dataset.id = a.id;
     b.title = a.name;
     b.innerHTML = `
-      <div class="anim-thumb">
-        <div class="ytg-stage" data-anim="${a.id}" data-wall="0" data-drift="0">
-          <div class="wall"></div><div class="img"></div><div class="dim"></div><div class="a1"></div><div class="a2"></div>
-        </div>
+      <div class="ytg-stage" data-anim="${a.id}" data-wall="0" data-drift="0">
+        <div class="wall"></div><div class="img"></div><div class="dim"></div><div class="a1"></div><div class="a2"></div>
       </div>
-      <span class="anim-name">${a.name}</span>
+      <span class="lbl">${a.name}</span>
     `;
     b.addEventListener("click", () => {
       save({ anim: a.id });
@@ -177,8 +175,28 @@ function buildSpeedWheel() {
     b.addEventListener("click", () => {
       save({ speed: sp.v });
       b.scrollIntoView({ behavior: "smooth", block: "center" });
+      updateSpeedArrows();
     });
     list.appendChild(b);
+  }
+}
+
+function updateSpeedArrows() {
+  const up = $("speedUp"), down = $("speedDown");
+  if (!up || !down) return;
+  const cur = parseFloat(s.speed || 1);
+  const idx = SPEEDS.findIndex(sp => Math.abs(sp.v - cur) < 0.15);
+  // When at top (first speed), hide upper arrow
+  if (idx <= 0) {
+    up.classList.add("hidden");
+  } else {
+    up.classList.remove("hidden");
+  }
+  // When at bottom (last speed), hide lower arrow
+  if (idx >= SPEEDS.length - 1 || idx === -1) {
+    down.classList.add("hidden");
+  } else {
+    down.classList.remove("hidden");
   }
 }
 
@@ -193,6 +211,7 @@ function initSpeedArrows() {
         save({ speed: SPEEDS[idx - 1].v });
         const target = track.children[idx - 1];
         if (target) target.scrollIntoView({ behavior: "smooth", block: "center" });
+        updateSpeedArrows();
       }
     });
   }
@@ -204,9 +223,11 @@ function initSpeedArrows() {
         save({ speed: SPEEDS[idx + 1].v });
         const target = track.children[idx + 1];
         if (target) target.scrollIntoView({ behavior: "smooth", block: "center" });
+        updateSpeedArrows();
       }
     });
   }
+  updateSpeedArrows();
 }
 
 function updateCarouselArrows() {
@@ -304,6 +325,18 @@ function paint() {
   if ($("curAnim")) $("curAnim").textContent = "· " + (r.name || (an ? an.name : ""));
   paintControls();
   updateCarouselArrows();
+  updateSpeedArrows();
+
+  if (!paint._themeScrolled) {
+    const activeThemeCard = document.querySelector("#grid .tc.on");
+    if (activeThemeCard) {
+      paint._themeScrolled = true;
+      setTimeout(() => {
+        activeThemeCard.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        updateCarouselArrows();
+      }, 120);
+    }
+  }
 }
 
 // ---------- Save ----------

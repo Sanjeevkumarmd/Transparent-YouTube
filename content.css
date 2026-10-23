@@ -935,12 +935,10 @@ html[data-ytg-on] .ytp-scrubber-button { background: var(--ytg-p, var(--ytg-a)) 
 html[data-ytg-on] .ytp-hover-progress { background: color-mix(in srgb, var(--ytg-p, var(--ytg-a)) 45%, transparent) !important; }
 html[data-ytg-on]:not([data-ytg-icons="gold"]):not([data-ytg-icons="white"]) .ytp-chrome-controls .ytp-button svg path,
 html[data-ytg-on]:not([data-ytg-icons="gold"]):not([data-ytg-icons="white"]) .ytp-chrome-controls .ytp-button svg use { fill: color-mix(in srgb, var(--ytg-p, #fff) 78%, #fff); transition: fill .8s ease; }
-html[data-ytg-on]:not([data-ytg-icons="gold"]):not([data-ytg-icons="white"]) .ytp-chrome-controls .ytp-time-display,
-html[data-ytg-on]:not([data-ytg-icons="gold"]):not([data-ytg-icons="white"]) .ytp-chrome-controls .ytp-time-display span { color: color-mix(in srgb, var(--ytg-p, #fff) 70%, #fff); }
+html[data-ytg-on] .ytp-chrome-controls .ytp-time-display,
+html[data-ytg-on] .ytp-chrome-controls .ytp-time-display span { color: var(--ytg-a) !important; -webkit-text-fill-color: var(--ytg-a) !important; }
 html[data-ytg-on][data-ytg-icons="gold"] .ytp-chrome-controls .ytp-button svg path,
 html[data-ytg-on][data-ytg-icons="gold"] .ytp-chrome-controls .ytp-button svg use { fill: var(--ytg-icon-gold) !important; }
-html[data-ytg-on][data-ytg-icons="gold"] .ytp-chrome-controls .ytp-time-display,
-html[data-ytg-on][data-ytg-icons="gold"] .ytp-chrome-controls .ytp-time-display span { color: var(--ytg-icon-gold) !important; }
 html[data-ytg-on][data-ytg-icons="white"] .ytp-chrome-controls .ytp-button svg path,
 html[data-ytg-on][data-ytg-icons="white"] .ytp-chrome-controls .ytp-button svg use { fill: #fff !important; }
 
@@ -979,6 +977,18 @@ html[data-ytg-on] :is(
   #player-full-bleed-container::before
 ) {
   border: none !important;
+}
+
+/* Sleek floating cinema border & rounded corners for the video player */
+html[data-ytg-on] ytd-watch-flexy :is(#player-container-inner, .html5-video-player:not(.ytp-fullscreen), #player-theater-container #movie_player) {
+  border-radius: 16px !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 40%, rgba(255, 255, 255, 0.2)) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55), 0 0 24px color-mix(in srgb, var(--ytg-a) 30%, transparent) !important;
+  overflow: hidden !important;
+}
+html[data-ytg-on] ytd-watch-flexy[theater] #player-theater-container {
+  padding: 10px 16px !important;
+  box-sizing: border-box !important;
 }
 
 /* 2. Ambient light behind the video: enlarged, rich, theme-radiant glow */
@@ -1174,8 +1184,13 @@ html[data-ytg-on] .ytp-chrome-controls .ytp-button svg use,
 html[data-ytg-on] .ytp-bezel svg path,
 html[data-ytg-on] ytd-shorts #actions svg path,
 html[data-ytg-on] ytd-shorts .ytp-button svg path { fill: var(--ytg-ui, #fff) !important; filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); transition: fill .2s ease; }
-html[data-ytg-on] .ytp-time-display, html[data-ytg-on] .ytp-time-display span,
-html[data-ytg-on] .ytp-chrome-top .ytp-button, html[data-ytg-on] ytd-shorts #actions span { color: #fff !important; text-shadow: 0 1px 2px rgba(0,0,0,.7); }
+html[data-ytg-on] .ytp-chrome-controls :is(.ytp-time-display, .ytp-time-current, .ytp-time-duration, .ytp-time-separator, .ytp-time-display span) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.85) !important;
+}
+html[data-ytp-chrome-top] .ytp-button, html[data-ytg-on] ytd-shorts #actions span { color: #fff !important; text-shadow: 0 1px 2px rgba(0,0,0,.7); }
 /* watch title: still (no animation), brighter gold, soft backing + fine dark edge for readability */
 html[data-ytg-on] h1.ytd-watch-metadata, html[data-ytg-on] .ytp-title-link { animation: none !important; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.75)); }
 
