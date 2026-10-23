@@ -979,16 +979,10 @@ html[data-ytg-on] :is(
   border: none !important;
 }
 
-/* Sleek floating cinema border & rounded corners for the video player */
-html[data-ytg-on] ytd-watch-flexy :is(#player-container-inner, .html5-video-player:not(.ytp-fullscreen), #player-theater-container #movie_player) {
-  border-radius: 16px !important;
-  border: 1px solid color-mix(in srgb, var(--ytg-a) 40%, rgba(255, 255, 255, 0.2)) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55), 0 0 24px color-mix(in srgb, var(--ytg-a) 30%, transparent) !important;
-  overflow: hidden !important;
-}
-html[data-ytg-on] ytd-watch-flexy[theater] #player-theater-container {
-  padding: 10px 16px !important;
-  box-sizing: border-box !important;
+/* Video player: seamless edge, zero harsh border */
+html[data-ytg-on] ytd-watch-flexy :is(#player-container-inner, .html5-video-player, #player-theater-container #movie_player, #movie_player) {
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* 2. Ambient light behind the video: enlarged, rich, theme-radiant glow */
@@ -1006,14 +1000,14 @@ html[data-ytg-ambient] ytd-watch-flexy:not([fullscreen]) :is(#player-container-o
   background: radial-gradient(ellipse at center, color-mix(in srgb, var(--ytg-v, var(--ytg-a)) 75%, transparent) 0%, color-mix(in srgb, var(--ytg-a) 40%, transparent) 45%, transparent 75%) !important;
   filter: blur(48px);
   opacity: 0.9;
-  transition: opacity .4s ease, filter .4s ease;
+  transition: opacity .3s ease, filter .3s ease;
 }
 
 /* In Theater Mode: extra enlarged ambient radiance filling the margins without separator lines */
 html[data-ytg-ambient] ytd-watch-flexy[theater]:not([fullscreen]) :is(#player-theater-container, #player-full-bleed-container)::before {
-  inset: -120px -300px !important;
-  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--ytg-v, var(--ytg-a)) 75%, transparent) 0%, color-mix(in srgb, var(--ytg-a) 45%, transparent) 50%, transparent 80%) !important;
-  filter: blur(54px) !important;
+  inset: -120px -320px !important;
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--ytg-v, var(--ytg-a)) 80%, transparent) 0%, color-mix(in srgb, var(--ytg-a) 45%, transparent) 50%, transparent 80%) !important;
+  filter: blur(60px) !important;
   opacity: 0.95 !important;
 }
 
@@ -1174,9 +1168,26 @@ html[data-ytg-on] ytd-guide-entry-renderer[active] svg path, html[data-ytg-on] y
 /* ---------- fullscreen: smooth, instant, completely like native YouTube ---------- */
 html[data-ytg-fs] #ytg-stage .a1, html[data-ytg-fs] #ytg-stage .a2, html[data-ytg-fs] #ytg-stage .wall { animation-play-state: paused !important; }
 html[data-ytg-on] .html5-video-player.ytp-fullscreen { background: #000 !important; }
-.ytg-amb { position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
-  transform: scale(1.08); filter: blur(28px) saturate(1.4); opacity: 0; transition: opacity .5s ease; }
-.ytg-amb.on { opacity: 1; }
+.ytg-amb {
+  position: absolute;
+  left: -8%;
+  top: -8%;
+  width: 116%;
+  height: 116%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(48px) saturate(1.8);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+ytd-watch-flexy[theater] .ytg-amb {
+  left: -22% !important;
+  top: -10% !important;
+  width: 144% !important;
+  height: 120% !important;
+  filter: blur(60px) saturate(2.0) !important;
+}
+.ytg-amb.on { opacity: 0.95 !important; }
 
 /* ---------- player controls: always bright, clear, theme-tinted icons ---------- */
 html[data-ytg-on] .ytp-chrome-controls .ytp-button svg path,
@@ -1242,9 +1253,22 @@ html[data-ytg-ads] :is(#masthead-ad, #player-ads, .video-ads, .ytp-ad-module, yt
   ytd-rich-item-renderer:has(.ytd-ad-slot-renderer), ytd-item-section-renderer:has(> #contents > ytd-ad-slot-renderer:only-child)) { display: none !important; }
 
 /* ---------- v8.6: readability + theme-matched player ---------- */
-html[data-ytg-on] h1.ytd-watch-metadata, html[data-ytg-on] .ytp-title-link {
-  background-image: linear-gradient(90deg, #f8e19a, #ffedb8 50%, #f3cf72) !important; background-size: 100% 100% !important;
-  filter: drop-shadow(0 0 1px rgba(0,0,0,.95)) drop-shadow(0 1px 3px rgba(0,0,0,.75)); font-weight: 700;
+html[data-ytg-on] :is(ytd-watch-metadata #title, h1.ytd-watch-metadata, #title.ytd-watch-metadata) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+html[data-ytg-on] :is(h1.ytd-watch-metadata, h1.ytd-watch-metadata yt-formatted-string, .ytp-title-link) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: color-mix(in srgb, var(--ytg-a) 75%, #ffffff) !important;
+  -webkit-text-fill-color: color-mix(in srgb, var(--ytg-a) 75%, #ffffff) !important;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.9)) !important;
+  text-shadow: 0 2px 6px rgba(0,0,0,.95) !important;
+  font-weight: 700;
 }
 html[data-ytg-on] { --ytg-tsh: 0 1px 2px rgba(0,0,0,.8), 0 0 6px rgba(0,0,0,.35); }
 html[data-ytg-on][data-ytg-mode="light"] { --ytg-tsh: 0 1px 2px rgba(255,255,255,.85); }
@@ -1508,6 +1532,25 @@ html[data-ytg-on] :is(
 }
 
 /* 3. Notification Options Dropdown (All, Personalized, None, Unsubscribe) */
+html[data-ytg-on] ytd-popup-container :is(
+  ytd-menu-popup-renderer,
+  ytd-menu-service-item-renderer,
+  tp-yt-paper-item
+) {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+html[data-ytg-on] ytd-popup-container :is(
+  tp-yt-paper-item.iron-selected,
+  ytd-menu-service-item-renderer[aria-selected="true"],
+  .iron-selected
+) {
+  background: color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
+  background-color: color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
+  border-radius: 8px !important;
+}
+
 html[data-ytg-on] ytd-popup-container :is(
   ytd-menu-popup-renderer,
   ytd-menu-service-item-renderer,

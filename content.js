@@ -67,29 +67,67 @@
     try { localStorage.setItem("ytg_s", JSON.stringify(s)); } catch (e) {}
   }
 
-  // ---- Fullscreen: own ambient light (blurred, softly blended copy of the scene) fills the bars ----
+  // ---- Live Ambient Light: Edge Scene Analyzer for Theater, Normal & Fullscreen Modes ----
   let amb = null, ambCx = null, ambRun = false, ambT = 0;
   function ambLoop(t) {
-    const p = document.fullscreenElement && document.querySelector(".html5-video-player.ytp-fullscreen");
-    if (!p || !s.enabled || !s.ambient || !s.fsAmbient) { if (amb) { amb.remove(); amb = null; } ambRun = false; return; }
-    if (t - ambT > 33) {
+    if (!s.enabled || !s.ambient) {
+      if (amb) { amb.remove(); amb = null; }
+      ambRun = false;
+      return;
+    }
+    const isFs = !!document.fullscreenElement;
+    const p = isFs
+      ? document.querySelector(".html5-video-player.ytp-fullscreen")
+      : (document.querySelector("ytd-watch-flexy[theater] #player-theater-container") ||
+         document.querySelector("ytd-watch-flexy #player-container-outer") ||
+         document.querySelector("#movie_player"));
+
+    if (!p) {
+      if (amb) { amb.remove(); amb = null; }
+      requestAnimationFrame(ambLoop);
+      return;
+    }
+
+    if (t - ambT > 40) { // ~25 FPS real-time scene analysis
       ambT = t;
-      const v = p.querySelector("video.html5-main-video");
-      if (v && v.readyState >= 2 && v.videoWidth) {
-        const first = !amb || !amb.isConnected;
-        if (first) {
-          amb = document.createElement("canvas"); amb.className = "ytg-amb"; amb.width = 64; amb.height = 36;
-          ambCx = amb.getContext("2d"); p.insertBefore(amb, p.firstChild);
+      const v = document.querySelector("video.html5-main-video") || p.querySelector("video");
+      if (v && v.readyState >= 2 && v.videoWidth && !v.paused) {
+        if (!amb || amb.parentElement !== p) {
+          if (amb) amb.remove();
+          amb = document.createElement("canvas");
+          amb.className = "ytg-amb";
+          amb.width = 64;
+          amb.height = 36;
+          ambCx = amb.getContext("2d", { willReadFrequently: true });
+          p.style.position = "relative";
+          p.insertBefore(amb, p.firstChild);
           requestAnimationFrame(() => amb && amb.classList.add("on"));
         }
         try {
-          const W = 64, H = 36, pr = p.getBoundingClientRect(), vr = v.getBoundingClientRect(), vw = v.videoWidth, vh = v.videoHeight;
-          const x = (vr.left - pr.left) * W / pr.width, y = (vr.top - pr.top) * H / pr.height, w = vr.width * W / pr.width, h = vr.height * H / pr.height;
-          ambCx.globalAlpha = first ? 1 : 0.6;
-          ambCx.drawImage(v, x, y, w, h);                                   // the scene where it really is
-          if (y > 0.5) { ambCx.drawImage(v, 0, 0, vw, vh * 0.03, 0, 0, W, y); ambCx.drawImage(v, 0, vh * 0.97, vw, vh * 0.03, 0, y + h, W, H - y - h); }   // bars continue the edge colours
-          if (x > 0.5) { ambCx.drawImage(v, 0, 0, vw * 0.03, vh, 0, 0, x, H); ambCx.drawImage(v, vw * 0.97, 0, vw * 0.03, vh, x + w, 0, W - x - w, H); }
+          const W = 64, H = 36;
+          const pr = p.getBoundingClientRect();
+          const vr = v.getBoundingClientRect();
+          const vw = v.videoWidth, vh = v.videoHeight;
+          const x = Math.max(0, (vr.left - pr.left) * W / (pr.width || 1));
+          const y = Math.max(0, (vr.top - pr.top) * H / (pr.height || 1));
+          const w = Math.min(W - x, vr.width * W / (pr.width || 1));
+          const h = Math.min(H - y, vr.height * H / (pr.height || 1));
+
+          ambCx.globalAlpha = 0.75;
+          ambCx.drawImage(v, x, y, w, h);
+          // Extend top and bottom scene colors
+          if (y > 0.5) {
+            ambCx.drawImage(v, 0, 0, vw, Math.max(1, vh * 0.05), 0, 0, W, y);
+            ambCx.drawImage(v, 0, Math.max(0, vh * 0.95), vw, Math.max(1, vh * 0.05), 0, y + h, W, Math.max(1, H - y - h));
+          }
+          // Extend left and right edge scene colors into the surrounding space
+          ambCx.drawImage(v, 0, 0, Math.max(1, vw * 0.05), vh, 0, 0, Math.max(1, x || 14), H);
+          ambCx.drawImage(v, Math.max(0, vw * 0.95), 0, Math.max(1, vw * 0.05), vh, Math.min(W - 14, x + w), 0, Math.max(1, W - x - w || 14), H);
           ambCx.globalAlpha = 1;
+
+          // Real-time dominant color extraction for UI
+          const d = ambCx.getImageData(Math.floor(W / 2), Math.floor(H / 2), 1, 1).data;
+          root.style.setProperty("--ytg-v", `rgb(${d[0]},${d[1]},${d[2]})`);
         } catch (e) {}
       }
     }
@@ -97,9 +135,9 @@
   }
   const fs = () => {
     root.toggleAttribute("data-ytg-fs", !!document.fullscreenElement);
-    if (document.fullscreenElement && !ambRun) { ambRun = true; requestAnimationFrame(ambLoop); }
   };
   document.addEventListener("fullscreenchange", fs); fs();
+  if (!ambRun) { ambRun = true; requestAnimationFrame(ambLoop); }
 
   // ---- Freeze background animation while scrolling (keeps scrolling smooth) ----
   let timer = 0, busy = false;
@@ -142,8 +180,8 @@
       // UI colors: always maintain bright, crisp theme icons (never turn muddy dark)
       root.removeAttribute("data-ytg-lum");
       root.style.setProperty("--ytg-ui", "color-mix(in srgb, var(--ytg-a) 75%, #ffffff)");
-    } catch (e) { blocked = true; root.style.removeProperty("--ytg-v"); }
-  }, 700);
+    } catch (e) {}
+  }, 120);
 
   // ---- App-wide safety net: find big dark (or, in dark theme, big white) panels and make them see-through ----
   // Works on any page (history, Shorts, library, settings...) without knowing YouTube's class names.
