@@ -244,7 +244,7 @@ html[data-ytg-on] :is(
   filter: drop-shadow(0 1px 3px rgba(0,0,0,0.85)) !important;
 }
 
-/* ---------- Suggestion Chips: Pill Shape, NO Borders, Subtle Glass (Main & Watch Screens) ---------- */
+/* ---------- Suggestion Chips: Pill-Curved, ZERO Outer Border, Themed Typography & Subtle Shadow ---------- */
 html[data-ytg-on] :is(
   yt-chip-cloud-chip-renderer,
   chip-shape,
@@ -253,7 +253,9 @@ html[data-ytg-on] :is(
   .ytChipShapeActive,
   yt-related-chip-cloud-renderer,
   ytd-feed-filter-chip-bar-renderer,
-  #chips
+  #chips,
+  #chips-wrapper,
+  #chips-content
 ) :is(
   button,
   .yt-spec-button-shape-next,
@@ -261,63 +263,85 @@ html[data-ytg-on] :is(
   chip-shape,
   yt-chip-cloud-chip-renderer
 ) {
-  border-radius: 999px !important;
   border: none !important;
+  border-width: 0 !important;
+  border-color: transparent !important;
   outline: none !important;
+  border-radius: 999px !important;
 }
 
-/* Inactive chips: smooth pill shape, translucent dark/theme-tinted backing, ZERO border */
+/* Inactive suggestion chips: smooth pill-curved background, soft shadow, NO outer border */
 html[data-ytg-on] :is(
   .ytChipShapeInactive,
   yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
   chip-shape:not([selected]),
-  #chips yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected)
-) :is(button, .ytChipShapeChip, .yt-spec-button-shape-next) {
-  background: color-mix(in srgb, var(--ytg-bg1) 50%, rgba(20, 16, 10, 0.40)) !important;
-  background-color: color-mix(in srgb, var(--ytg-bg1) 50%, rgba(20, 16, 10, 0.40)) !important;
+  #chips yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
+  ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer:not([selected])
+) :is(button, .ytChipShapeChip, .yt-spec-button-shape-next, chip-shape, yt-chip-cloud-chip-renderer) {
+  background: color-mix(in srgb, var(--ytg-bg1) 58%, rgba(20, 16, 10, 0.50)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 58%, rgba(20, 16, 10, 0.50)) !important;
   border: none !important;
+  border-width: 0 !important;
+  border-color: transparent !important;
   outline: none !important;
-  box-shadow: none !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  backdrop-filter: blur(12px) !important;
   border-radius: 999px !important;
-  transition: background-color .2s ease, transform .15s ease !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  backdrop-filter: blur(14px) !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35), 0 0 6px color-mix(in srgb, var(--ytg-a) 20%, transparent) !important;
+  transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease !important;
 }
 
-/* Inactive chips text: clean, readable theme typography */
+/* Suggestion chips text: Theme-wise text color matching the active theme */
 html[data-ytg-on] :is(
   .ytChipShapeInactive,
   yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
   chip-shape:not([selected]),
-  #chips yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected)
+  #chips yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
+  ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer:not([selected])
 ) :is(*, span, .ytChipShapeText, #text, yt-formatted-string) {
-  color: var(--ytg-text) !important;
-  -webkit-text-fill-color: var(--ytg-text) !important;
+  color: color-mix(in srgb, var(--ytg-a) 75%, #ffffff) !important;
+  -webkit-text-fill-color: color-mix(in srgb, var(--ytg-a) 75%, #ffffff) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
   opacity: 1 !important;
   font-weight: 500 !important;
   background: transparent !important;
+  transition: color .2s ease !important;
 }
 
-/* Suggestion chips hover: soft gentle highlight without harsh borders */
+/* Hover state: gentle scale, brighter theme text, warm glow, NO border */
 html[data-ytg-on] :is(
   .ytChipShapeInactive,
   yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
-  chip-shape:not([selected])
-):hover :is(button, .ytChipShapeChip, .yt-spec-button-shape-next) {
-  background: color-mix(in srgb, var(--ytg-a) 18%, rgba(255, 255, 255, 0.08)) !important;
+  chip-shape:not([selected]),
+  ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer:not([selected])
+):hover :is(button, .ytChipShapeChip, .yt-spec-button-shape-next, chip-shape, yt-chip-cloud-chip-renderer) {
+  transform: translateY(-1.5px) scale(1.03) !important;
+  background: color-mix(in srgb, var(--ytg-a) 25%, rgba(20, 16, 10, 0.65)) !important;
   border: none !important;
+  border-width: 0 !important;
   outline: none !important;
-  box-shadow: none !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), 0 0 12px color-mix(in srgb, var(--ytg-a) 45%, transparent) !important;
 }
 
-/* ---------- Suggestion Chips: Active / Selected state (Vibrant Theme Accent Pill, NO Border, Never Black) ---------- */
+html[data-ytg-on] :is(
+  .ytChipShapeInactive,
+  yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
+  chip-shape:not([selected]),
+  ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer:not([selected])
+):hover :is(*, span, .ytChipShapeText, #text, yt-formatted-string) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Active / Selected suggestion chip (e.g. "All"): Vibrant theme pill, NO border */
 html[data-ytg-on] :is(
   .ytChipShapeActive,
   [aria-selected="true"],
   .iron-selected,
   yt-chip-cloud-chip-renderer[selected],
   chip-shape[selected],
-  #chips yt-chip-cloud-chip-renderer[selected]
+  #chips yt-chip-cloud-chip-renderer[selected],
+  ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer[selected]
 ),
 html[data-ytg-on] :is(
   .ytChipShapeActive,
@@ -325,27 +349,98 @@ html[data-ytg-on] :is(
   .iron-selected,
   yt-chip-cloud-chip-renderer[selected],
   chip-shape[selected],
-  #chips yt-chip-cloud-chip-renderer[selected]
+  #chips yt-chip-cloud-chip-renderer[selected],
+  ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer[selected]
 ) :is(button, .ytChipShapeChip, .yt-spec-button-shape-next, yt-chip-cloud-chip-renderer, chip-shape) {
   background: linear-gradient(135deg, color-mix(in srgb, var(--ytg-a) 60%, #fff), var(--ytg-a) 70%, color-mix(in srgb, var(--ytg-a) 70%, #000)) !important;
   background-color: var(--ytg-a) !important;
   border: none !important;
+  border-width: 0 !important;
   outline: none !important;
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--ytg-a) 45%, transparent) !important;
+  box-shadow: 0 3px 12px color-mix(in srgb, var(--ytg-a) 55%, transparent), 0 2px 6px rgba(0,0,0,0.3) !important;
   border-radius: 999px !important;
 }
+
 html[data-ytg-on] :is(
   .ytChipShapeActive,
   [aria-selected="true"],
   .iron-selected,
   yt-chip-cloud-chip-renderer[selected],
   chip-shape[selected],
-  #chips yt-chip-cloud-chip-renderer[selected]
+  #chips yt-chip-cloud-chip-renderer[selected],
+  ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer[selected]
 ) :is(*, span, .ytChipShapeText, #text, yt-formatted-string) {
   color: #0b0906 !important;
   -webkit-text-fill-color: #0b0906 !important;
   font-weight: 700 !important;
   background: transparent !important;
+}
+
+/* Next / Previous arrows in the suggestion chips line: theme icon color, pill/circle shape, NO outer box */
+html[data-ytg-on] :is(
+  #chips-wrapper,
+  ytd-feed-filter-chip-bar-renderer,
+  yt-chip-cloud-renderer,
+  #chips-content
+) :is(#left-arrow, #right-arrow, #left-arrow-button, #right-arrow-button) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+html[data-ytg-on] :is(
+  #chips-wrapper,
+  ytd-feed-filter-chip-bar-renderer,
+  yt-chip-cloud-renderer,
+  #chips-content
+) :is(#left-arrow, #right-arrow, #left-arrow-button, #right-arrow-button)::before,
+html[data-ytg-on] :is(
+  #chips-wrapper,
+  ytd-feed-filter-chip-bar-renderer,
+  yt-chip-cloud-renderer,
+  #chips-content
+) :is(#left-arrow, #right-arrow, #left-arrow-button, #right-arrow-button)::after {
+  display: none !important;
+}
+
+html[data-ytg-on] :is(
+  #chips-wrapper,
+  ytd-feed-filter-chip-bar-renderer,
+  yt-chip-cloud-renderer,
+  #chips-content
+) :is(#left-arrow, #right-arrow, #left-arrow-button, #right-arrow-button) button {
+  background: color-mix(in srgb, var(--ytg-bg1) 65%, rgba(20, 16, 10, 0.6)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 65%, rgba(20, 16, 10, 0.6)) !important;
+  border: none !important;
+  border-width: 0 !important;
+  border-radius: 50% !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35), 0 0 8px color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease !important;
+}
+
+html[data-ytg-on] :is(
+  #chips-wrapper,
+  ytd-feed-filter-chip-bar-renderer,
+  yt-chip-cloud-renderer,
+  #chips-content
+) :is(#left-arrow, #right-arrow, #left-arrow-button, #right-arrow-button) button:hover {
+  transform: scale(1.1) !important;
+  background: color-mix(in srgb, var(--ytg-a) 25%, rgba(20, 16, 10, 0.7)) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), 0 0 14px color-mix(in srgb, var(--ytg-a) 55%, transparent) !important;
+}
+
+html[data-ytg-on] :is(
+  #chips-wrapper,
+  ytd-feed-filter-chip-bar-renderer,
+  yt-chip-cloud-renderer,
+  #chips-content
+) :is(#left-arrow, #right-arrow, #left-arrow-button, #right-arrow-button) :is(svg, path, yt-icon, .yt-spec-button-shape-next__icon) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.85)) !important;
+  transition: fill .3s ease, color .3s ease !important;
 }
 
 /* Suggestion chips: pill shape everywhere */
@@ -435,10 +530,6 @@ html[data-ytg-on] ytd-guide-section-renderer #guide-section-title {
 
 /* ========== High-Contrast Theme Arrows & Navigation Across YouTube ========== */
 html[data-ytg-on] :is(
-  #chips-wrapper #left-arrow button,
-  #chips-wrapper #right-arrow button,
-  yt-chip-cloud-renderer #left-arrow button,
-  yt-chip-cloud-renderer #right-arrow button,
   ytd-rich-shelf-renderer #arrow-left button,
   ytd-rich-shelf-renderer #arrow-right button,
   ytd-guide-collapsible-section-entry-renderer #expander-item,
@@ -456,10 +547,6 @@ html[data-ytg-on] :is(
 }
 
 html[data-ytg-on] :is(
-  #chips-wrapper #left-arrow,
-  #chips-wrapper #right-arrow,
-  yt-chip-cloud-renderer #left-arrow,
-  yt-chip-cloud-renderer #right-arrow,
   ytd-rich-shelf-renderer #arrow-left,
   ytd-rich-shelf-renderer #arrow-right,
   ytd-guide-collapsible-section-entry-renderer #expander-item,
@@ -472,10 +559,6 @@ html[data-ytg-on] :is(
 }
 
 html[data-ytg-on] :is(
-  #chips-wrapper #left-arrow button:hover,
-  #chips-wrapper #right-arrow button:hover,
-  yt-chip-cloud-renderer #left-arrow button:hover,
-  yt-chip-cloud-renderer #right-arrow button:hover,
   ytd-rich-shelf-renderer #arrow-left button:hover,
   ytd-rich-shelf-renderer #arrow-right button:hover,
   ytd-playlist-panel-renderer :is(#previous-button, #next-button, #expand-button) button:hover,
@@ -1532,8 +1615,10 @@ html[data-ytg-theme="noir"][data-ytg-mode="dark"] ytd-popup-container tp-yt-iron
 
 /* ---------- v7.4 ---------- */
 /* every non-filled button gets the glass look automatically (current and future ones) */
-html[data-ytg-on] button.yt-spec-button-shape-next--tonal, html[data-ytg-on] button.yt-spec-button-shape-next--outline,
-html[data-ytg-on] button.yt-spec-button-shape-next--overlay, html[data-ytg-on] button.yt-spec-button-shape-next--mono:not(.yt-spec-button-shape-next--text):not(.yt-spec-button-shape-next--filled) {
+html[data-ytg-on] button.yt-spec-button-shape-next--tonal:not(#chips *):not(#chips-wrapper *):not(yt-chip-cloud-chip-renderer *):not(chip-shape *),
+html[data-ytg-on] button.yt-spec-button-shape-next--outline:not(#chips *):not(#chips-wrapper *):not(yt-chip-cloud-chip-renderer *):not(chip-shape *),
+html[data-ytg-on] button.yt-spec-button-shape-next--overlay:not(#chips *):not(#chips-wrapper *):not(yt-chip-cloud-chip-renderer *):not(chip-shape *),
+html[data-ytg-on] button.yt-spec-button-shape-next--mono:not(.yt-spec-button-shape-next--text):not(.yt-spec-button-shape-next--filled):not(#chips *):not(#chips-wrapper *):not(yt-chip-cloud-chip-renderer *):not(chip-shape *) {
   background: var(--ytg-fill) !important; border: 1px solid var(--ytg-edge) !important; box-shadow: var(--ytg-shine) !important;
 }
 /* Shorts: icons, progress and controls follow the active theme colour */
