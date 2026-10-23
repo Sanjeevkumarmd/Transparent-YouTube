@@ -407,6 +407,116 @@ html[data-ytg-on] .ytp-settings-menu {
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
 }
+/* Three-dots menu buttons on comments, videos, watch metadata: completely transparent (no black circular button) */
+html[data-ytg-on] :is(
+  ytd-menu-renderer,
+  #action-menu,
+  ytd-comment-view-model #action-menu,
+  ytd-comment-renderer #action-menu,
+  ytd-compact-video-renderer #menu,
+  ytd-rich-grid-media #menu,
+  ytd-video-renderer #menu
+) :is(
+  yt-icon-button,
+  button,
+  .yt-spec-button-shape-next
+) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html[data-ytg-on] :is(
+  ytd-menu-renderer,
+  #action-menu,
+  ytd-comment-view-model #action-menu,
+  ytd-comment-renderer #action-menu,
+  ytd-compact-video-renderer #menu,
+  ytd-rich-grid-media #menu,
+  ytd-video-renderer #menu
+) :is(
+  yt-icon-button,
+  button,
+  .yt-spec-button-shape-next
+):hover {
+  background: color-mix(in srgb, var(--ytg-a) 20%, transparent) !important;
+  border-radius: 50% !important;
+}
+
+html[data-ytg-on] :is(
+  ytd-menu-renderer,
+  #action-menu,
+  ytd-comment-view-model #action-menu,
+  ytd-comment-renderer #action-menu,
+  ytd-compact-video-renderer #menu,
+  ytd-rich-grid-media #menu,
+  ytd-video-renderer #menu
+) :is(yt-icon, svg, path) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+  opacity: 0.85 !important;
+}
+html[data-ytg-on] :is(
+  ytd-menu-renderer,
+  #action-menu,
+  ytd-comment-view-model #action-menu,
+  ytd-comment-renderer #action-menu,
+  ytd-compact-video-renderer #menu,
+  ytd-rich-grid-media #menu,
+  ytd-video-renderer #menu
+):hover :is(yt-icon, svg, path) {
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 6px var(--ytg-a)) !important;
+}
+
+/* ========== YouTube Masthead "+ Create" Button: Theme-Wise ========== */
+html[data-ytg-on] ytd-masthead :is(
+  ytd-button-renderer:has(yt-icon[icon*="create"], svg path[d*="M14 10H3v2h11v-2zm0-4H3v2h11V6zM3 16h7v-2H3v2zm11.5-6"]),
+  ytd-button-renderer:has(path[d*="M14 10"]),
+  yt-button-view-model:has(path[d*="M14 10"]),
+  [aria-label*="Create" i],
+  button[aria-label*="Create" i]
+) {
+  background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.45)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 40%, rgba(255, 255, 255, 0.18)) !important;
+  border-radius: 999px !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  transition: all .2s ease !important;
+}
+
+html[data-ytg-on] ytd-masthead :is(
+  ytd-button-renderer:has(path[d*="M14 10"]),
+  yt-button-view-model:has(path[d*="M14 10"]),
+  [aria-label*="Create" i],
+  button[aria-label*="Create" i]
+):hover {
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
+}
+
+html[data-ytg-on] ytd-masthead :is(
+  ytd-button-renderer:has(path[d*="M14 10"]),
+  yt-button-view-model:has(path[d*="M14 10"]),
+  [aria-label*="Create" i],
+  button[aria-label*="Create" i]
+) :is(span, .yt-spec-button-shape-next__button-text-content, .yt-core-attributed-string) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 600 !important;
+}
+
+html[data-ytg-on] ytd-masthead :is(
+  ytd-button-renderer:has(path[d*="M14 10"]),
+  yt-button-view-model:has(path[d*="M14 10"]),
+  [aria-label*="Create" i],
+  button[aria-label*="Create" i]
+) :is(svg, path, yt-icon, .yt-spec-button-shape-next__icon) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
+
 /* inner layers see-through, notification cards are flat rows (no boxes) */
 html[data-ytg-on] ytd-popup-container ytd-multi-page-menu-renderer,
 html[data-ytg-on] ytd-popup-container ytd-menu-popup-renderer,
@@ -842,11 +952,59 @@ html[data-ytg-on] .ytp-popup, html[data-ytg-on] .ytp-settings-menu {
   -webkit-backdrop-filter: blur(28px) saturate(140%) !important; backdrop-filter: blur(28px) saturate(140%) !important;
 }
 
-/* Ambient light behind the video: a soft gradient (no box-shadow) from the video's own colours */
-html[data-ytg-ambient] ytd-watch-flexy:not([fullscreen]) #player-container-outer { position: relative; isolation: isolate; }
-html[data-ytg-ambient] ytd-watch-flexy:not([fullscreen]) #player-container-outer::before {
-  content: ""; position: absolute; inset: -90px -110px; z-index: -1; pointer-events: none;
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--ytg-v, var(--ytg-a)) calc(var(--ytg-amb) * 1%), transparent), transparent);
+/* ========== Ambient Light & Theater Mode: Enlarged, Seamless Radiance ========== */
+/* 1. Remove all separator lines and dark borders around the video in theater mode and normal mode */
+html[data-ytg-on] :is(
+  #player-theater-container,
+  #player-full-bleed-container,
+  #full-bleed-container,
+  #player-container-outer,
+  #player-container-inner,
+  #player-container,
+  ytd-watch-flexy[theater] #player-theater-container,
+  ytd-watch-flexy[theater] #player-full-bleed-container
+) {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+html[data-ytg-on] :is(
+  #player-theater-container::after,
+  #player-full-bleed-container::after,
+  #full-bleed-container::after,
+  #player-theater-container::before,
+  #player-full-bleed-container::before
+) {
+  border: none !important;
+}
+
+/* 2. Ambient light behind the video: enlarged, rich, theme-radiant glow */
+html[data-ytg-ambient] ytd-watch-flexy:not([fullscreen]) :is(#player-container-outer, #player-theater-container, #player-full-bleed-container) {
+  position: relative;
+  isolation: isolate;
+  overflow: visible !important;
+}
+html[data-ytg-ambient] ytd-watch-flexy:not([fullscreen]) :is(#player-container-outer, #player-theater-container, #player-full-bleed-container)::before {
+  content: "";
+  position: absolute;
+  inset: -140px -220px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--ytg-v, var(--ytg-a)) 75%, transparent) 0%, color-mix(in srgb, var(--ytg-a) 40%, transparent) 45%, transparent 75%) !important;
+  filter: blur(48px);
+  opacity: 0.9;
+  transition: opacity .4s ease, filter .4s ease;
+}
+
+/* In Theater Mode: extra enlarged ambient radiance filling the margins without separator lines */
+html[data-ytg-ambient] ytd-watch-flexy[theater]:not([fullscreen]) :is(#player-theater-container, #player-full-bleed-container)::before {
+  inset: -120px -300px !important;
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--ytg-v, var(--ytg-a)) 75%, transparent) 0%, color-mix(in srgb, var(--ytg-a) 45%, transparent) 50%, transparent 80%) !important;
+  filter: blur(54px) !important;
+  opacity: 0.95 !important;
 }
 
 /* ---------- Simple layout: banners / end cards only (Shorts stay) ---------- */
@@ -1134,51 +1292,12 @@ html[data-ytg-on] :is(
 html[data-ytg-on] .html5-video-player :is(like-button-view-model, dislike-button-view-model, segmented-like-dislike-button-view-model, button-view-model, yt-button-shape, button) svg :is(path, circle, rect) { fill: var(--ytg-ui, #fff) !important; }
 html[data-ytg-on] .html5-video-player :is([class*="overlay-bottom-right"], [class*="engagement"], [class*="fullscreen-action"], [class*="ytp-fullerscreen"]) { background: transparent !important; box-shadow: none !important; }
 
-/* ========== YouTube Subscribe Button - Dynamic Theme Gradient ========== */
-/* 1. Pre-subscribed State (when user has NOT subscribed yet) */
-html[data-ytg-on] [data-ytg-sub-state="subscribe"],
-html[data-ytg-on] :is(
-  #subscribe-button,
-  ytd-subscribe-button-renderer,
-  yt-subscribe-button-view-model,
-  [target-id*="subscribe"],
-  [class*="subscribe-button"]
-) :is(
-  button,
-  .yt-spec-button-shape-next,
-  .yt-spec-button-shape-next--filled,
-  yt-button-shape button
-):not([aria-label*="Subscribed" i]):not([aria-label*="notification" i]):not([aria-label*="Unsubscribe" i]):not(.yt-spec-button-shape-next--tonal) {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--ytg-a) 60%, #fff), var(--ytg-a) 70%, color-mix(in srgb, var(--ytg-a) 70%, #000)) !important;
-  background-color: var(--ytg-a) !important;
-  color: #0b0906 !important;
-  border: 1px solid var(--ytg-edge) !important;
-  box-shadow: 0 2px 14px color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
-  font-weight: 700 !important;
-  border-radius: 999px !important;
+/* ========== YouTube Subscribe & Notification Buttons - 100% Transparent Glass for EVERY Theme ========== */
+html[data-ytg-on] {
+  --yt-spec-badge-chip-background: transparent !important;
+  --yt-spec-button-chip-background-hover: color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
 }
 
-html[data-ytg-on] [data-ytg-sub-state="subscribe"] :is(*, span, .yt-core-attributed-string),
-html[data-ytg-on] :is(
-  #subscribe-button,
-  ytd-subscribe-button-renderer,
-  yt-subscribe-button-view-model,
-  [target-id*="subscribe"],
-  [class*="subscribe-button"]
-) :is(
-  button,
-  .yt-spec-button-shape-next,
-  .yt-spec-button-shape-next--filled,
-  yt-button-shape button
-):not([aria-label*="Subscribed" i]):not([aria-label*="notification" i]):not([aria-label*="Unsubscribe" i]):not(.yt-spec-button-shape-next--tonal) :is(*, span, .yt-core-attributed-string, .yt-spec-button-shape-next__button-text-content) {
-  color: #0b0906 !important;
-  -webkit-text-fill-color: #0b0906 !important;
-  font-weight: 700 !important;
-}
-
-/* 2. Subscribed & Notification Bell State: clean translucent frosted pill with theme-colored bell icon & chevron (NEVER plain white) */
-html[data-ytg-on] [data-ytg-sub-state="subscribed"],
-html[data-ytg-on] [data-ytg-sub-state="subscribed"] *,
 html[data-ytg-on] :is(
   #subscribe-button,
   ytd-subscribe-button-renderer,
@@ -1191,35 +1310,47 @@ html[data-ytg-on] :is(
   ytd-subscription-notification-toggle-button-renderer-next,
   yt-subscription-notification-toggle-button-renderer-next,
   subscription-notification-toggle-button-shape-renderer,
+  yt-subscription-notification-toggle-button-shape-renderer,
   #notification-preference-button,
   #owner ytd-subscription-notification-toggle-button-renderer-next,
   #owner yt-subscription-notification-toggle-button-renderer-next,
   #owner #notification-preference-button,
   ytd-subscribe-button-renderer ~ *,
-  ytd-subscribe-button-renderer ~ ytd-subscription-notification-toggle-button-renderer-next
+  ytd-reel-player-overlay-renderer #subscribe-button,
+  [data-ytg-sub-state]
 ) :is(
   button,
   .yt-spec-button-shape-next,
+  .yt-spec-button-shape-next--filled,
   .yt-spec-button-shape-next--tonal,
   .yt-spec-button-shape-next--mono,
-  yt-button-shape button,
-  button[aria-label*="Subscribed" i],
-  button[aria-label*="notification" i],
-  button[aria-label*="Unsubscribe" i],
-  button[aria-label*="setting" i]
+  yt-button-shape,
+  yt-button-shape button
 ) {
-  background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.45)) !important;
-  background-color: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.45)) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
   border: 1px solid color-mix(in srgb, var(--ytg-a) 55%, rgba(255, 255, 255, 0.25)) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+  border-radius: 999px !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
-  border-radius: 999px !important;
-  color: var(--ytg-text) !important;
-  -webkit-text-fill-color: var(--ytg-text) !important;
+  box-shadow: none !important;
+  transition: all .2s ease !important;
 }
 
-html[data-ytg-on] [data-ytg-sub-state="subscribed"] :is(*, span, .yt-core-attributed-string),
+/* Eliminate touch feedback pseudo-fills */
+html[data-ytg-on] :is(
+  #subscribe-button,
+  ytd-subscribe-button-renderer,
+  yt-subscribe-button-view-model,
+  yt-channel-header-view-model,
+  #notification-preference-button
+) :is(.yt-spec-touch-feedback-shape__fill, .yt-spec-touch-feedback-shape__stroke) {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Hover: glowing theme highlight */
 html[data-ytg-on] :is(
   #subscribe-button,
   ytd-subscribe-button-renderer,
@@ -1232,19 +1363,45 @@ html[data-ytg-on] :is(
   ytd-subscription-notification-toggle-button-renderer-next,
   yt-subscription-notification-toggle-button-renderer-next,
   subscription-notification-toggle-button-shape-renderer,
-  #notification-preference-button
+  yt-subscription-notification-toggle-button-shape-renderer,
+  #notification-preference-button,
+  ytd-reel-player-overlay-renderer #subscribe-button,
+  [data-ytg-sub-state]
 ) :is(
-  button,
-  .yt-spec-button-shape-next,
-  yt-button-shape button
-) :is(*, span, .yt-core-attributed-string, .yt-spec-button-shape-next__button-text-content) {
+  button:hover,
+  .yt-spec-button-shape-next:hover,
+  yt-button-shape button:hover
+) {
+  background: color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
+  background-color: color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
+}
+
+/* Text inside Subscribe / Subscribed */
+html[data-ytg-on] :is(
+  #subscribe-button,
+  ytd-subscribe-button-renderer,
+  yt-subscribe-button-view-model,
+  yt-channel-header-view-model,
+  ytd-c4-tabbed-header-renderer,
+  ytd-channel-header-renderer,
+  [class*="channel-header-view-model"],
+  [class*="subscribe-button"],
+  ytd-subscription-notification-toggle-button-renderer-next,
+  yt-subscription-notification-toggle-button-renderer-next,
+  subscription-notification-toggle-button-shape-renderer,
+  yt-subscription-notification-toggle-button-shape-renderer,
+  #notification-preference-button,
+  ytd-reel-player-overlay-renderer #subscribe-button,
+  [data-ytg-sub-state]
+) :is(span, .yt-core-attributed-string, .yt-spec-button-shape-next__button-text-content) {
   color: var(--ytg-text) !important;
   -webkit-text-fill-color: var(--ytg-text) !important;
-  opacity: 1 !important;
   font-weight: 600 !important;
 }
 
-html[data-ytg-on] [data-ytg-sub-state="subscribed"] :is(svg, path, yt-icon),
+/* Icons (Bell, chevron, plus) inside Subscribe / Subscribed */
 html[data-ytg-on] :is(
   #subscribe-button,
   ytd-subscribe-button-renderer,
@@ -1257,9 +1414,10 @@ html[data-ytg-on] :is(
   ytd-subscription-notification-toggle-button-renderer-next,
   yt-subscription-notification-toggle-button-renderer-next,
   subscription-notification-toggle-button-shape-renderer,
+  yt-subscription-notification-toggle-button-shape-renderer,
   #notification-preference-button,
-  #owner ytd-subscription-notification-toggle-button-renderer-next,
-  #owner yt-subscription-notification-toggle-button-renderer-next
+  ytd-reel-player-overlay-renderer #subscribe-button,
+  [data-ytg-sub-state]
 ) :is(yt-icon, svg, path, .yt-spec-button-shape-next__icon) {
   fill: var(--ytg-a) !important;
   color: var(--ytg-a) !important;
