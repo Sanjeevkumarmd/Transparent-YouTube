@@ -235,17 +235,23 @@
     });
 
     // 2. Tag Subscribe vs Subscribed buttons to prevent white background
-    const subBtns = document.querySelectorAll("#subscribe-button button, ytd-subscribe-button-renderer button, yt-subscribe-button-view-model button, ytd-subscription-notification-toggle-button-renderer-next button, yt-subscription-notification-toggle-button-renderer-next button, #notification-preference-button button");
+    const subBtns = document.querySelectorAll(
+      "#subscribe-button button, ytd-subscribe-button-renderer button, yt-subscribe-button-view-model button, " +
+      "yt-channel-header-view-model button, .yt-channel-header-view-model-wiz__subscribe-button button, " +
+      "ytd-c4-tabbed-header-renderer button, ytd-channel-header-renderer button, " +
+      "ytd-subscription-notification-toggle-button-renderer-next button, yt-subscription-notification-toggle-button-renderer-next button, " +
+      "#notification-preference-button button, ytd-reel-player-overlay-renderer #subscribe-button button, " +
+      "button[aria-label*='Subscribe' i], button[aria-label*='Subscribed' i], button[aria-label*='notification' i]"
+    );
     subBtns.forEach(btn => {
       const label = (btn.getAttribute("aria-label") || "").toLowerCase();
       const txt = (btn.textContent || "").trim().toLowerCase();
       const hasBell = !!btn.querySelector("svg, yt-icon");
       const isSubscribed = txt.includes("subscribed") || label.includes("subscribed") || label.includes("notification") || label.includes("unsubscribe") || (hasBell && !txt.includes("subscribe"));
-      if (isSubscribed) {
-        btn.setAttribute("data-ytg-sub-state", "subscribed");
-      } else {
-        btn.setAttribute("data-ytg-sub-state", "subscribe");
-      }
+      const state = isSubscribed ? "subscribed" : "subscribe";
+      btn.setAttribute("data-ytg-sub-state", state);
+      const parent = btn.closest("yt-button-shape, .yt-channel-header-view-model-wiz__subscribe-button, ytd-subscribe-button-renderer, yt-subscribe-button-view-model");
+      if (parent) parent.setAttribute("data-ytg-sub-state", state);
     });
   }
   setInterval(updateButtonsAndBadges, 600);

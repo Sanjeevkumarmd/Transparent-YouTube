@@ -534,7 +534,7 @@ html[data-ytg-on] .ytSearchboxComponentSuggestion:hover,
 html[data-ytg-on] yt-searchbox [role="option"]:hover,
 html[data-ytg-on] .sbse:hover, html[data-ytg-on] .ytSearchboxComponentSuggestion[aria-selected="true"] { background: rgba(255,255,255,.12) !important; }
 
-/* ---------- Shorts: no black letterbox columns around the video ---------- */
+/* ---------- Shorts: Full Liquid Glass & Theme-Wise Styling ---------- */
 html[data-ytg-on] ytd-shorts,
 html[data-ytg-on] ytd-shorts #shorts-container,
 html[data-ytg-on] ytd-shorts #shorts-inner-container,
@@ -553,25 +553,164 @@ html[data-ytg-on] ytd-shorts [id*="cinematic"] {
 html[data-ytg-on] ytd-shorts [class*="cinematic"], html[data-ytg-on] ytd-shorts [id*="cinematic"] { display: none !important; }
 html[data-ytg-on] ytd-shorts::before, html[data-ytg-on] ytd-shorts::after,
 html[data-ytg-on] ytd-shorts ytd-reel-video-renderer::before, html[data-ytg-on] ytd-shorts ytd-reel-video-renderer::after { display: none !important; }
-/* round liquid-glass action buttons on Shorts */
-html[data-ytg-on] ytd-shorts #actions .yt-spec-button-shape-next--size-l,
-html[data-ytg-on] ytd-shorts #navigation-button-up button,
-html[data-ytg-on] ytd-shorts #navigation-button-down button {
-  background: var(--ytg-fill) !important; border: 1px solid var(--ytg-edge) !important; box-shadow: var(--ytg-shine) !important;
+
+/* 1. Shorts Player Top Controls (Play/Pause, Mute, CC, Settings, Fullscreen) */
+html[data-ytg-on] ytd-shorts .ytp-chrome-top,
+html[data-ytg-on] #shorts-player .ytp-chrome-top,
+html[data-ytg-on] ytd-reel-video-renderer .ytp-chrome-top {
+  background: linear-gradient(180deg, rgba(0,0,0,0.55), transparent) !important;
+}
+html[data-ytg-on] ytd-shorts .ytp-chrome-top :is(button, .ytp-button),
+html[data-ytg-on] #shorts-player .ytp-chrome-top :is(button, .ytp-button),
+html[data-ytg-on] ytd-reel-video-renderer .ytp-chrome-top :is(button, .ytp-button) {
+  opacity: 0.92 !important;
+  transition: transform .2s ease, filter .2s ease;
+}
+html[data-ytg-on] ytd-shorts .ytp-chrome-top :is(button, .ytp-button):hover,
+html[data-ytg-on] #shorts-player .ytp-chrome-top :is(button, .ytp-button):hover {
+  transform: scale(1.12) !important;
+  filter: drop-shadow(0 0 6px var(--ytg-a)) !important;
+}
+html[data-ytg-on] ytd-shorts .ytp-chrome-top :is(svg, path, use),
+html[data-ytg-on] #shorts-player .ytp-chrome-top :is(svg, path, use),
+html[data-ytg-on] ytd-reel-video-renderer .ytp-chrome-top :is(svg, path, use) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
 }
 
-/* ---------- Video titles: styled according to specific theme, slightly brighter for high readability ---------- */
+/* 2. Shorts Right-Side Action Sidebar (Like, Dislike, Comments, Share, Remix, Sound) */
+html[data-ytg-on] ytd-shorts #actions,
+html[data-ytg-on] ytd-reel-video-renderer #actions {
+  background: transparent !important;
+}
+html[data-ytg-on] ytd-shorts #actions :is(
+  .yt-spec-button-shape-next--size-l,
+  .yt-spec-button-shape-next--size-m,
+  yt-button-shape button,
+  button.yt-spec-button-shape-next
+) {
+  background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.65)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.65)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 45%, rgba(255, 255, 255, 0.22)) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  border-radius: 50% !important;
+  transition: transform .2s cubic-bezier(.2,.8,.2,1), border-color .2s ease, box-shadow .2s ease !important;
+}
+html[data-ytg-on] ytd-shorts #actions :is(
+  .yt-spec-button-shape-next--size-l,
+  .yt-spec-button-shape-next--size-m,
+  yt-button-shape button,
+  button.yt-spec-button-shape-next
+):hover {
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--ytg-a) 60%, transparent), 0 4px 18px rgba(0,0,0,0.6) !important;
+  transform: scale(1.08) !important;
+}
+html[data-ytg-on] ytd-shorts #actions :is(yt-icon, svg, path, .yt-spec-button-shape-next__icon) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
+html[data-ytg-on] ytd-shorts #actions :is(
+  label,
+  span,
+  .yt-spec-button-shape-with-label__label,
+  ytd-like-button-renderer span
+) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+  font-weight: 600 !important;
+  font-size: 11.5px !important;
+}
+html[data-ytg-on] ytd-shorts #actions :is(#sound-metadata, .sound-metadata, [class*="sound-button"]) {
+  border: 2px solid var(--ytg-a) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
+}
+
+/* 3. Shorts Far-Right Navigation Arrow Buttons */
+html[data-ytg-on] ytd-shorts :is(#navigation-button-up, #navigation-button-down) button {
+  background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.65)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.65)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 45%, rgba(255, 255, 255, 0.22)) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  border-radius: 50% !important;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease !important;
+}
+html[data-ytg-on] ytd-shorts :is(#navigation-button-up, #navigation-button-down) button:hover {
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--ytg-a) 65%, transparent), 0 4px 18px rgba(0,0,0,0.6) !important;
+  transform: scale(1.12) !important;
+}
+html[data-ytg-on] ytd-shorts :is(#navigation-button-up, #navigation-button-down) :is(svg, path, yt-icon) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
+
+/* 4. Shorts Bottom-Left Overlay (Channel Info, Handle, Audio Track, Title, Subscribe Button) */
+html[data-ytg-on] ytd-reel-player-overlay-renderer #channel-info,
+html[data-ytg-on] ytd-shorts #overlay #channel-info {
+  background: transparent !important;
+}
+html[data-ytg-on] ytd-reel-player-overlay-renderer :is(
+  #channel-name,
+  #channel-name a,
+  #channel-name yt-formatted-string,
+  #channel-info yt-formatted-string
+) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 8px color-mix(in srgb, var(--ytg-a) 40%, transparent) !important;
+}
+html[data-ytg-on] ytd-reel-player-overlay-renderer :is(
+  #overlay-metadata-renderer #title,
+  #title.ytd-reel-player-overlay-renderer,
+  .reel-player-overlay-renderer #title
+) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.95) !important;
+}
+html[data-ytg-on] ytd-reel-player-overlay-renderer #sound-metadata,
+html[data-ytg-on] ytd-reel-player-overlay-renderer #sound-metadata * {
+  color: color-mix(in srgb, var(--ytg-a) 30%, #ffffff) !important;
+  -webkit-text-fill-color: color-mix(in srgb, var(--ytg-a) 30%, #ffffff) !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9) !important;
+}
+html[data-ytg-on] ytd-reel-player-overlay-renderer #sound-metadata :is(svg, path, yt-icon) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
+html[data-ytg-on] ytd-reel-player-overlay-renderer #subscribe-button button {
+  background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.6)) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 55%, rgba(255, 255, 255, 0.25)) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-radius: 999px !important;
+  color: var(--ytg-text) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4) !important;
+}
+html[data-ytg-on] ytd-reel-player-overlay-renderer #subscribe-button button:hover {
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--ytg-a) 55%, transparent) !important;
+  color: #ffffff !important;
+}
+
+/* ---------- Video titles: crystal-clear high-contrast readability with theme hover accent ---------- */
 html[data-ytg-on] :is(
-  h1.ytd-watch-metadata,
-  h1.ytd-watch-metadata yt-formatted-string,
-  ytd-watch-metadata #title,
-  ytd-watch-metadata #title yt-formatted-string,
-  .ytp-title-link,
   #video-title,
   a#video-title,
   yt-formatted-string#video-title,
   ytd-compact-video-renderer #video-title,
   ytd-rich-grid-media #video-title,
+  ytd-grid-video-renderer #video-title,
   .yt-lockup-metadata-view-model-wiz__title,
   .yt-lockup-metadata-view-model__title,
   .ytLockupMetadataViewModelTitle,
@@ -581,16 +720,38 @@ html[data-ytg-on] :is(
   ytd-rich-shelf-renderer #title,
   ytd-engagement-panel-title-header-renderer #title-text
 ) {
-  color: color-mix(in srgb, var(--ytg-a) 78%, #ffffff) !important;
-  -webkit-text-fill-color: color-mix(in srgb, var(--ytg-a) 78%, #ffffff) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
   background: none !important;
-  font-weight: 600;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+  transition: color .2s ease, text-shadow .2s ease;
 }
 
+/* Hover highlight on video titles: lights up with the active theme color */
+html[data-ytg-on] :is(
+  #video-title:hover,
+  a#video-title:hover,
+  yt-formatted-string#video-title:hover,
+  ytd-compact-video-renderer:hover #video-title,
+  ytd-rich-grid-media:hover #video-title,
+  ytd-grid-video-renderer:hover #video-title,
+  .yt-lockup-metadata-view-model-wiz__title:hover,
+  .ytLockupMetadataViewModelTitle:hover
+) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  text-shadow: 0 0 10px color-mix(in srgb, var(--ytg-a) 60%, transparent) !important;
+}
+
+/* Big watch page hero title */
 html[data-ytg-on] h1.ytd-watch-metadata,
 html[data-ytg-on] h1.ytd-watch-metadata yt-formatted-string,
 html[data-ytg-on] .ytp-title-link {
+  color: color-mix(in srgb, var(--ytg-a) 75%, #ffffff) !important;
+  -webkit-text-fill-color: color-mix(in srgb, var(--ytg-a) 75%, #ffffff) !important;
   font-weight: 700 !important;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.85);
 }
 
 html[data-ytg-on][data-ytg-shimmer] h1.ytd-watch-metadata yt-formatted-string {
@@ -603,9 +764,32 @@ html[data-ytg-on][data-ytg-shimmer] h1.ytd-watch-metadata yt-formatted-string {
 }
 html:not([data-ytg-shimmer]) h1.ytd-watch-metadata yt-formatted-string { animation: none; }
 
-html[data-ytg-on] ytd-video-meta-block, html[data-ytg-on] #metadata-line span, html[data-ytg-on] #channel-name a,
-html[data-ytg-on] .yt-content-metadata-view-model-wiz__metadata-text, html[data-ytg-on] .yt-content-metadata-view-model__metadata-text {
-  color: var(--ytg-sub) !important;
+/* Metadata lines (views, date, channel name) - high-contrast clear readability */
+html[data-ytg-on] :is(
+  ytd-video-meta-block,
+  #metadata-line,
+  #metadata-line span,
+  #channel-name a,
+  #channel-name yt-formatted-string,
+  .yt-content-metadata-view-model-wiz__metadata-text,
+  .yt-content-metadata-view-model__metadata-text,
+  ytd-grid-video-renderer #metadata,
+  ytd-grid-video-renderer #metadata span
+) {
+  color: rgba(255, 255, 255, 0.78) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.78) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Remove dark background overlays on video card metadata */
+html[data-ytg-on] :is(
+  ytd-rich-grid-media #details,
+  ytd-grid-video-renderer #details,
+  ytd-video-renderer #details,
+  .yt-lockup-view-model-wiz__metadata,
+  ytd-rich-item-renderer #content
+) {
+  background: transparent !important;
 }
 @keyframes ytg-shimmer { to { background-position: 220% 0; } }
 
@@ -994,10 +1178,16 @@ html[data-ytg-on] :is(
 
 /* 2. Subscribed & Notification Bell State: clean translucent frosted pill with theme-colored bell icon & chevron (NEVER plain white) */
 html[data-ytg-on] [data-ytg-sub-state="subscribed"],
+html[data-ytg-on] [data-ytg-sub-state="subscribed"] *,
 html[data-ytg-on] :is(
   #subscribe-button,
   ytd-subscribe-button-renderer,
   yt-subscribe-button-view-model,
+  yt-channel-header-view-model,
+  ytd-c4-tabbed-header-renderer,
+  ytd-channel-header-renderer,
+  [class*="channel-header-view-model"],
+  [class*="subscribe-button"],
   ytd-subscription-notification-toggle-button-renderer-next,
   yt-subscription-notification-toggle-button-renderer-next,
   subscription-notification-toggle-button-shape-renderer,
@@ -1012,7 +1202,7 @@ html[data-ytg-on] :is(
   .yt-spec-button-shape-next,
   .yt-spec-button-shape-next--tonal,
   .yt-spec-button-shape-next--mono,
-  .yt-spec-button-shape-next--filled,
+  yt-button-shape button,
   button[aria-label*="Subscribed" i],
   button[aria-label*="notification" i],
   button[aria-label*="Unsubscribe" i],
@@ -1034,13 +1224,19 @@ html[data-ytg-on] :is(
   #subscribe-button,
   ytd-subscribe-button-renderer,
   yt-subscribe-button-view-model,
+  yt-channel-header-view-model,
+  ytd-c4-tabbed-header-renderer,
+  ytd-channel-header-renderer,
+  [class*="channel-header-view-model"],
+  [class*="subscribe-button"],
   ytd-subscription-notification-toggle-button-renderer-next,
   yt-subscription-notification-toggle-button-renderer-next,
   subscription-notification-toggle-button-shape-renderer,
   #notification-preference-button
 ) :is(
   button,
-  .yt-spec-button-shape-next
+  .yt-spec-button-shape-next,
+  yt-button-shape button
 ) :is(*, span, .yt-core-attributed-string, .yt-spec-button-shape-next__button-text-content) {
   color: var(--ytg-text) !important;
   -webkit-text-fill-color: var(--ytg-text) !important;
@@ -1053,6 +1249,11 @@ html[data-ytg-on] :is(
   #subscribe-button,
   ytd-subscribe-button-renderer,
   yt-subscribe-button-view-model,
+  yt-channel-header-view-model,
+  ytd-c4-tabbed-header-renderer,
+  ytd-channel-header-renderer,
+  [class*="channel-header-view-model"],
+  [class*="subscribe-button"],
   ytd-subscription-notification-toggle-button-renderer-next,
   yt-subscription-notification-toggle-button-renderer-next,
   subscription-notification-toggle-button-shape-renderer,
@@ -1063,6 +1264,74 @@ html[data-ytg-on] :is(
   fill: var(--ytg-a) !important;
   color: var(--ytg-a) !important;
   opacity: 1 !important;
+}
+
+/* ========== Channel Navigation Tabs (Home, Videos, Shorts, Live, etc.) ========== */
+html[data-ytg-on] :is(
+  yt-tab-group-shape,
+  tp-yt-paper-tabs,
+  ytd-c4-tabbed-header-renderer #tabs-container,
+  .yt-tab-group-shape-wiz,
+  #tabsContainer,
+  #tabsContent
+) {
+  background: transparent !important;
+  border-bottom: 1px solid var(--ytg-edge) !important;
+}
+
+html[data-ytg-on] :is(
+  yt-tab-shape,
+  tp-yt-paper-tab,
+  .yt-tab-shape-wiz__tab
+) {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-weight: 500 !important;
+  transition: color .2s ease, opacity .2s ease;
+}
+
+html[data-ytg-on] :is(
+  yt-tab-shape:hover,
+  tp-yt-paper-tab:hover,
+  .yt-tab-shape-wiz__tab:hover
+) {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  text-shadow: 0 0 8px color-mix(in srgb, var(--ytg-a) 40%, transparent);
+}
+
+/* Selected Tab: bright theme accent */
+html[data-ytg-on] :is(
+  yt-tab-shape[aria-selected="true"],
+  tp-yt-paper-tab.iron-selected,
+  .yt-tab-shape-wiz__tab--tab-selected
+) {
+  color: var(--ytg-a) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 10px color-mix(in srgb, var(--ytg-a) 60%, transparent);
+}
+
+html[data-ytg-on] :is(
+  yt-tab-shape[aria-selected="true"],
+  tp-yt-paper-tab.iron-selected,
+  .yt-tab-shape-wiz__tab--tab-selected
+) :is(*, span, div, .yt-tab-shape-wiz__tab) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  font-weight: 700 !important;
+}
+
+/* Underline Indicator: Glowing Theme Bar */
+html[data-ytg-on] :is(
+  .yt-tab-shape-wiz__indicator,
+  #selectionBar.tp-yt-paper-tabs,
+  .paper-tabs #selectionBar
+) {
+  background: var(--ytg-a) !important;
+  background-color: var(--ytg-a) !important;
+  border-color: var(--ytg-a) !important;
+  box-shadow: 0 0 12px var(--ytg-a), 0 0 4px color-mix(in srgb, var(--ytg-a) 80%, #fff) !important;
+  border-radius: 99px !important;
+  height: 3px !important;
 }
 
 /* 3. Notification Options Dropdown (All, Personalized, None, Unsubscribe) */
