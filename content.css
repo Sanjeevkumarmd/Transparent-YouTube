@@ -672,29 +672,54 @@ html[data-ytg-on] :is(
   }
 }
 
-html[data-ytg-on] ytd-masthead :is(
+html[data-ytg-on] :is(
+  ytd-masthead,
+  #masthead-container,
+  #masthead,
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer,
+  #actions,
+  ytd-app
+) :is(
   ytd-button-renderer:has(yt-icon[icon*="create"], svg path[d*="M14 10H3v2h11v-2zm0-4H3v2h11V6zM3 16h7v-2H3v2zm11.5-6"]),
   ytd-button-renderer:has(path[d*="M14 10"]),
   yt-button-view-model:has(path[d*="M14 10"]),
   yt-button-shape:has(path[d*="M14 10"]),
   [aria-label*="Create" i],
-  button[aria-label*="Create" i]
+  button[aria-label*="Create" i],
+  #remix-button button,
+  [aria-label*="Remix" i] button
 ) {
   background: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.45)) !important;
+  background-color: color-mix(in srgb, var(--ytg-bg1) 60%, rgba(18, 14, 8, 0.45)) !important;
   border: 1px solid color-mix(in srgb, var(--ytg-a) 40%, rgba(255, 255, 255, 0.18)) !important;
   border-radius: 999px !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   animation: ytg-create-pulse 3.8s ease-in-out infinite !important;
   transition: transform .28s cubic-bezier(.2,.8,.2,1), border-color .28s ease, box-shadow .28s ease !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-html[data-ytg-on] ytd-masthead :is(
+html[data-ytg-on] :is(
+  ytd-masthead,
+  #masthead-container,
+  #masthead,
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer,
+  #actions,
+  ytd-app
+) :is(
   ytd-button-renderer:has(path[d*="M14 10"]),
   yt-button-view-model:has(path[d*="M14 10"]),
   yt-button-shape:has(path[d*="M14 10"]),
   [aria-label*="Create" i],
-  button[aria-label*="Create" i]
+  button[aria-label*="Create" i],
+  #remix-button button,
+  [aria-label*="Remix" i] button
 ):hover {
   animation: none !important;
   transform: translateY(-2px) scale(1.06) !important;
@@ -702,12 +727,23 @@ html[data-ytg-on] ytd-masthead :is(
   box-shadow: 0 0 18px color-mix(in srgb, var(--ytg-a) 65%, transparent), 0 4px 14px rgba(0,0,0,0.35) !important;
 }
 
-html[data-ytg-on] ytd-masthead :is(
+html[data-ytg-on] :is(
+  ytd-masthead,
+  #masthead-container,
+  #masthead,
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer,
+  #actions,
+  ytd-app
+) :is(
   ytd-button-renderer:has(path[d*="M14 10"]),
   yt-button-view-model:has(path[d*="M14 10"]),
   yt-button-shape:has(path[d*="M14 10"]),
   [aria-label*="Create" i],
-  button[aria-label*="Create" i]
+  button[aria-label*="Create" i],
+  #remix-button,
+  [aria-label*="Remix" i]
 ) :is(span, .yt-spec-button-shape-next__button-text-content, .yt-core-attributed-string) {
   color: var(--ytg-a) !important;
   -webkit-text-fill-color: var(--ytg-a) !important;
@@ -715,24 +751,46 @@ html[data-ytg-on] ytd-masthead :is(
   transition: color .25s ease !important;
 }
 
-html[data-ytg-on] ytd-masthead :is(
+html[data-ytg-on] :is(
+  ytd-masthead,
+  #masthead-container,
+  #masthead,
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer,
+  #actions,
+  ytd-app
+) :is(
   ytd-button-renderer:has(path[d*="M14 10"]),
   yt-button-view-model:has(path[d*="M14 10"]),
   yt-button-shape:has(path[d*="M14 10"]),
   [aria-label*="Create" i],
-  button[aria-label*="Create" i]
+  button[aria-label*="Create" i],
+  #remix-button,
+  [aria-label*="Remix" i]
 ) :is(svg, path, yt-icon, .yt-spec-button-shape-next__icon) {
   fill: var(--ytg-a) !important;
   color: var(--ytg-a) !important;
   transition: transform .35s cubic-bezier(.2,.8,.2,1), fill .25s ease !important;
 }
 
-html[data-ytg-on] ytd-masthead :is(
+html[data-ytg-on] :is(
+  ytd-masthead,
+  #masthead-container,
+  #masthead,
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer,
+  #actions,
+  ytd-app
+) :is(
   ytd-button-renderer:has(path[d*="M14 10"]),
   yt-button-view-model:has(path[d*="M14 10"]),
   yt-button-shape:has(path[d*="M14 10"]),
   [aria-label*="Create" i],
-  button[aria-label*="Create" i]
+  button[aria-label*="Create" i],
+  #remix-button,
+  [aria-label*="Remix" i]
 ):hover :is(svg, yt-icon, .yt-spec-button-shape-next__icon) {
   transform: rotate(90deg) scale(1.15) !important;
 }
@@ -880,9 +938,16 @@ html[data-ytg-on] ytd-shorts [class*="cinematic"],
 html[data-ytg-on] ytd-shorts [id*="cinematic"] {
   background: transparent !important; background-color: transparent !important;
 }
-html[data-ytg-on] ytd-shorts [class*="cinematic"], html[data-ytg-on] ytd-shorts [id*="cinematic"] { display: none !important; }
+html[data-ytg-on] ytd-shorts [class*="cinematic"],
+html[data-ytg-on] ytd-shorts [id*="cinematic"] {
+  background: transparent !important;
+  box-shadow: none !important;
+}
 html[data-ytg-on] ytd-shorts::before, html[data-ytg-on] ytd-shorts::after,
-html[data-ytg-on] ytd-shorts ytd-reel-video-renderer::before, html[data-ytg-on] ytd-shorts ytd-reel-video-renderer::after { display: none !important; }
+html[data-ytg-on] ytd-shorts ytd-reel-video-renderer::before, html[data-ytg-on] ytd-shorts ytd-reel-video-renderer::after {
+  background: transparent !important;
+  border: none !important;
+}
 
 /* 1. Shorts Player Top Controls (Play/Pause, Mute, CC, Settings, Fullscreen) */
 html[data-ytg-on] ytd-shorts .ytp-chrome-top,
@@ -909,11 +974,23 @@ html[data-ytg-on] ytd-reel-video-renderer .ytp-chrome-top :is(svg, path, use) {
 }
 
 /* 2. Shorts Right-Side Action Sidebar (Like, Dislike, Comments, Share, Remix, Sound) */
-html[data-ytg-on] ytd-shorts #actions,
-html[data-ytg-on] ytd-reel-video-renderer #actions {
+html[data-ytg-on] :is(
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer
+) #actions {
   background: transparent !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
 }
-html[data-ytg-on] ytd-shorts #actions :is(
+
+html[data-ytg-on] :is(
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer
+) #actions :is(
   .yt-spec-button-shape-next--size-l,
   .yt-spec-button-shape-next--size-m,
   yt-button-shape button,
@@ -927,8 +1004,15 @@ html[data-ytg-on] ytd-shorts #actions :is(
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   border-radius: 50% !important;
   transition: transform .2s cubic-bezier(.2,.8,.2,1), border-color .2s ease, box-shadow .2s ease !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
-html[data-ytg-on] ytd-shorts #actions :is(
+
+html[data-ytg-on] :is(
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer
+) #actions :is(
   .yt-spec-button-shape-next--size-l,
   .yt-spec-button-shape-next--size-m,
   yt-button-shape button,
@@ -938,10 +1022,85 @@ html[data-ytg-on] ytd-shorts #actions :is(
   box-shadow: 0 0 16px color-mix(in srgb, var(--ytg-a) 60%, transparent), 0 4px 18px rgba(0,0,0,0.6) !important;
   transform: scale(1.08) !important;
 }
-html[data-ytg-on] ytd-shorts #actions :is(yt-icon, svg, path, .yt-spec-button-shape-next__icon) {
+
+/* Shorts All Action & Overlay Icons: Theme-Tinted, Fully Visible */
+html[data-ytg-on] :is(
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer,
+  #shorts-player
+) :is(
+  #actions,
+  #overlay,
+  .ytp-chrome-top,
+  #navigation-button-up,
+  #navigation-button-down,
+  #sound-metadata,
+  [class*="sound-button"],
+  [class*="sound-metadata"]
+) :is(
+  yt-icon,
+  .yt-spec-button-shape-next__icon,
+  .yt-icon-shape,
+  svg,
+  path,
+  use,
+  polygon,
+  circle
+) {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html[data-ytg-on] :is(
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer,
+  #shorts-player
+) :is(
+  #actions,
+  #overlay,
+  .ytp-chrome-top,
+  #navigation-button-up,
+  #navigation-button-down,
+  #sound-metadata,
+  [class*="sound-button"],
+  [class*="sound-metadata"]
+) :is(
+  yt-icon,
+  .yt-spec-button-shape-next__icon,
+  .yt-icon-shape
+) {
   fill: var(--ytg-a) !important;
   color: var(--ytg-a) !important;
 }
+
+html[data-ytg-on] :is(
+  ytd-shorts,
+  ytd-reel-video-renderer,
+  ytd-reel-player-overlay-renderer,
+  #shorts-player
+) :is(
+  #actions,
+  #overlay,
+  .ytp-chrome-top,
+  #navigation-button-up,
+  #navigation-button-down,
+  #sound-metadata,
+  [class*="sound-button"],
+  [class*="sound-metadata"]
+) svg :is(
+  path,
+  use,
+  polygon,
+  circle,
+  rect,
+  g
+) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
+
 html[data-ytg-on] ytd-shorts #actions :is(
   label,
   span,
@@ -954,6 +1113,7 @@ html[data-ytg-on] ytd-shorts #actions :is(
   font-weight: 600 !important;
   font-size: 11.5px !important;
 }
+
 html[data-ytg-on] ytd-shorts #actions :is(#sound-metadata, .sound-metadata, [class*="sound-button"]) {
   border: 2px solid var(--ytg-a) !important;
   border-radius: 8px !important;
@@ -1389,7 +1549,7 @@ html[data-ytg-on] ytd-shorts :is(#actions, #overlay, [class*="sound-button"], [c
   transition: fill .3s ease, color .3s ease;
 }
 html[data-ytg-on] ytd-shorts .ytp-play-progress { background: var(--ytg-a) !important; }
-html[data-ytg-on] ytd-shorts .html5-video-player, html[data-ytg-on] ytd-reel-video-renderer { background: var(--ytg-fill) !important; }
+html[data-ytg-on] ytd-shorts .html5-video-player, html[data-ytg-on] ytd-reel-video-renderer { background: transparent !important; }
 html[data-ytg-on] ytd-reel-video-renderer #player-container, html[data-ytg-on] ytd-reel-video-renderer .player-container { transition: opacity .35s ease; }
 /* Vibrant active theme accents: search + mic icons, selected sidebar item */
 html[data-ytg-on] #search-icon-legacy svg, html[data-ytg-on] .ytSearchboxComponentSearchButton svg, html[data-ytg-on] #voice-search-button svg,
