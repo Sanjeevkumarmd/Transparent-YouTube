@@ -1,21 +1,23 @@
-# ✨ Gold Glass v10.1.4 — Premium Transparent Glass UI & Dynamic Themes
+# ✨ Gold Glass v10.1.5 — Premium Transparent Glass UI & Dynamic Themes
 
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-gold?style=for-the-badge&logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/mv3/intro/)
-[![Version](https://img.shields.io/badge/Version-10.1.4-d4af37?style=for-the-badge)](manifest.json)
+[![Version](https://img.shields.io/badge/Version-10.1.5-d4af37?style=for-the-badge)](manifest.json)
 [![Platform](https://img.shields.io/badge/Browser-Chrome%20%7C%20Edge%20%7C%20Brave-blue?style=for-the-badge)](https://www.google.com/chrome/)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge)](LICENSE)
 
-> **Gold Glass v10.1.4**: A futuristic, liquid-glass visual theme and enhancement suite for YouTube. Experience seamless translucent glassmorphism, horizontal instant clear theme carousels, live 16:9 customization preview, cinematic ambient animations, and real-time fine-tuning.
+> **Gold Glass v10.1.5**: A futuristic, liquid-glass visual theme and enhancement suite for YouTube. Experience seamless translucent glassmorphism, instant Normal / Ultra / Max transparent modes, horizontal theme carousels, live 16:9 customization preview, cinematic ambient animations, and real-time fine-tuning.
 
 ---
 
-## 🌟 What's New in v10.1.4
+## 🌟 What's New in v10.1.5
 
-### 🎛️ Horizontal Desktop Extension Interface
-- **Wide Horizontal Layout**: Sized to `760px × 530px` — restored the wide layout giving the 16:9 preview, themes carousel, animation cards, and speed controls room to breathe without vertical crowding or right-side horizontal page scrolling.
-- **Gen Z Curved Borders**: Modern 16px–18px rounded pill aesthetics with liquid glass refraction.
-- **Selected Gold Glow**: Active theme displays an elevated gold border (`#ffd700`) and amber glow; active animation card displays a gold border and gold text.
-- **Pop-In / Pop-Out Center Badge**: Smooth animated pop-in and pop-out preview badge in the center of the live 16:9 canvas when switching themes or animations.
+### 💎 Normal, Ultra & Max Transparency Modes
+- **Transparency Selector Under Preview**: Direct one-click access beneath the live 16:9 preview to switch across three distinct transparency modes:
+  - **Normal**: Balanced dark & thin liquid glass (`tint: 14, blur: 16, wallDim: 48, popAlpha: 28, bright: 1.0`).
+  - **Ultra**: Enhanced brightness (+18%) with heightened crystal transparency and refined 8px blur.
+  - **Max**: Maximum liquid see-through clarity with highest brightness (+32%), ultra-low 3px blur, and vibrant ambient reflection.
+- **Universal Liquid Glass Throughout YouTube**: The gorgeous translucent frosted glass from the sidebar drawer is now applied consistently across the entire site — masthead, secondary video column, comments, cards, filter chip bar, playlist panels, and popup dialogs.
+- **Selected Gold Glow**: Active transparency button glows with an elevated gold border (`#ffd700`) and amber halo.
 
 ### 💡 Video Player & UI Enhancements
 - **Hover-Only Single-Line Tooltips**: Removed forced-display rules on tooltips. "Search with your voice", "Notifications", and player tooltips now strictly show on hover and disappear cleanly on mouse-out, formatted in a single horizontal line.

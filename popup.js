@@ -234,6 +234,12 @@ function paint() {
     }
   });
 
+  // Highlight active transparency mode button
+  const currentTransMode = s.transMode || "normal";
+  document.querySelectorAll("#transModes .trans-btn").forEach(b => {
+    b.classList.toggle("on", b.dataset.mode === currentTransMode);
+  });
+
   const r = resolve(s), an = ANIMS.find(a => a.id === r.anim);
   const nm = (YTG.THEMES[s.theme] || THEMES.gold).name;
   const animNm = an ? an.name : (r.name || r.anim);
@@ -425,12 +431,30 @@ function initWheelNavigation() {
   }
 }
 
+function initTransModes() {
+  document.querySelectorAll("#transModes .trans-btn").forEach(b => {
+    b.addEventListener("click", () => {
+      const modeId = b.dataset.mode;
+      const tm = YTG.TRANSPARENT_MODES[modeId] || YTG.TRANSPARENT_MODES.normal;
+      s.transMode = modeId;
+      s.tint = tm.tint;
+      s.blur = tm.blur;
+      s.wallDim = tm.wallDim;
+      s.popAlpha = tm.popAlpha;
+      save({ transMode: modeId, tint: tm.tint, blur: tm.blur, wallDim: tm.wallDim, popAlpha: tm.popAlpha });
+      flashText(tm.name + " Mode");
+      paint();
+    });
+  });
+}
+
 // ---------- Init ----------
 buildMotionWheel();
 buildSpeedWheel();
 initCarouselArrows();
 initSpeedArrows();
 initWheelNavigation();
+initTransModes();
 
 if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local) {
   chrome.storage.local.get({ ...D, bgImage: "" }, v => { s = { ...D, ...v }; paint(); });

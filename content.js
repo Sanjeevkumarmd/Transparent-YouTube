@@ -1,7 +1,7 @@
 (() => {
   const root = document.documentElement;
   const stage = Object.assign(document.createElement("div"), { id: "ytg-stage", className: "ytg-stage" });
-  const FLAGS = ["data-ytg-on", "data-ytg-ads", "data-ytg-mode", "data-ytg-theme", "data-ytg-lum", "data-ytg-simple", "data-ytg-focus", "data-ytg-glow", "data-ytg-cursor", "data-ytg-tback",
+  const FLAGS = ["data-ytg-on", "data-ytg-ads", "data-ytg-mode", "data-ytg-theme", "data-ytg-trans", "data-ytg-lum", "data-ytg-simple", "data-ytg-focus", "data-ytg-glow", "data-ytg-cursor", "data-ytg-tback",
     "data-ytg-shimmer", "data-ytg-ambient", "data-ytg-icons", "data-ytg-noshorts", "data-ytg-nocomments"];
   let s = { ...YTG.DEFAULTS }, img = "", applied = [];
   const dark = matchMedia("(prefers-color-scheme: dark)");
@@ -49,6 +49,7 @@
     flag("data-ytg-ads", s.ads && s.adHide);
     root.setAttribute("data-ytg-mode", m);
     root.setAttribute("data-ytg-theme", s.theme);
+    root.setAttribute("data-ytg-trans", s.transMode || "normal");
     flag("data-ytg-simple", s.simple);
     flag("data-ytg-focus", s.focus);
     flag("data-ytg-glow", s.glow);

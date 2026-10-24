@@ -7,7 +7,8 @@
     speed: 1,            // animation speed
     drift: true, driftSpeed: 1,   // slow colour movement of the wallpaper itself (all themes)
     wallDim: 48, wallOpacity: 100,
-    tint: 3, blur: 14,     // glass fill (0 = fully clear) / header + menu blur
+    transMode: "normal",   // "normal" | "ultra" | "max"
+    tint: 14, blur: 16,     // glass fill (0 = fully clear) / header + menu blur
     imgBlur: 0, imgMotion: false, zoomSpeed: 1,
     shimmer: true, shimmerSpeed: 1,           // slow gold shimmer on the title you are watching / hovering
     glow: false, iconMode: "video",           // progress bar + player icons: video | gold | white
@@ -83,9 +84,9 @@
   ];
 
   const TRANSPARENT_MODES = {
-    normal: { id: "normal", name: "Normal", desc: "Smooth glass", tint: 15, blur: 14, wallDim: 48, popAlpha: 30 },
-    high:   { id: "high",   name: "High Transparency", desc: "See-through", tint: 4, blur: 6, wallDim: 30, popAlpha: 15 },
-    ultra:  { id: "ultra",  name: "Ultra Clear", desc: "Almost invisible", tint: 0, blur: 2, wallDim: 15, popAlpha: 8 }
+    normal: { id: "normal", name: "Normal", desc: "Dark & thin glass", tint: 14, blur: 16, wallDim: 48, popAlpha: 28, bright: 1.0, glassAlpha: 0.35 },
+    ultra:  { id: "ultra",  name: "Ultra",  desc: "Enhanced crystal glass", tint: 4, blur: 8, wallDim: 24, popAlpha: 12, bright: 1.18, glassAlpha: 0.18 },
+    max:    { id: "max",    name: "Max",    desc: "Maximum liquid clarity", tint: 0, blur: 3, wallDim: 10, popAlpha: 5, bright: 1.32, glassAlpha: 0.08 }
   };
 
   const WALLPAPERS = [
@@ -114,9 +115,17 @@
   }
 
   function vars(s, mode) {
-    const t = themeOf(s), c = t[mode] || t.dark, dark = mode === "dark", f = s.tint / 100;
-    const veil = dark ? s.wallDim / 100 : Math.min(0.9, 0.52 + s.wallDim / 250);
-    const a1 = dark ? 0.05 + f * 2.4 : 0.30 + f * 2.2, a2 = dark ? f * 0.8 : 0.12 + f * 1.2;
+    const t = themeOf(s), c = t[mode] || t.dark, dark = mode === "dark";
+    const tm = TRANSPARENT_MODES[s.transMode] || TRANSPARENT_MODES.normal;
+    const tintVal = (s.transMode ? tm.tint : s.tint);
+    const blurVal = (s.transMode ? tm.blur : s.blur);
+    const wallDimVal = (s.transMode ? tm.wallDim : s.wallDim);
+    const popAlphaVal = (s.transMode ? tm.popAlpha : s.popAlpha);
+    const brightVal = tm.bright || 1.0;
+    const glassA = tm.glassAlpha !== undefined ? tm.glassAlpha : (dark ? 0.30 : 0.45);
+    const f = tintVal / 100;
+    const veil = dark ? wallDimVal / 100 : Math.min(0.9, 0.52 + wallDimVal / 250);
+    const a1 = dark ? 0.04 + f * 2.0 : 0.25 + f * 1.8, a2 = dark ? f * 0.6 : 0.10 + f * 1.0;
     // metallic gold: deep -> gold -> pale highlight -> gold -> deep (loops seamlessly for the shimmer)
     const deep = shade(s.gold, dark ? -0.32 : -0.55), mid = dark ? s.gold : shade(s.gold, -0.35), hi = shade(s.gold, dark ? 0.62 : 0.15);
     return {
@@ -131,16 +140,19 @@
       "--ytg-icon-gold": shade(s.gold, dark ? 0.3 : -0.2),
       "--ytg-shimmer": (14 / s.shimmerSpeed).toFixed(1) + "s",
       "--ytg-tint": dark ? f : Math.min(0.9, f + 0.25),
-      "--ytg-blur": s.blur + "px",
+      "--ytg-blur": blurVal + "px",
+      "--ytg-bright": brightVal,
+      "--ytg-glass-a": glassA,
+      "--ytg-glass-fill": `color-mix(in srgb, ${c.bg1} ${Math.round(glassA * 100)}%, transparent)`,
       "--ytg-speed": s.speed * (t.mul || 1), "--ytg-zoom": s.zoomSpeed, "--ytg-dspeed": s.driftSpeed,
       "--ytg-wallo": s.wallOpacity / 100,
       "--ytg-amb": s.ambientAmt, "--ytg-menu-a": s.menuAlpha,
       "--ytg-dimc": dark ? `rgba(0,0,0,${veil})` : `rgba(255,255,255,${veil})`,
       "--ytg-imgblur": s.imgBlur + "px",
       "--ytg-fill": `linear-gradient(145deg,rgba(255,255,255,${Math.min(.9, a1).toFixed(3)}),rgba(255,255,255,${Math.min(.8, a2).toFixed(3)}))`,
-      "--ytg-edge": dark ? "rgba(255,255,255,.20)" : "rgba(255,255,255,.95)",
+      "--ytg-edge": dark ? (s.transMode === "max" ? "rgba(255,255,255,.32)" : "rgba(255,255,255,.20)") : "rgba(255,255,255,.95)",
       "--ytg-shine": dark ? "inset 0 1px 0 rgba(255,255,255,.28)" : "inset 0 1px 0 rgba(255,255,255,.9)",
-      "--ytg-pop": `color-mix(in srgb, ${c.bg2} ${dark ? s.popAlpha - 6 : s.popAlpha + 10}%, transparent)`,
+      "--ytg-pop": `color-mix(in srgb, ${c.bg2} ${dark ? popAlphaVal - 4 : popAlphaVal + 10}%, transparent)`,
       "--yt-spec-call-to-action": c.a,
       "--yt-spec-brand-button-background": c.a
     };
