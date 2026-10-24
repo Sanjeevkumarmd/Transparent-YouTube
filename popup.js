@@ -1,4 +1,4 @@
-﻿const { DEFAULTS: D, THEMES, ANIMS, vars, stage, resolve } = YTG;
+const { DEFAULTS: D, THEMES, ANIMS, vars, stage, resolve } = YTG;
 let s = { ...D, bgImage: "" };
 const $ = id => document.getElementById(id);
 const dq = matchMedia("(prefers-color-scheme: dark)");
@@ -295,6 +295,11 @@ function paint() {
   if (lastImg !== s.bgImage) { lastImg = s.bgImage; buildGrid(); }
 
   // Highlight active theme in the horizontal track
+  document.querySelectorAll(".tqp").forEach(b => {
+    const k = b.dataset.mode;
+    const p = YTG.TRANSPARENT_MODES && YTG.TRANSPARENT_MODES[k];
+    b.classList.toggle("active", p && Math.abs(p.tint - s.tint) <= 4);
+  });
   document.querySelectorAll("#grid .tc.theme").forEach(b => {
     const isActive = b.dataset.id === s.theme && s.wall !== "image" && s.wall !== "none";
     b.classList.toggle("on", isActive);
@@ -530,6 +535,30 @@ buildSpeedWheel();
 initCarouselArrows();
 initSpeedArrows();
 initWheelNavigation();
+
+if ($("openStudioBtn")) {
+  $("openStudioBtn").addEventListener("click", () => {
+    chrome.runtime.openOptionsPage();
+  });
+}
+
+document.querySelectorAll(".tqp").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const modeKey = btn.dataset.mode;
+    const preset = YTG.TRANSPARENT_MODES && YTG.TRANSPARENT_MODES[modeKey];
+    if (!preset) return;
+    save({
+      tint: preset.tint,
+      blur: preset.blur,
+      wallDim: preset.wallDim,
+      popAlpha: preset.popAlpha
+    });
+    document.querySelectorAll(".tqp").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    flashText(`${preset.name}`);
+  });
+});
+
 chrome.storage.local.get({ ...D, bgImage: "" }, v => { s = { ...D, ...v }; paint(); });
 dq.addEventListener("change", () => { lastImg = null; paint(); });
 

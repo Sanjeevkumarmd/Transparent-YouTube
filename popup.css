@@ -383,4 +383,35 @@ h2 { margin: 0; font-size: 10.5px; font-weight: 700; text-transform: uppercase; 
   box-shadow: inset 0 1px 0 rgba(255,255,255,.3); transition: transform .2s ease, background .2s ease; font-family: var(--f); }
 .devbtn:hover { transform: translateY(-1px); background: linear-gradient(145deg, rgba(246,227,160,.4), rgba(212,175,55,.18)); }
 
+.studio-btn {
+  display: inline-flex; align-items: center; gap: 4px; padding: 5px 12px; border-radius: 999px;
+  border: 1px solid rgba(244, 197, 66, 0.6); background: rgba(244, 197, 66, 0.16);
+  color: #f4c542; font-weight: 700; font-size: 11px; letter-spacing: 0.2px;
+  box-shadow: 0 0 10px rgba(244, 197, 66, 0.25); cursor: pointer; transition: all 0.2s ease;
+}
+.studio-btn:hover {
+  background: rgba(244, 197, 66, 0.32);
+  box-shadow: 0 0 16px rgba(244, 197, 66, 0.55);
+  transform: translateY(-1px);
+}
+
+.trans-quick-pills {
+  display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 4px;
+}
+.tqp-label {
+  font-size: 10.5px; font-weight: 600; color: #f4c542;
+}
+.tqp {
+  padding: 3px 9px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(24, 17, 8, 0.5); color: rgba(255, 245, 217, 0.7); font-size: 10px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s ease;
+}
+.tqp:hover {
+  border-color: rgba(244, 197, 66, 0.5); color: #fff;
+}
+.tqp.active {
+  border-color: #f4c542; background: rgba(244, 197, 66, 0.2); color: #f4c542;
+  box-shadow: 0 0 8px rgba(244, 197, 66, 0.3);
+}
+
 .mock *, .mock, .pv, .pv .ytg-stage { transition: background-color .5s cubic-bezier(.25,.8,.25,1), border-color .5s ease, color .5s ease; }

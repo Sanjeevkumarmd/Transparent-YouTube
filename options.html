@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Gold Glass 2.0 Studio — Master UI Concept</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="anim.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body class="gg-board">
+  <!-- Immersive Live Scenic Background Stage -->
+  <div class="ytg-stage scenic-stage" id="bgStage"></div>
+  <div class="scenic-overlay"></div>
+
+  <!-- Master 16:9 Composition Board -->
+  <div class="board-wrapper">
+    
+    <!-- Top Row: Area A (~60%) and Area B (~40%) -->
+    <div class="top-row">
+      
+      <!-- AREA A: Main Floating Gold Glass 2.0 Window -->
+      <section class="main-window glass-panel" id="mainWindow">
+        
+        <!-- Header -->
+        <header class="window-header">
+          <div class="header-left">
+            <button class="win-icon-btn menu-btn" id="menuToggle" title="Menu" aria-label="Menu">&#9776;</button>
+            <div class="brand">
+              <span class="brand-sparkle">&#10022;</span>
+              <span class="brand-name">Gold <span class="brand-accent">Glass</span></span>
+            </div>
+          </div>
+          
+          <div class="header-center">
+            <div class="themes-title-wrap">
+              <span class="header-icon">&#127912;</span>
+              <span class="header-title">Themes</span>
+            </div>
+            <span class="header-subtitle">Scroll or use arrows to switch themes</span>
+          </div>
+
+          <div class="header-right">
+            <button class="customize-pill-btn" id="customizeBtn">
+              <span class="btn-icon">&#9881;</span>
+              <span>Customize</span>
+            </button>
+            <label class="master-switch" title="Master Extension Toggle">
+              <input type="checkbox" id="masterToggle" checked>
+              <span class="switch-slider"></span>
+            </label>
+            <div class="window-controls">
+              <button class="win-btn win-min" title="Minimize">&minus;</button>
+              <button class="win-btn win-max" title="Maximize">&#9633;</button>
+              <button class="win-btn win-close" title="Close">&times;</button>
+            </div>
+          </div>
+        </header>
+
+        <!-- Window Body: Nav Rail + 3D Carousel & Quick Controls -->
+        <div class="window-body">
+          
+          <!-- Navigation Rail -->
+          <nav class="nav-rail" id="navRail">
+            <button class="rail-btn active" data-tab="Look">
+              <span class="rail-icon">&#10024;</span>
+              <span class="rail-label">Look</span>
+            </button>
+            <button class="rail-btn" data-tab="Animation">
+              <span class="rail-icon">&#127916;</span>
+              <span class="rail-label">Animation</span>
+            </button>
+            <button class="rail-btn" data-tab="Player">
+              <span class="rail-icon">&#9654;</span>
+              <span class="rail-label">Player</span>
+            </button>
+            <button class="rail-btn" data-tab="Ads">
+              <span class="rail-icon">&#128737;</span>
+              <span class="rail-label">Ads</span>
+            </button>
+            <button class="rail-btn" data-tab="Extras">
+              <span class="rail-icon">&#8862;</span>
+              <span class="rail-label">Extras</span>
+            </button>
+          </nav>
+
+          <!-- Main Carousel & Workspace Area -->
+          <div class="workspace-area">
+            
+            <!-- 3D Theme Carousel Viewport -->
+            <div class="carousel-viewport" id="carouselViewport">
+              <button class="carousel-nav-btn prev" id="carouselPrev" title="Previous Theme" aria-label="Previous Theme">&#10094;</button>
+              
+              <div class="carousel-track" id="carouselTrack">
+                <!-- Dynamic 3D Theme Cards injected via JS -->
+              </div>
+
+              <button class="carousel-nav-btn next" id="carouselNext" title="Next Theme" aria-label="Next Theme">&#10095;</button>
+
+              <!-- Carousel Dots Indicator -->
+              <div class="carousel-dots" id="carouselDots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+            </div>
+
+            <!-- Quick Customize Section at Bottom of Window -->
+            <div class="quick-customize-panel" id="quickCustomize">
+              <div class="qc-header">
+                <span class="qc-title"><span class="qc-icon">&#10022;</span> Quick Customize</span>
+              </div>
+
+              <!-- Scenic Wallpaper Strip -->
+              <div class="wallpaper-strip" id="wallpaperStrip">
+                <!-- Wallpaper cards injected via JS -->
+                <button class="wall-card upload-btn" id="uploadWallBtn">
+                  <span class="upload-icon">+</span>
+                  <span class="upload-label">Upload</span>
+                  <input type="file" id="wallFileInput" accept="image/*" hidden>
+                </button>
+              </div>
+
+              <!-- Sliders & Switches Grid -->
+              <div class="qc-controls-grid">
+                
+                <!-- Row 1 -->
+                <div class="qc-control-item">
+                  <div class="qc-label-row">
+                    <span>Glass Fill (Transparency)</span>
+                    <b id="valTint">30%</b>
+                  </div>
+                  <input type="range" id="rangeTint" min="0" max="50" step="1" value="30">
+                </div>
+
+                <div class="qc-control-item">
+                  <div class="qc-label-row">
+                    <span>Blur Strength</span>
+                    <b id="valBlur">14px</b>
+                  </div>
+                  <input type="range" id="rangeBlur" min="0" max="30" step="1" value="14">
+                </div>
+
+                <div class="qc-control-item">
+                  <div class="qc-label-row">
+                    <span>Title Shimmer Speed</span>
+                    <b id="valShimmerSpeed">1x</b>
+                  </div>
+                  <input type="range" id="rangeShimmerSpeed" min="0.3" max="3" step="0.1" value="1">
+                </div>
+
+                <div class="qc-control-item toggle-item">
+                  <span class="toggle-label">Gold Title Shimmer</span>
+                  <label class="master-switch">
+                    <input type="checkbox" id="toggleShimmer" checked>
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="qc-control-item">
+                  <div class="qc-label-row">
+                    <span>Wallpaper Dim</span>
+                    <b id="valWallDim">48%</b>
+                  </div>
+                  <input type="range" id="rangeWallDim" min="0" max="80" step="1" value="48">
+                </div>
+
+                <div class="qc-control-item">
+                  <div class="qc-label-row">
+                    <span>Header Blur</span>
+                    <b id="valHeaderBlur">14px</b>
+                  </div>
+                  <input type="range" id="rangeHeaderBlur" min="0" max="30" step="1" value="14">
+                </div>
+
+                <div class="qc-control-item toggle-item">
+                  <span class="toggle-label">Soft Backing</span>
+                  <label class="master-switch">
+                    <input type="checkbox" id="toggleSoftBacking" checked>
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+
+                <div class="qc-control-item">
+                  <div class="qc-label-row">
+                    <span>Popup &amp; Menu Fill (Lower = Clearer)</span>
+                    <b id="valPopAlpha">30%</b>
+                  </div>
+                  <input type="range" id="rangePopAlpha" min="5" max="80" step="1" value="30">
+                </div>
+
+              </div>
+
+              <!-- Footer Controls: Title Gold Palette & Reset -->
+              <div class="qc-footer-row">
+                <div class="gold-palette-wrap">
+                  <span class="palette-label">Title Gold</span>
+                  <div class="swatches-row" id="swatchesRow">
+                    <button class="color-swatch active" data-color="#F4C542" style="--c:#F4C542" title="Royal Gold"></button>
+                    <button class="color-swatch" data-color="#E8C878" style="--c:#E8C878" title="Champagne Gold"></button>
+                    <button class="color-swatch" data-color="#76551A" style="--c:#76551A" title="Muted Bronze"></button>
+                    <button class="color-swatch" data-color="#FFF5D9" style="--c:#FFF5D9" title="Soft Ivory"></button>
+                    <label class="color-swatch rainbow-swatch" title="Custom Color Picker">
+                      <input type="color" id="customColorPicker" value="#F4C542" hidden>
+                    </label>
+                  </div>
+                </div>
+
+                <button class="reset-pill-btn" id="resetBtn">
+                  <span class="reset-icon">&#8635;</span>
+                  <span>Reset to Default</span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- AREA B: Theme and Effects Panel (~40%) -->
+      <aside class="side-panel-stack">
+        
+        <!-- CARD 1: Different Modern Themes -->
+        <div class="side-card glass-panel" id="cardThemes">
+          <div class="side-card-header">
+            <div class="sc-title-wrap">
+              <span class="sc-icon">&#127912;</span>
+              <span class="sc-title">Different Modern Themes</span>
+            </div>
+            <div class="sc-nav-wrap">
+              <span class="sc-hint">Scroll / Next / Previous</span>
+              <div class="sc-arrows">
+                <button class="sc-arrow-btn" id="sidePrevTheme" title="Previous Theme">&#10094;</button>
+                <button class="sc-arrow-btn" id="sideNextTheme" title="Next Theme">&#10095;</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="themes-mini-row" id="themesMiniRow">
+            <!-- 5 Modern Theme Cards -->
+            <div class="theme-mini-card active" data-theme="gold">
+              <div class="tmc-preview gold-preview"></div>
+              <div class="tmc-name">Royal Gold</div>
+              <div class="tmc-desc">Warm &amp; Premium</div>
+            </div>
+            <div class="theme-mini-card" data-theme="noir">
+              <div class="tmc-preview noir-preview"></div>
+              <div class="tmc-name">Noir Gold</div>
+              <div class="tmc-desc">Dark &amp; Classy</div>
+            </div>
+            <div class="theme-mini-card" data-theme="sapphire">
+              <div class="tmc-preview sapphire-preview"></div>
+              <div class="tmc-name">Sapphire</div>
+              <div class="tmc-desc">Cool &amp; Modern</div>
+            </div>
+            <div class="theme-mini-card" data-theme="amethyst">
+              <div class="tmc-preview amethyst-preview"></div>
+              <div class="tmc-name">Amethyst</div>
+              <div class="tmc-desc">Purple Aesthetic</div>
+            </div>
+            <div class="theme-mini-card" data-theme="emerald">
+              <div class="tmc-preview emerald-preview"></div>
+              <div class="tmc-name">Emerald</div>
+              <div class="tmc-desc">Natural &amp; Calm</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: Transparent Modes -->
+        <div class="side-card glass-panel" id="cardTransparency">
+          <div class="side-card-header">
+            <div class="sc-title-wrap">
+              <span class="sc-icon">&#10024;</span>
+              <span class="sc-title">Transparent Modes</span>
+            </div>
+          </div>
+
+          <div class="transparency-modes-row" id="transparencyModes">
+            <div class="trans-mode-card" data-mode="normal">
+              <div class="tm-mockup normal-mockup">
+                <div class="mock-win-bar"><i class="mock-dot"></i><i class="mock-dot"></i><i class="mock-dot"></i></div>
+                <div class="mock-lines"><div class="ml-1"></div><div class="ml-2"></div><div class="ml-3"></div></div>
+              </div>
+              <div class="tm-name">Normal</div>
+              <div class="tm-desc">Smooth glass</div>
+            </div>
+
+            <div class="trans-mode-card active" data-mode="high">
+              <div class="tm-mockup high-mockup">
+                <div class="mock-win-bar"><i class="mock-dot"></i><i class="mock-dot"></i><i class="mock-dot"></i></div>
+                <div class="mock-lines"><div class="ml-1"></div><div class="ml-2"></div><div class="ml-3"></div></div>
+              </div>
+              <div class="tm-name">High Transparency</div>
+              <div class="tm-desc">See-through</div>
+            </div>
+
+            <div class="trans-mode-card" data-mode="ultra">
+              <div class="tm-mockup ultra-mockup">
+                <div class="mock-win-bar"><i class="mock-dot"></i><i class="mock-dot"></i><i class="mock-dot"></i></div>
+                <div class="mock-lines"><div class="ml-1"></div><div class="ml-2"></div><div class="ml-3"></div></div>
+              </div>
+              <div class="tm-name">Ultra Clear</div>
+              <div class="tm-desc">Almost invisible</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3: Animations (Preview) -->
+        <div class="side-card glass-panel" id="cardAnimations">
+          <div class="side-card-header">
+            <div class="sc-title-wrap">
+              <span class="sc-icon">&#127916;</span>
+              <span class="sc-title">Animations (Preview)</span>
+            </div>
+            <div class="sc-arrows">
+              <button class="sc-arrow-btn" id="nextAnimBtn" title="Next Animation">&#10095;</button>
+            </div>
+          </div>
+
+          <div class="animations-preview-row" id="animationsRow">
+            <div class="anim-preview-card active" data-anim="fireflies">
+              <div class="ap-canvas firefly-canvas">
+                <div class="particle-spark p1"></div>
+                <div class="particle-spark p2"></div>
+                <div class="particle-spark p3"></div>
+              </div>
+              <div class="ap-name">Firefly</div>
+            </div>
+
+            <div class="anim-preview-card" data-anim="flow">
+              <div class="ap-canvas waver-canvas">
+                <div class="waver-ribbon"></div>
+              </div>
+              <div class="ap-name">Waver</div>
+            </div>
+
+            <div class="anim-preview-card" data-anim="aurora">
+              <div class="ap-canvas aurora-canvas">
+                <div class="aurora-glow"></div>
+              </div>
+              <div class="ap-name">Aurora</div>
+            </div>
+
+            <div class="anim-preview-card" data-anim="stars">
+              <div class="ap-canvas stars-canvas">
+                <div class="star-point s1"></div>
+                <div class="star-point s2"></div>
+                <div class="star-point s3"></div>
+              </div>
+              <div class="ap-name">Stars</div>
+            </div>
+
+            <div class="anim-preview-card" data-anim="embers">
+              <div class="ap-canvas embers-canvas">
+                <div class="ember-spark e1"></div>
+                <div class="ember-spark e2"></div>
+              </div>
+              <div class="ap-name">Embers</div>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- AREA C: Bottom Feature Strip (3 Panels) -->
+    <div class="bottom-strip-row">
+      
+      <!-- Panel 1: More Customization Ideas -->
+      <div class="bottom-card glass-panel" id="bottomIdeas">
+        <div class="bc-header">
+          <span class="bc-icon">&#127912;</span>
+          <span class="bc-title">More Customization Ideas</span>
+        </div>
+        
+        <div class="ideas-grid">
+          <button class="feature-action-btn" data-feat="wallpapers">
+            <span class="fab-icon">&#128444;</span>
+            <span class="fab-text">Background Images/Videos</span>
+          </button>
+          <button class="feature-action-btn" data-feat="live">
+            <span class="fab-icon">&#127795;</span>
+            <span class="fab-text">Live Wallpapers (Nature, Space, City)</span>
+          </button>
+          <button class="feature-action-btn" data-feat="daynight">
+            <span class="fab-icon">&#9728;</span>
+            <span class="fab-text">Time of Day Mode (Auto Change)</span>
+          </button>
+          <button class="feature-action-btn" data-feat="colors">
+            <span class="fab-icon">&#9998;</span>
+            <span class="fab-text">Custom Colors</span>
+          </button>
+          <button class="feature-action-btn" data-feat="fonts">
+            <span class="fab-icon">Aa</span>
+            <span class="fab-text">Font Style</span>
+          </button>
+          <button class="feature-action-btn" data-feat="icons">
+            <span class="fab-icon">&#8862;</span>
+            <span class="fab-text">Icon Style</span>
+          </button>
+          <button class="feature-action-btn" data-feat="sounds">
+            <span class="fab-icon">&#128266;</span>
+            <span class="fab-text">Sound Effects</span>
+          </button>
+          <button class="feature-action-btn" data-feat="weather">
+            <span class="fab-icon">&#9925;</span>
+            <span class="fab-text">Weather Integration</span>
+          </button>
+          <button class="feature-action-btn" data-feat="presets">
+            <span class="fab-icon">&#9889;</span>
+            <span class="fab-text">Quick Presets</span>
+          </button>
+          <button class="feature-action-btn" data-feat="io">
+            <span class="fab-icon">&#8645;</span>
+            <span class="fab-text">Import / Export Settings</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Panel 2: Real-time Preview (Live) -->
+      <div class="bottom-card glass-panel" id="bottomLivePreview">
+        <div class="bc-header">
+          <span class="bc-icon">&#128241;</span>
+          <span class="bc-title">Real-time Preview (Live)</span>
+        </div>
+
+        <div class="live-previews-row">
+          <div class="live-mini-frame live-p1 active" title="Royal Gold Theme">
+            <div class="lmf-bar"><span></span><span></span></div>
+            <div class="lmf-content"><div class="lmf-pill"></div><div class="lmf-dots"><i></i><i></i><i></i><i></i></div></div>
+          </div>
+          <div class="live-mini-frame live-p2" title="Sapphire Theme">
+            <div class="lmf-bar"><span></span><span></span></div>
+            <div class="lmf-content"><div class="lmf-pill"></div><div class="lmf-dots"><i></i><i></i><i></i><i></i></div></div>
+          </div>
+          <div class="live-mini-frame live-p3" title="Emerald Theme">
+            <div class="lmf-bar"><span></span><span></span></div>
+            <div class="lmf-content"><div class="lmf-pill"></div><div class="lmf-dots"><i></i><i></i><i></i><i></i></div></div>
+          </div>
+          <div class="live-mini-frame live-p4" title="Sunset Theme">
+            <div class="lmf-bar"><span></span><span></span></div>
+            <div class="lmf-content"><div class="lmf-pill"></div><div class="lmf-dots"><i></i><i></i><i></i><i></i></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Extra Features to Add -->
+      <div class="bottom-card glass-panel" id="bottomExtras">
+        <div class="bc-header">
+          <span class="bc-icon">&#9881;</span>
+          <span class="bc-title">Extra Features to Add</span>
+        </div>
+
+        <div class="extras-grid">
+          <button class="extra-toggle-btn active" data-extra="autoTheme">
+            <span class="etb-icon">&#128339;</span>
+            <span class="etb-text">Auto Theme by Time (Day/Night)</span>
+          </button>
+          <button class="extra-toggle-btn active" data-extra="dynamicBg">
+            <span class="etb-icon">&#128444;</span>
+            <span class="etb-text">Dynamic Background (with subtle motion)</span>
+          </button>
+          <button class="extra-toggle-btn" data-extra="particleDensity">
+            <span class="etb-icon">&#9788;</span>
+            <span class="etb-text">Particle Density Control</span>
+          </button>
+          <button class="extra-toggle-btn" data-extra="mouseGlow">
+            <span class="etb-icon">&#10024;</span>
+            <span class="etb-text">Mouse Hover Effects</span>
+          </button>
+          <button class="extra-toggle-btn" data-extra="shortcuts">
+            <span class="etb-icon">&#9000;</span>
+            <span class="etb-text">Keyboard Shortcuts</span>
+          </button>
+          <button class="extra-toggle-btn" data-extra="customLayouts">
+            <span class="etb-icon">&#9638;</span>
+            <span class="etb-text">Custom Layouts</span>
+          </button>
+          <button class="extra-toggle-btn" data-extra="cloudSync">
+            <span class="etb-icon">&#9729;</span>
+            <span class="etb-text">Cloud Sync</span>
+          </button>
+          <button class="extra-toggle-btn" data-extra="themeShare">
+            <span class="etb-icon">&#128279;</span>
+            <span class="etb-text">Theme Sharing</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast-popup" id="toastPopup"></div>
+
+  <script src="themes.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

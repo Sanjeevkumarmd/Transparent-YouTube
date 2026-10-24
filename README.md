@@ -1,11 +1,35 @@
-# ✨ Transparent YouTube (YT Gold Glass)
+# ✨ Gold Glass 2.0 — Premium Transparent Glass UI & Dynamic Theme Studio
 
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-gold?style=for-the-badge&logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/mv3/intro/)
-[![Version](https://img.shields.io/badge/Version-10.0.28-d4af37?style=for-the-badge)](manifest.json)
+[![Version](https://img.shields.io/badge/Version-10.1.0-d4af37?style=for-the-badge)](manifest.json)
 [![Platform](https://img.shields.io/badge/Browser-Chrome%20%7C%20Edge%20%7C%20Brave-blue?style=for-the-badge)](https://www.google.com/chrome/)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge)](LICENSE)
 
-> A modern, liquid-glass visual theme and enhancement suite for YouTube. Experience seamless translucent glass aesthetics, handcrafted royal themes, live ambient GPU particle animations, and refined interface polish.
+> **Gold Glass 2.0**: A futuristic, liquid-glass visual theme and enhancement suite. Experience seamless translucent glassmorphism, dynamic 3D theme carousels, cinematic GPU-accelerated ambient animations, scenic wallpaper integration, and real-time studio customization.
+
+---
+
+## 🌟 What's New in Gold Glass 2.0
+
+### 🎨 Master Studio Dashboard (`options.html`)
+- **16:9 Landscape Composition**: Full-page interactive command center featuring a floating dark-glass window, responsive navigation rail, 3D theme carousel over an alpine sunset landscape, and real-time previews.
+- **Dynamic 3D Theme Carousel**: Smooth horizontal wheel, trackpad, and keyboard arrow navigation with active glowing gold borders and depth scaling.
+- **Curated Palette**: Deep espresso (`#171006`), transparent dark glass (`rgba(24, 17, 8, 0.22)`), royal gold (`#F4C542`), champagne gold (`#E8C878`), soft ivory (`#FFF5D9`), and muted bronze (`#76551A`).
+
+### 🧊 3 Transparent Modes
+- **Normal Glass**: Lightly tinted glass with readable content and visible scenery.
+- **High Transparency**: Clearer panels with stronger backdrop visibility and lighter shadows.
+- **Ultra Clear**: Minimal background tint, subtle borders, and near-invisible floating glass surfaces.
+
+### 🎬 Dedicated Animation Studio
+- **Firefly**: Tiny golden particles drifting slowly through the background with a soft natural glow.
+- **Waver**: Smooth, flowing gold ribbons and light waves gliding gently behind the interface.
+- **Aurora**: Soft shifting celestial bands of teal, green, and violet light.
+- **Stars**: Twinkling starfield with gradual cosmic drift.
+- **Embers**: Warm orange-gold sparks rising organically.
+
+### 🖼️ Scenic Wallpaper Gallery
+- Instant scenic presets: **Default** (Sunset Alps), **Nature** (Alpine Valley), **City** (Sunset Skyline), **Space** (Cosmic Nebula), **Ocean** (Deep Azure), and **Forest** (Boreal Mist), plus custom photo upload.
 
 ---
 

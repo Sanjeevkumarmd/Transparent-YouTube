@@ -18,42 +18,42 @@
     pauseScroll: true
   };
 
-  // 12 handcrafted royal themes. Each = unique wallpaper + matching fluid animation + distinct vibrant palette.
+  // 12 handcrafted royal themes (Gold Glass 2.0).
   const THEMES = {
-    gold:     { name: "Royal Gold",       anim: "fireflies", animName: "Firefly", mul: 1,
-      dark:  { a: "#f5c842", b: "#d4881e", bg1: "#261905", bg2: "#61400e" },
+    gold:     { name: "Royal Gold", tag: "Warm & Premium", anim: "fireflies", animName: "Firefly", mul: 1,
+      dark:  { a: "#F4C542", b: "#E8C878", bg1: "#171006", bg2: "#76551A" },
       light: { a: "#b38600", b: "#d99b1c", bg1: "#fff8e1", bg2: "#f7e3a6" } },
-    noir:     { name: "Noir Gold",        anim: "embers", animName: "Embers", mul: 1,
-      dark:  { a: "#ffd700", b: "#c9973a", bg1: "#0a0704", bg2: "#261a08" },
+    noir:     { name: "Noir Gold",  tag: "Dark & Classy",  anim: "embers", animName: "Embers", mul: 1,
+      dark:  { a: "#FFD700", b: "#C9973A", bg1: "#0A0704", bg2: "#261A08" },
       light: { a: "#8a6a12", b: "#c9a227", bg1: "#faf6ea", bg2: "#efe3bd" } },
-    sapphire: { name: "Sapphire",   anim: "aurora", animName: "Aurora", mul: 1,
-      dark:  { a: "#60a5fa", b: "#818cf8", bg1: "#06153d", bg2: "#12338a" },
+    sapphire: { name: "Sapphire",   tag: "Cool & Modern",  anim: "aurora", animName: "Aurora", mul: 1,
+      dark:  { a: "#60A5FA", b: "#818CF8", bg1: "#06153D", bg2: "#12338A" },
       light: { a: "#2563eb", b: "#4f46e5", bg1: "#eff6ff", bg2: "#dbeafe" } },
-    amethyst: { name: "Amethyst", anim: "stars", animName: "Stars", mul: 1,
-      dark:  { a: "#c084fc", b: "#f472b6", bg1: "#1c0b45", bg2: "#4c1d95" },
+    amethyst: { name: "Amethyst",   tag: "Purple Aesthetic", anim: "stars", animName: "Stars", mul: 1,
+      dark:  { a: "#C084FC", b: "#F472B6", bg1: "#1C0B45", bg2: "#4C1D95" },
       light: { a: "#9333ea", b: "#c026d3", bg1: "#faf5ff", bg2: "#f3e8ff" } },
-    emerald:  { name: "Emerald",    anim: "fireflies", animName: "Firefly", mul: 1,
-      dark:  { a: "#34d399", b: "#2dd4bf", bg1: "#03261a", bg2: "#065f46" },
+    emerald:  { name: "Emerald",    tag: "Natural & Calm", anim: "fireflies", animName: "Firefly", mul: 1,
+      dark:  { a: "#34D399", b: "#2DD4BF", bg1: "#03261A", bg2: "#065F46" },
       light: { a: "#059669", b: "#0d9488", bg1: "#ecfdf5", bg2: "#d1fae5" } },
-    crimson:  { name: "Crimson",    anim: "flow", animName: "Waver", mul: 1,
+    silver:   { name: "Arctic Silver", tag: "Frosted Luxury", anim: "stars", animName: "Stars", mul: 1,
+      dark:  { a: "#E2E8F0", b: "#94A3B8", bg1: "#141822", bg2: "#374151" },
+      light: { a: "#475569", b: "#64748b", bg1: "#f8fafc", bg2: "#e2e8f0" } },
+    crimson:  { name: "Crimson",    tag: "Ruby Velvet",    anim: "flow", animName: "Waver", mul: 1,
       dark:  { a: "#fb7185", b: "#f97316", bg1: "#3d0718", bg2: "#881337" },
       light: { a: "#e11d48", b: "#ea580c", bg1: "#fff1f2", bg2: "#ffe4e6" } },
-    silver:   { name: "Silver",     anim: "stars", animName: "Stars", mul: 1,
-      dark:  { a: "#e2e8f0", b: "#94a3b8", bg1: "#141822", bg2: "#374151" },
-      light: { a: "#475569", b: "#64748b", bg1: "#f8fafc", bg2: "#e2e8f0" } },
-    northern: { name: "Northern",  anim: "aurora", animName: "Aurora", mul: 1,
+    northern: { name: "Northern",   tag: "Boreal Glow",    anim: "aurora", animName: "Aurora", mul: 1,
       dark:  { a: "#2dd4bf", b: "#a78bfa", bg1: "#04232c", bg2: "#0e4b55" },
       light: { a: "#0d9488", b: "#7c3aed", bg1: "#f0fdfa", bg2: "#ccfbf1" } },
-    sunset:   { name: "Sunset",      anim: "embers", animName: "Embers", mul: 1,
+    sunset:   { name: "Sunset",     tag: "Dusk Horizon",   anim: "embers", animName: "Embers", mul: 1,
       dark:  { a: "#fb923c", b: "#f43f5e", bg1: "#220c38", bg2: "#701a4f" },
       light: { a: "#ea580c", b: "#e11d48", bg1: "#fff7ed", bg2: "#ffedd5" } },
-    deepsea:  { name: "Deep Sea",         anim: "flow", animName: "Waver", mul: 1,
+    deepsea:  { name: "Deep Sea",   tag: "Ocean Drift",    anim: "flow", animName: "Waver", mul: 1,
       dark:  { a: "#38bdf8", b: "#2dd4bf", bg1: "#032d42", bg2: "#075985" },
       light: { a: "#0284c7", b: "#0d9488", bg1: "#f0f9ff", bg2: "#e0f2fe" } },
-    rose:     { name: "Rose Quartz",      anim: "flow", animName: "Waver", mul: 1,
+    rose:     { name: "Rose Quartz", tag: "Sakura Velvet", anim: "flow", animName: "Waver", mul: 1,
       dark:  { a: "#f472b6", b: "#fb7185", bg1: "#380c25", bg2: "#831843" },
       light: { a: "#db2777", b: "#e11d48", bg1: "#fdf2f8", bg2: "#fce7f3" } },
-    galaxy:   { name: "Galaxy",           anim: "stars", animName: "Stars", mul: 1,
+    galaxy:   { name: "Galaxy",     tag: "Nebula Cosmos",  anim: "stars", animName: "Stars", mul: 1,
       dark:  { a: "#a855f7", b: "#ec4899", bg1: "#140938", bg2: "#3b0764" },
       light: { a: "#7e22ce", b: "#be185d", bg1: "#faf5ff", bg2: "#f3e8ff" } }
   };
@@ -75,11 +75,26 @@
   };
 
   const ANIMS = [
-    { id: "fireflies", name: "Firefly" },
-    { id: "flow",      name: "Waver" },
-    { id: "aurora",    name: "Aurora" },
-    { id: "stars",     name: "Stars" },
-    { id: "embers",    name: "Embers" }
+    { id: "fireflies", name: "Firefly", desc: "Drifting golden embers" },
+    { id: "flow",      name: "Waver",   desc: "Flowing light ribbons" },
+    { id: "aurora",    name: "Aurora",  desc: "Sweeping northern lights" },
+    { id: "stars",     name: "Stars",   desc: "Twinkling starfield" },
+    { id: "embers",    name: "Embers",  desc: "Warm rising sparks" }
+  ];
+
+  const TRANSPARENT_MODES = {
+    normal: { id: "normal", name: "Normal", desc: "Smooth glass", tint: 15, blur: 14, wallDim: 48, popAlpha: 30 },
+    high:   { id: "high",   name: "High Transparency", desc: "See-through", tint: 4, blur: 6, wallDim: 30, popAlpha: 15 },
+    ultra:  { id: "ultra",  name: "Ultra Clear", desc: "Almost invisible", tint: 0, blur: 2, wallDim: 15, popAlpha: 8 }
+  };
+
+  const WALLPAPERS = [
+    { id: "default", name: "Default", sub: "Sunset Alps", wall: "gold", preview: "linear-gradient(135deg, #f59e0b 0%, #ea580c 40%, #1e1b4b 100%)" },
+    { id: "nature",  name: "Nature",  sub: "Alpine Valley", wall: "emerald", preview: "linear-gradient(135deg, #10b981 0%, #047857 50%, #064e3b 100%)" },
+    { id: "city",    name: "City",    sub: "Sunset Skyline", wall: "sunset", preview: "linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #1e1b4b 100%)" },
+    { id: "space",   name: "Space",   sub: "Cosmic Nebula", wall: "galaxy", preview: "linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #0f172a 100%)" },
+    { id: "ocean",   name: "Ocean",   sub: "Azure Waters", wall: "deepsea", preview: "linear-gradient(135deg, #38bdf8 0%, #0284c7 50%, #082f49 100%)" },
+    { id: "forest",  name: "Forest",  sub: "Boreal Mist", wall: "northern", preview: "linear-gradient(135deg, #2dd4bf 0%, #0d9488 50%, #042f2e 100%)" }
   ];
 
   const clamp = v => Math.max(0, Math.min(255, Math.round(v)));
@@ -189,5 +204,5 @@
     el.dataset.drift = s.drift ? "1" : "0";
   }
 
-  g.YTG = { DEFAULTS, THEMES, WALLS, ANIMS, vars, stage, resolve, shade };
+  g.YTG = { DEFAULTS, THEMES, WALLS, ANIMS, TRANSPARENT_MODES, WALLPAPERS, vars, stage, resolve, shade };
 })(typeof self !== "undefined" ? self : this);
