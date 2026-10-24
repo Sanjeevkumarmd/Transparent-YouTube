@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "YT Gold Glass",
-  "version": "10.1.0",
-  "description": "Gold Glass 2.0: Premium transparent glassmorphism, dynamic themes, cinematic animations, and real-time customization.",
+  "version": "10.1.1",
+  "description": "Premium transparent glassmorphism, dynamic themes, cinematic animations, live customization studio, and ad-blocking for YouTube.",
   "permissions": [
     "storage",
     "unlimitedStorage",
@@ -16,11 +16,6 @@
   "background": {
     "service_worker": "background.js"
   },
-  "options_ui": {
-    "page": "options.html",
-    "open_in_tab": true
-  },
-  "options_page": "options.html",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",

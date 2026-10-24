@@ -1,28 +1,28 @@
-# ✨ Gold Glass 2.0 — Premium Transparent Glass UI & Dynamic Theme Studio
+# ✨ Gold Glass v10.1.1 — Premium Transparent Glass UI & Dynamic Themes
 
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-gold?style=for-the-badge&logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/mv3/intro/)
-[![Version](https://img.shields.io/badge/Version-10.1.0-d4af37?style=for-the-badge)](manifest.json)
+[![Version](https://img.shields.io/badge/Version-10.1.1-d4af37?style=for-the-badge)](manifest.json)
 [![Platform](https://img.shields.io/badge/Browser-Chrome%20%7C%20Edge%20%7C%20Brave-blue?style=for-the-badge)](https://www.google.com/chrome/)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge)](LICENSE)
 
-> **Gold Glass 2.0**: A futuristic, liquid-glass visual theme and enhancement suite. Experience seamless translucent glassmorphism, dynamic 3D theme carousels, cinematic GPU-accelerated ambient animations, scenic wallpaper integration, and real-time studio customization.
+> **Gold Glass v10.1.1**: A futuristic, liquid-glass visual theme and enhancement suite for YouTube. Experience seamless translucent glassmorphism, instant clear theme carousels, live 16:9 customization preview, fullscreen workspace mode, cinematic ambient animations, and real-time fine-tuning.
 
 ---
 
-## 🌟 What's New in Gold Glass 2.0
+## 🌟 What's New in v10.1.1
 
-### 🎨 Master Studio Dashboard (`options.html`)
-- **16:9 Landscape Composition**: Full-page interactive command center featuring a floating dark-glass window, responsive navigation rail, 3D theme carousel over an alpine sunset landscape, and real-time previews.
-- **Dynamic 3D Theme Carousel**: Smooth horizontal wheel, trackpad, and keyboard arrow navigation with active glowing gold borders and depth scaling.
-- **Curated Palette**: Deep espresso (`#171006`), transparent dark glass (`rgba(24, 17, 8, 0.22)`), royal gold (`#F4C542`), champagne gold (`#E8C878`), soft ivory (`#FFF5D9`), and muted bronze (`#76551A`).
+### 🎨 Crystal Clear Theme Switching & Carousel
+- **Unified & Streamlined**: Reverted external dashboard clutter to focus directly on fast, clear, and responsive theme switching inside the primary extension interface.
+- **Smart Conditional Arrows**: Carousel navigation arrows gracefully appear and disappear depending on scroll position.
+- **Mouse Wheel & Arrow Navigation**: Smooth one-by-one cycling across themes and animations.
 
-### 🧊 3 Transparent Modes
-- **Normal Glass**: Lightly tinted glass with readable content and visible scenery.
-- **High Transparency**: Clearer panels with stronger backdrop visibility and lighter shadows.
-- **Ultra Clear**: Minimal background tint, subtle borders, and near-invisible floating glass surfaces.
+### 🎛️ Expanded Customization Studio with Live 16:9 Preview
+- **Split Workspace Layout**: Customize with total visual feedback! Adjust glass fill, blur, wallpaper dim, or animation speed on the right and watch the live 16:9 preview on the left respond instantly in real time.
+- **Instant Transparent Mode Presets**: One-click toggling between **Normal Glass** (smooth balanced glass), **High Clear** (4% tint, 6px blur), and **Ultra Clear** (0% tint, 2px blur, pure liquid clarity).
+- **Fullscreen Mode (`⛶ Fullscreen`)**: One click opens the studio into an expansive browser tab for a widescreen desktop editing experience.
 
-### 🎬 Dedicated Animation Studio
-- **Firefly**: Tiny golden particles drifting slowly through the background with a soft natural glow.
+### 🎬 Dedicated GPU Ambient Animations
+- **Firefly**: Organic golden embers swaying softly across the background.
 - **Waver**: Smooth, flowing gold ribbons and light waves gliding gently behind the interface.
 - **Aurora**: Soft shifting celestial bands of teal, green, and violet light.
 - **Stars**: Twinkling starfield with gradual cosmic drift.

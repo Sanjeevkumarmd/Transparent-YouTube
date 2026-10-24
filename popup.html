@@ -12,12 +12,13 @@
     <h1>Gold <span>Glass</span></h1>
     <span class="toast" id="toast"></span>
     <span class="grow"></span>
-    <button class="studio-btn" id="openStudioBtn" title="Open Gold Glass 2.0 Studio Dashboard">&#127912; Studio 2.0</button>
+    <button class="fs-btn" id="fullTabBtn" title="Open Fullscreen Workspace">&#x26F6; Fullscreen</button>
     <button class="devbtn" id="devbtn">&#9881; Customize</button>
     <label class="sw" title="Turn the theme on / off"><input type="checkbox" data-k="enabled"><i></i></label>
   </header>
 
   <main>
+    <!-- MAIN THEME GALLERY VIEW -->
     <section id="viewGallery" class="gallery-layout">
       <!-- TOP: Live 16:9 Preview and Current Theme indicator -->
       <div class="preview-center-wrap">
@@ -40,12 +41,6 @@
           </div>
         </div>
         <div class="cur"><b id="curName"></b><span id="curAnim"></span></div>
-        <div class="trans-quick-pills" id="transQuickPills">
-          <span class="tqp-label">&#10024; Glass:</span>
-          <button class="tqp" data-mode="normal">Normal</button>
-          <button class="tqp" data-mode="high">High Clear</button>
-          <button class="tqp" data-mode="ultra">Ultra Clear</button>
-        </div>
       </div>
 
       <!-- MIDDLE: Full-width Themes Carousel with smart conditional arrows -->
@@ -82,12 +77,60 @@
       </div>
     </section>
 
-    <!-- DEVELOPER CUSTOMIZATION VIEW -->
+    <!-- DEVELOPER CUSTOMIZATION VIEW: EXPANDED WITH LIVE PREVIEW & RICH CONTROLS -->
     <section id="viewDev" hidden>
-      <div class="head"><button class="back" id="exitDev">&#8592; Back</button><h2>Customize</h2><span></span></div>
-      <div class="tabs" id="tabs"></div>
-      <div class="devbody" id="devBody"></div>
-      <button id="reset" class="ghost wide">Reset everything</button>
+      <div class="dev-header">
+        <button class="back" id="exitDev">&#8592; Back to Themes</button>
+        <h2>Studio Customization</h2>
+        <div class="dev-head-actions">
+          <button class="fs-btn mini" id="devFullTabBtn" title="Open Fullscreen Workspace">&#x26F6; Fullscreen</button>
+          <button id="reset" class="ghost mini">Reset Defaults</button>
+        </div>
+      </div>
+
+      <div class="dev-main-layout">
+        <!-- LEFT: Live 16:9 Preview and Quick Transparent Presets -->
+        <div class="dev-preview-col">
+          <div class="pv dev-pv" id="devPv">
+            <div class="ytg-stage" id="devStage"></div>
+            <div class="mock">
+              <div class="mtop"><i class="mmenu"></i><b class="mlogo"></b><i class="msearch"></i><i class="mbtn"></i><i class="mav"></i></div>
+              <div class="mchips"><i class="on"></i><i></i><i></i><i></i></div>
+              <div class="mside"><i></i><i></i><i></i><i></i></div>
+              <div class="mgrid">
+                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
+              </div>
+              <div class="flash" id="devFlash"></div>
+              <div class="mpop"><b></b><i></i><i></i><i class="s"></i></div>
+            </div>
+          </div>
+          <div class="cur dev-cur"><b id="devCurName"></b><span id="devCurAnim"></span></div>
+
+          <!-- Quick Transparent Glass Presets directly under live preview -->
+          <div class="dev-presets-card">
+            <div class="dpc-head">
+              <span class="dpc-title">&#10024; Transparent Mode</span>
+              <span class="dpc-sub">Instant preset</span>
+            </div>
+            <div class="dpc-buttons">
+              <button class="dqp-btn" data-mode="normal" title="Normal Glass: Smooth balance with 14px blur">Normal Glass</button>
+              <button class="dqp-btn" data-mode="high" title="High Transparency: 4% tint, 6px blur, crystal see-through">High Clear</button>
+              <button class="dqp-btn" data-mode="ultra" title="Ultra Clear: 0% tint, 2px blur, invisible liquid surface">Ultra Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Category Tabs and Rich Controls Grid -->
+        <div class="dev-controls-col">
+          <div class="tabs" id="tabs"></div>
+          <div class="devbody" id="devBody"></div>
+        </div>
+      </div>
     </section>
   </main>
 
