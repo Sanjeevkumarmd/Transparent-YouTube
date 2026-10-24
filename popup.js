@@ -16,101 +16,14 @@ const SPEEDS = [
   { v: 3.0, label: "3.0x" }
 ];
 
-// ---------- Hidden developer panel (Customize button or Ctrl+Shift+D) ----------
-const DEV = {
-  Look: [
-    ["range", "tint", "Glass fill (0 = crystal clear)", 0, 30, 1, "%"],
-    ["range", "blur", "Header & menu blur", 0, 35, 1, "px"],
-    ["range", "popAlpha", "Popup & menu fill (lower = clearer)", 0, 80, 1, "%"],
-    ["range", "wallDim", "Wallpaper dim level", 0, 85, 1, "%"],
-    ["range", "wallOpacity", "Wallpaper strength", 10, 100, 1, "%"],
-    ["switch", "titleBack", "Soft backing behind video title"],
-    ["switch", "shimmer", "Gold title shimmer animation"],
-    ["range", "shimmerSpeed", "Title shimmer speed", 0.3, 3, 0.1, "x"],
-    ["gold"]
-  ],
-  Transparent: [
-    ["pills", "transPreset", "Quick Glass Preset", [["normal", "Normal"], ["high", "High Clear"], ["ultra", "Ultra Clear"]]],
-    ["range", "tint", "Glass surface tint", 0, 30, 1, "%"],
-    ["range", "blur", "Surface backdrop blur", 0, 35, 1, "px"],
-    ["range", "popAlpha", "Popup menu transparency", 0, 80, 1, "%"],
-    ["range", "menuAlpha", "Player controls transparency", 0, 80, 1, "%"],
-    ["range", "wallDim", "Scenic dimming strength", 0, 85, 1, "%"]
-  ],
-  Animation: [
-    ["range", "speed", "Animation speed", 0.2, 4, 0.1, "x"],
-    ["range", "driftSpeed", "Wallpaper drift speed", 0.2, 4, 0.1, "x"],
-    ["switch", "drift", "Slow wallpaper drift"],
-    ["range", "zoomSpeed", "Photo zoom speed", 0.2, 4, 0.1, "x"],
-    ["range", "imgBlur", "Photo blur", 0, 30, 1, "px"],
-    ["switch", "imgMotion", "Slow zoom on photo"],
-    ["switch", "pauseScroll", "Pause motion while scrolling"]
-  ],
-  Player: [
-    ["range", "ambientAmt", "Ambient light strength", 0, 100, 1, "%"],
-    ["range", "menuAlpha", "Player menu colour (lower = clearer)", 0, 90, 1, "%"],
-    ["switch", "ambient", "Ambient light behind video"],
-    ["switch", "fsAmbient", "Ambient light in fullscreen"],
-    ["switch", "glow", "Use video colours (else theme)"],
-    ["pills", "iconMode", "Player icons", [["video", "Video"], ["gold", "Gold"], ["white", "White"]]],
-    ["switch", "cursor", "Themed luxury cursor"],
-    ["pills", "cursorColor", "Cursor colour", [["gold", "Gold"], ["theme", "Theme"]]]
-  ],
-  Ads: [
-    ["switch", "ads", "Block ads (master toggle)"],
-    ["switch", "adHide", "Hide ad slots in feeds"],
-    ["switch", "adSkip", "Auto-click Skip instantly"],
-    ["switch", "adFast", "Speed up video ads"],
-    ["switch", "adInstant", "Jump straight to end of ads"],
-    ["range", "adSpeed", "Ad playback speed multiplier", 1, 16, 1, "x"],
-    ["switch", "adMute", "Mute video ads automatically"]
-  ],
-  Extras: [
-    ["switch", "hideShorts", "Hide Shorts shelf"],
-    ["switch", "hideComments", "Hide comments section"],
-    ["switch", "simple", "Simple mode (promos, end cards)"],
-    ["switch", "focus", "Focus mode (video only)"]
-  ]
-};
-let tab = "Look";
-
-function renderDev() {
-  $("tabs").innerHTML = Object.keys(DEV).map(t => `<button class="tab${t === tab ? " on" : ""}" data-t="${t}">${t}</button>`).join("");
-  $("devBody").innerHTML = DEV[tab].map(it => {
-    const [type, k, label, a, b, step, unit] = it;
-    if (type === "range") return `<div class="range"><span>${label}</span><b data-for="${k}" data-unit="${unit}"></b><input type="range" data-k="${k}" min="${a}" max="${b}" step="${step}"></div>`;
-    if (type === "switch") return `<label class="row"><span>${label}</span><span class="sw"><input type="checkbox" data-k="${k}"><i></i></span></label>`;
-    if (type === "pills") return `<div class="full"><div class="lbl2">${label}</div><div class="pills">${a.map(([v, n]) => `<button class="pill" data-k="${k}" data-v="${v}">${n}</button>`).join("")}</div></div>`;
-    if (type === "gold") return `<div class="full"><div class="lbl2">Title gold</div><div class="gold" id="goldRow">` +
-      [["#d4af37", "Royal"], ["#c9a227", "Deep"], ["#e6cf94", "Champagne"], ["#c9a46c", "Rose gold"]].map(([c, n]) => `<button class="g" data-c="${c}" style="--c:${c}" title="${n}"></button>`).join("") +
-      `<input type="color" id="goldPick" title="Custom gold"></div></div>`;
-  }).join("");
-  paintControls();
-}
-
-function paintControls() {
-  document.querySelectorAll("[data-k]").forEach(el => {
-    const k = el.dataset.k;
-    if (el.type === "checkbox") el.checked = !!s[k];
-    else if (el.type === "range") { el.value = s[k]; const b = document.querySelector(`b[data-for="${k}"]`); if (b) b.textContent = s[k] + b.dataset.unit; }
-    else if (el.dataset.v) {
-      if (k === "transPreset") {
-        const p = YTG.TRANSPARENT_MODES && YTG.TRANSPARENT_MODES[el.dataset.v];
-        el.classList.toggle("on", p && Math.abs(p.tint - s.tint) <= 4);
-      } else {
-        el.classList.toggle("on", s[k] === el.dataset.v);
-      }
-    }
-  });
-  document.querySelectorAll("#goldRow .g").forEach(b => b.classList.toggle("on", b.dataset.c === s.gold));
-  if ($("goldPick")) $("goldPick").value = s.gold;
-}
-
 // ---------- Themes horizontal track: mini live previews ----------
 function tile(cls, html) {
   const b = document.createElement("button");
-  b.className = "tc " + cls; b.innerHTML = html; return b;
+  b.className = "tc " + cls;
+  b.innerHTML = html;
+  return b;
 }
+
 let lastImg = null;
 function buildGrid() {
   const grid = $("grid"); if (!grid) return;
@@ -125,7 +38,7 @@ function buildGrid() {
     b.addEventListener("click", () => {
       save({ theme: id, wall: "auto" });
       b.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-      setTimeout(updateCarouselArrows, 300);
+      setTimeout(updateCarouselArrows, 280);
     });
     grid.appendChild(b);
   }
@@ -139,7 +52,7 @@ function buildGrid() {
     mine.addEventListener("click", () => {
       save({ wall: "image" });
       mine.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-      setTimeout(updateCarouselArrows, 300);
+      setTimeout(updateCarouselArrows, 280);
     });
     grid.appendChild(mine);
   } else {
@@ -148,28 +61,26 @@ function buildGrid() {
     none.addEventListener("click", () => {
       save({ wall: "none" });
       none.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-      setTimeout(updateCarouselArrows, 300);
+      setTimeout(updateCarouselArrows, 280);
     });
     grid.appendChild(none);
   }
   setTimeout(updateCarouselArrows, 60);
 }
 
+// Pop-in and pop-out center badge animation
 function flashText(text) {
   const f = $("flash");
-  const df = $("devFlash");
-  [f, df].forEach(el => {
-    if (!el || !text) return;
-    el.textContent = text;
-    el.classList.remove("on");
-    void el.offsetWidth;
-    el.classList.add("on");
-    clearTimeout(el._t);
-    el._t = setTimeout(() => el.classList.remove("on"), 1200);
-  });
+  if (!f || !text) return;
+  f.textContent = text;
+  f.classList.remove("on");
+  void f.offsetWidth;
+  f.classList.add("on");
+  clearTimeout(f._t);
+  f._t = setTimeout(() => f.classList.remove("on"), 1250);
 }
 
-// ---------- Horizontal controls for Animation (with live preview) and Speed ----------
+// ---------- Animations and Speed Wheels ----------
 function buildMotionWheel() {
   const list = $("pills"); if (!list) return;
   list.innerHTML = "";
@@ -216,18 +127,10 @@ function updateSpeedArrows() {
   if (!up || !down) return;
   const cur = parseFloat(s.speed || 1);
   const idx = SPEEDS.findIndex(sp => Math.abs(sp.v - cur) < 0.15);
-  // When at top (first speed), hide upper arrow
-  if (idx <= 0) {
-    up.classList.add("hidden");
-  } else {
-    up.classList.remove("hidden");
-  }
-  // When at bottom (last speed), hide lower arrow
-  if (idx >= SPEEDS.length - 1 || idx === -1) {
-    down.classList.add("hidden");
-  } else {
-    down.classList.remove("hidden");
-  }
+  if (idx <= 0) up.classList.add("hidden");
+  else up.classList.remove("hidden");
+  if (idx >= SPEEDS.length - 1 || idx === -1) down.classList.add("hidden");
+  else down.classList.remove("hidden");
 }
 
 function initSpeedArrows() {
@@ -249,7 +152,7 @@ function initSpeedArrows() {
     down.addEventListener("click", () => {
       const cur = parseFloat(s.speed || 1);
       const idx = SPEEDS.findIndex(sp => Math.abs(sp.v - cur) < 0.15);
-      if (idx < SPEEDS.length - 1) {
+      if (idx < SPEEDS.length - 1 && idx !== -1) {
         save({ speed: SPEEDS[idx + 1].v });
         const target = track.children[idx + 1];
         if (target) target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -265,20 +168,10 @@ function updateCarouselArrows() {
   if (!track || !prev || !next) return;
   const sl = track.scrollLeft;
   const max = track.scrollWidth - track.clientWidth;
-  
-  // When at start (first theme displayed), hide backward arrow
-  if (sl <= 6) {
-    prev.classList.add("hidden");
-  } else {
-    prev.classList.remove("hidden");
-  }
-  
-  // When at end (last theme displayed), hide forward arrow
-  if (sl >= max - 6) {
-    next.classList.add("hidden");
-  } else {
-    next.classList.remove("hidden");
-  }
+  if (sl <= 6) prev.classList.add("hidden");
+  else prev.classList.remove("hidden");
+  if (sl >= max - 6) next.classList.add("hidden");
+  else next.classList.remove("hidden");
 }
 
 function initCarouselArrows() {
@@ -286,16 +179,16 @@ function initCarouselArrows() {
   if (!track) return;
   if (prev) {
     prev.addEventListener("click", () => {
-      track.scrollBy({ left: -200, behavior: "smooth" });
+      track.scrollBy({ left: -140, behavior: "smooth" });
       setTimeout(updateCarouselArrows, 200);
-      setTimeout(updateCarouselArrows, 450);
+      setTimeout(updateCarouselArrows, 400);
     });
   }
   if (next) {
     next.addEventListener("click", () => {
-      track.scrollBy({ left: 200, behavior: "smooth" });
+      track.scrollBy({ left: 140, behavior: "smooth" });
       setTimeout(updateCarouselArrows, 200);
-      setTimeout(updateCarouselArrows, 450);
+      setTimeout(updateCarouselArrows, 400);
     });
   }
   track.addEventListener("scroll", updateCarouselArrows, { passive: true });
@@ -309,29 +202,19 @@ function paint() {
     $("pv").dataset.shimmer = s.shimmer ? "1" : "0";
     if ($("stage")) stage($("stage"), s, m, s.bgImage);
   }
-  if ($("devPv")) {
-    setVars($("devPv"), vars(s, m));
-    $("devPv").dataset.shimmer = s.shimmer ? "1" : "0";
-    if ($("devStage")) stage($("devStage"), s, m, s.bgImage);
-  }
   setVars(document.body, vars(s, "dark"));
   if ($("bg")) stage($("bg"), { ...s, anim: "off", drift: false }, "dark", s.bgImage);
 
   if (lastImg !== s.bgImage) { lastImg = s.bgImage; buildGrid(); }
 
-  // Highlight active theme in the horizontal track
-  document.querySelectorAll(".dqp-btn").forEach(b => {
-    const k = b.dataset.mode;
-    const p = YTG.TRANSPARENT_MODES && YTG.TRANSPARENT_MODES[k];
-    b.classList.toggle("active", p && Math.abs(p.tint - s.tint) <= 4);
-  });
+  // Highlight active theme in the horizontal track with gold glowing border
   document.querySelectorAll("#grid .tc.theme").forEach(b => {
     const isActive = b.dataset.id === s.theme && s.wall !== "image" && s.wall !== "none";
     b.classList.toggle("on", isActive);
   });
   document.querySelectorAll("#grid .tc.mine, #grid .tc.clear").forEach(b => b.classList.toggle("on", b.dataset.id === s.wall));
 
-  // Highlight active animation item and set preview vars
+  // Highlight active animation item with gold border and gold text
   document.querySelectorAll("#pills .wheel-item").forEach(b => {
     const isActive = b.dataset.id === s.anim;
     b.classList.toggle("on", isActive);
@@ -339,7 +222,7 @@ function paint() {
     if (st) setVars(st, vars(s, m));
   });
 
-  // Highlight active speed wheel item and scroll into center
+  // Highlight active speed wheel item
   const currentSpeed = parseFloat(s.speed || 1);
   document.querySelectorAll("#speedList .wheel-item").forEach(b => {
     const sv = parseFloat(b.dataset.speed);
@@ -355,6 +238,7 @@ function paint() {
   const nm = (YTG.THEMES[s.theme] || THEMES.gold).name;
   const animNm = an ? an.name : (r.name || r.anim);
 
+  // Trigger smooth pop-in and pop-out badge in the center
   if (paint.lastTheme !== undefined && paint.lastTheme !== s.theme) {
     flashText(nm);
   } else if (paint.lastAnim !== undefined && paint.lastAnim !== s.anim) {
@@ -365,9 +249,11 @@ function paint() {
 
   if ($("curName")) $("curName").textContent = nm;
   if ($("curAnim")) $("curAnim").textContent = "• " + animNm;
-  if ($("devCurName")) $("devCurName").textContent = nm;
-  if ($("devCurAnim")) $("devCurAnim").textContent = "• " + animNm;
-  paintControls();
+
+  // Master switch status
+  const sw = document.querySelector('input[data-k="enabled"]');
+  if (sw) sw.checked = !!s.enabled;
+
   updateCarouselArrows();
   updateSpeedArrows();
 
@@ -388,79 +274,27 @@ let pending = {}, timer = 0;
 function save(patch, slow) {
   Object.assign(s, patch);
   paint();
-  if (!slow) { chrome.storage.local.set(patch); return; }
+  if (!slow) {
+    if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local) {
+      chrome.storage.local.set(patch);
+    }
+    return;
+  }
   Object.assign(pending, patch);
   clearTimeout(timer);
-  timer = setTimeout(() => { chrome.storage.local.set(pending); pending = {}; }, 80);
+  timer = setTimeout(() => {
+    if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local) {
+      chrome.storage.local.set(pending);
+    }
+    pending = {};
+  }, 80);
 }
 
-// ---------- Wire controls ----------
-document.addEventListener("input", e => {
-  const el = e.target, k = el.dataset && el.dataset.k;
-  if (el.id === "goldPick") return save({ gold: el.value }, true);
-  if (!k) return;
-  if (el.type === "range") save({ [k]: parseFloat(el.value) }, true);
-});
+// Master enable checkbox
 document.addEventListener("change", e => {
   const el = e.target, k = el.dataset && el.dataset.k;
   if (k && el.type === "checkbox") save({ [k]: el.checked });
 });
-document.addEventListener("click", e => {
-  const dqp = e.target.closest(".dqp-btn");
-  if (dqp) {
-    const modeKey = dqp.dataset.mode;
-    const preset = YTG.TRANSPARENT_MODES && YTG.TRANSPARENT_MODES[modeKey];
-    if (preset) {
-      save({
-        tint: preset.tint,
-        blur: preset.blur,
-        wallDim: preset.wallDim,
-        popAlpha: preset.popAlpha
-      });
-      flashText(preset.name);
-    }
-    return;
-  }
-  const el = e.target.closest("button");
-  if (!el) return;
-  if (el.dataset.k === "transPreset" && el.dataset.v) {
-    const preset = YTG.TRANSPARENT_MODES && YTG.TRANSPARENT_MODES[el.dataset.v];
-    if (preset) {
-      save({
-        tint: preset.tint,
-        blur: preset.blur,
-        wallDim: preset.wallDim,
-        popAlpha: preset.popAlpha
-      });
-      flashText(preset.name);
-    }
-    return;
-  }
-  if (el.dataset.k && el.dataset.v) save({ [el.dataset.k]: el.dataset.v });
-  else if (el.classList.contains("g")) save({ gold: el.dataset.c });
-  else if (el.classList.contains("tab")) { tab = el.dataset.t; renderDev(); }
-});
-if ($("reset")) $("reset").addEventListener("click", () => save({ ...D }));
-
-// ---------- Developer panel entrance ----------
-function toggleDev(force) {
-  const show = force !== undefined ? force : $("viewDev").hidden;
-  $("viewDev").hidden = !show; $("viewGallery").hidden = show;
-  if (show) {
-    renderDev();
-    paint();
-  }
-  document.body.classList.toggle("dev", show); $("devbtn").hidden = show;
-  const t = $("toast"); if (t) { t.textContent = show ? "Customize" : ""; t.classList.toggle("on", show); }
-}
-let clicks = 0, clickTimer = 0;
-$("logo").addEventListener("click", () => {
-  clicks++; clearTimeout(clickTimer); clickTimer = setTimeout(() => (clicks = 0), 2000);
-  if (clicks >= 5) { clicks = 0; toggleDev(); }
-});
-document.addEventListener("keydown", e => { if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "d") toggleDev(); });
-$("devbtn").addEventListener("click", () => toggleDev(true));
-$("exitDev").addEventListener("click", () => toggleDev(false));
 
 // ---------- Photo upload ----------
 function toDataUrl(file) {
@@ -483,19 +317,23 @@ function toDataUrl(file) {
     fr.readAsDataURL(file);
   });
 }
-$("file").addEventListener("change", async e => {
-  const f = e.target.files[0]; e.target.value = "";
-  $("msg").textContent = "";
-  if (!f) return;
-  if (!f.type.startsWith("image/")) { $("msg").textContent = "Please choose an image file."; return; }
-  if (f.size > 20 * 1024 * 1024) { $("msg").textContent = "Image too large (max 20 MB)."; return; }
-  try {
-    const url = await toDataUrl(f);
-    s.bgImage = url;
-    await chrome.storage.local.set({ bgImage: url, wall: "image" });
-    save({ wall: "image" });
-  } catch { $("msg").textContent = "Could not load that image."; }
-});
+if ($("file")) {
+  $("file").addEventListener("change", async e => {
+    const f = e.target.files[0]; e.target.value = "";
+    if ($("msg")) $("msg").textContent = "";
+    if (!f) return;
+    if (!f.type.startsWith("image/")) { if ($("msg")) $("msg").textContent = "Please choose an image file."; return; }
+    if (f.size > 20 * 1024 * 1024) { if ($("msg")) $("msg").textContent = "Image too large (max 20 MB)."; return; }
+    try {
+      const url = await toDataUrl(f);
+      s.bgImage = url;
+      if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local) {
+        await chrome.storage.local.set({ bgImage: url, wall: "image" });
+      }
+      save({ wall: "image" });
+    } catch { if ($("msg")) $("msg").textContent = "Could not load that image."; }
+  });
+}
 
 // ---------- Mouse scroll wheel support: select one by one ----------
 function initWheelNavigation() {
@@ -527,7 +365,7 @@ function initWheelNavigation() {
         if (targetBtn) {
           targetBtn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
         }
-        setTimeout(updateCarouselArrows, 320);
+        setTimeout(updateCarouselArrows, 280);
       }
     }, { passive: false });
   }
@@ -594,31 +432,9 @@ initCarouselArrows();
 initSpeedArrows();
 initWheelNavigation();
 
-function openFullscreenTab() {
-  const isDevOpen = $("viewDev") && !$("viewDev").hidden;
-  const url = chrome.runtime.getURL(`popup.html?fullscreen=1${isDevOpen ? "&view=dev" : ""}`);
-  if (typeof chrome !== "undefined" && chrome.tabs && chrome.tabs.create) {
-    chrome.tabs.create({ url });
-  } else {
-    window.open(url, "_blank");
-  }
+if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local) {
+  chrome.storage.local.get({ ...D, bgImage: "" }, v => { s = { ...D, ...v }; paint(); });
+} else {
+  paint();
 }
-if ($("fullTabBtn")) $("fullTabBtn").addEventListener("click", openFullscreenTab);
-if ($("devFullTabBtn")) $("devFullTabBtn").addEventListener("click", openFullscreenTab);
-
-// Detect fullscreen tab mode
-if (window.innerWidth > 800 || window.innerHeight > 600 || window.location.search.includes("fullscreen")) {
-  document.body.classList.add("is-fullscreen");
-  if ($("fullTabBtn")) $("fullTabBtn").style.display = "none";
-  if ($("devFullTabBtn")) $("devFullTabBtn").style.display = "none";
-}
-
-// Auto open dev customize if requested in URL
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get("view") === "dev") {
-  toggleDev(true);
-}
-
-chrome.storage.local.get({ ...D, bgImage: "" }, v => { s = { ...D, ...v }; paint(); });
 dq.addEventListener("change", () => { lastImg = null; paint(); });
-

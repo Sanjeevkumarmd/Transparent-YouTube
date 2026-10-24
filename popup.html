@@ -12,15 +12,12 @@
     <h1>Gold <span>Glass</span></h1>
     <span class="toast" id="toast"></span>
     <span class="grow"></span>
-    <button class="fs-btn" id="fullTabBtn" title="Open Fullscreen Workspace">&#x26F6; Fullscreen</button>
-    <button class="devbtn" id="devbtn">&#9881; Customize</button>
     <label class="sw" title="Turn the theme on / off"><input type="checkbox" data-k="enabled"><i></i></label>
   </header>
 
   <main>
-    <!-- MAIN THEME GALLERY VIEW -->
     <section id="viewGallery" class="gallery-layout">
-      <!-- TOP: Live 16:9 Preview and Current Theme indicator -->
+      <!-- TOP: Live 16:9 Preview Frame with Live Ambient Animation & Pop-in Center Badge -->
       <div class="preview-center-wrap">
         <div class="pv" id="pv">
           <div class="ytg-stage" id="stage"></div>
@@ -36,18 +33,19 @@
               <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
               <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
             </div>
-            <div class="flash" id="flash"></div>
+            <!-- Pop-in / Pop-out Animated Center Badge -->
+            <div class="flash pop-badge" id="flash"></div>
             <div class="mpop"><b></b><i></i><i></i><i class="s"></i></div>
           </div>
         </div>
-        <div class="cur"><b id="curName"></b><span id="curAnim"></span></div>
+        <div class="cur" id="curBadge"><b id="curName"></b><span id="curAnim"></span></div>
       </div>
 
-      <!-- MIDDLE: Full-width Themes Carousel with smart conditional arrows -->
+      <!-- MIDDLE: Themes Carousel (Previous, Current centered with gold glow, Next) -->
       <div class="themes-section-wide">
         <div class="themes-header">
           <h2>Themes</h2>
-          <span class="hint">Click arrows or cards to switch</span>
+          <span class="hint">Click or scroll to switch</span>
         </div>
         <div class="themes-carousel-container">
           <button class="carousel-nav-btn prev" id="themePrev" title="Previous theme" aria-label="Previous theme">&#10094;</button>
@@ -60,7 +58,7 @@
         <div id="msg"></div>
       </div>
 
-      <!-- BOTTOM: Animations (wide) and Speed (vertical mobile-alarm wheel with up/down arrows) -->
+      <!-- BOTTOM: Live Animations Bar & Vertical Speed Wheel -->
       <div class="bottom-controls-bar">
         <div class="anim-col-wide">
           <div class="head"><h2>Animation</h2></div>
@@ -73,62 +71,6 @@
             <div class="speed-wheel-track" id="speedList"></div>
             <button class="speed-nav-btn down" id="speedDown" title="Decrease speed" aria-label="Decrease speed">&#9660;</button>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DEVELOPER CUSTOMIZATION VIEW: EXPANDED WITH LIVE PREVIEW & RICH CONTROLS -->
-    <section id="viewDev" hidden>
-      <div class="dev-header">
-        <button class="back" id="exitDev">&#8592; Back to Themes</button>
-        <h2>Studio Customization</h2>
-        <div class="dev-head-actions">
-          <button class="fs-btn mini" id="devFullTabBtn" title="Open Fullscreen Workspace">&#x26F6; Fullscreen</button>
-          <button id="reset" class="ghost mini">Reset Defaults</button>
-        </div>
-      </div>
-
-      <div class="dev-main-layout">
-        <!-- LEFT: Live 16:9 Preview and Quick Transparent Presets -->
-        <div class="dev-preview-col">
-          <div class="pv dev-pv" id="devPv">
-            <div class="ytg-stage" id="devStage"></div>
-            <div class="mock">
-              <div class="mtop"><i class="mmenu"></i><b class="mlogo"></b><i class="msearch"></i><i class="mbtn"></i><i class="mav"></i></div>
-              <div class="mchips"><i class="on"></i><i></i><i></i><i></i></div>
-              <div class="mside"><i></i><i></i><i></i><i></i></div>
-              <div class="mgrid">
-                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-                <div class="mc"><span class="vid"><u></u></span><em></em><s></s></div>
-              </div>
-              <div class="flash" id="devFlash"></div>
-              <div class="mpop"><b></b><i></i><i></i><i class="s"></i></div>
-            </div>
-          </div>
-          <div class="cur dev-cur"><b id="devCurName"></b><span id="devCurAnim"></span></div>
-
-          <!-- Quick Transparent Glass Presets directly under live preview -->
-          <div class="dev-presets-card">
-            <div class="dpc-head">
-              <span class="dpc-title">&#10024; Transparent Mode</span>
-              <span class="dpc-sub">Instant preset</span>
-            </div>
-            <div class="dpc-buttons">
-              <button class="dqp-btn" data-mode="normal" title="Normal Glass: Smooth balance with 14px blur">Normal Glass</button>
-              <button class="dqp-btn" data-mode="high" title="High Transparency: 4% tint, 6px blur, crystal see-through">High Clear</button>
-              <button class="dqp-btn" data-mode="ultra" title="Ultra Clear: 0% tint, 2px blur, invisible liquid surface">Ultra Clear</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- RIGHT: Category Tabs and Rich Controls Grid -->
-        <div class="dev-controls-col">
-          <div class="tabs" id="tabs"></div>
-          <div class="devbody" id="devBody"></div>
         </div>
       </div>
     </section>

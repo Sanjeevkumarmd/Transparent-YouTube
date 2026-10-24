@@ -1,25 +1,28 @@
-# ✨ Gold Glass v10.1.2 — Premium Transparent Glass UI & Dynamic Themes
+# ✨ Gold Glass v10.1.3 — Premium Transparent Glass UI & Dynamic Themes
 
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-gold?style=for-the-badge&logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/mv3/intro/)
-[![Version](https://img.shields.io/badge/Version-10.1.2-d4af37?style=for-the-badge)](manifest.json)
+[![Version](https://img.shields.io/badge/Version-10.1.3-d4af37?style=for-the-badge)](manifest.json)
 [![Platform](https://img.shields.io/badge/Browser-Chrome%20%7C%20Edge%20%7C%20Brave-blue?style=for-the-badge)](https://www.google.com/chrome/)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge)](LICENSE)
 
-> **Gold Glass v10.1.1**: A futuristic, liquid-glass visual theme and enhancement suite for YouTube. Experience seamless translucent glassmorphism, instant clear theme carousels, live 16:9 customization preview, fullscreen workspace mode, cinematic ambient animations, and real-time fine-tuning.
+> **Gold Glass v10.1.3**: A futuristic, liquid-glass visual theme and enhancement suite for YouTube. Experience seamless translucent glassmorphism, instant clear theme carousels, live 16:9 customization preview, cinematic ambient animations, and real-time fine-tuning.
 
 ---
 
-## 🌟 What's New in v10.1.1
+## 🌟 What's New in v10.1.3
 
-### 🎨 Crystal Clear Theme Switching & Carousel
-- **Unified & Streamlined**: Reverted external dashboard clutter to focus directly on fast, clear, and responsive theme switching inside the primary extension interface.
-- **Smart Conditional Arrows**: Carousel navigation arrows gracefully appear and disappear depending on scroll position.
-- **Mouse Wheel & Arrow Navigation**: Smooth one-by-one cycling across themes and animations.
+### ⚡ Lightweight, Fast & Zero-Lag Popup
+- **Compact 440px Dimensions**: Perfectly fitted to Chrome's native extension popup dimensions without horizontal scrollbars or page overflow.
+- **Removed Fullscreen & 2.0 Design**: Eliminated heavy dual-view DOM trees and fullscreen buttons, restoring blazing-fast, buttery smooth responsiveness when switching themes.
+- **Gen Z Curved Borders**: Modern 16px–18px rounded pill aesthetics with liquid glass refraction.
+- **Gold Selection Glow**: Selected theme card features an elevated gold border (`#ffd700`) and glow; selected animation card displays gold text and borders.
+- **Pop-In / Pop-Out Center Badge**: Smooth animated pop-in and pop-out preview badge in the center of the live 16:9 canvas when switching themes or animations.
 
-### 🎛️ Expanded Customization Studio with Live 16:9 Preview
-- **Split Workspace Layout**: Customize with total visual feedback! Adjust glass fill, blur, wallpaper dim, or animation speed on the right and watch the live 16:9 preview on the left respond instantly in real time.
-- **Instant Transparent Mode Presets**: One-click toggling between **Normal Glass** (smooth balanced glass), **High Clear** (4% tint, 6px blur), and **Ultra Clear** (0% tint, 2px blur, pure liquid clarity).
-- **Fullscreen Mode (`⛶ Fullscreen`)**: One click opens the studio into an expansive browser tab for a widescreen desktop editing experience.
+### 🎬 Player & UI Fixes
+- **High-Contrast Player Settings Menu**: Dark liquid frosted glass (`rgba(22, 16, 10, 0.90)`) with 32px blur, pure white option labels (`#ffffff`), and gold accents ensures Quality and playback settings are 100% readable even over pure white video backgrounds.
+- **Subscribe Button Separator Removed**: Cleanly stripped the vertical divider line in the Subscribe / Notification bell segmented pill.
+- **Single-Line Microphone Tooltip**: Tooltips for "Search with your voice" and other top bar controls now strictly render on a single horizontal line without awkward vertical wrapping.
+- **Create Button Hover Stabilized**: Fixed hover behavior to scale gently without rotation or unwanted menu popups.
 
 ### 🎬 Dedicated GPU Ambient Animations
 - **Firefly**: Organic golden embers swaying softly across the background.
