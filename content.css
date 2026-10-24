@@ -173,23 +173,24 @@ html[data-ytg-on] :is(
   .ytSearchboxComponentSearchButton,
   #search-icon-legacy
 ) {
-  background: color-mix(in srgb, var(--ytg-bg1) 14%, rgba(25, 20, 12, 0.12)) !important;
-  background-color: color-mix(in srgb, var(--ytg-bg1) 14%, rgba(25, 20, 12, 0.12)) !important;
+  background: transparent !important;
+  background-color: transparent !important;
   border: 1px solid color-mix(in srgb, var(--ytg-a) 35%, rgba(255, 255, 255, 0.15)) !important;
+  border-left: none !important;
   border-radius: 0 999px 999px 0 !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-  transition: border-color .25s ease, box-shadow .25s ease, background-color .25s ease !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: none !important;
+  transition: border-color .25s ease, background-color .25s ease !important;
 }
 
 html[data-ytg-on] :is(
   .ytSearchboxComponentSearchButton:hover,
   #search-icon-legacy:hover
 ) {
-  background: color-mix(in srgb, var(--ytg-a) 25%, rgba(25, 20, 12, 0.25)) !important;
+  background: color-mix(in srgb, var(--ytg-a) 20%, transparent) !important;
   border-color: var(--ytg-a) !important;
-  box-shadow: 0 0 14px color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
+  box-shadow: none !important;
 }
 
 html[data-ytg-on] :is(
@@ -199,24 +200,25 @@ html[data-ytg-on] :is(
   ytd-searchbox:focus-within #search-icon-legacy
 ) {
   border-color: var(--ytg-a) !important;
-  box-shadow: 0 0 18px color-mix(in srgb, var(--ytg-a) 60%, transparent), 0 4px 18px rgba(0,0,0,0.5) !important;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
 }
 
-/* Voice search & Search clear button: 10% slightly transparent with themed icon */
+/* Voice search & Search clear button: 100% transparent, NO black background */
 html[data-ytg-on] :is(#voice-search-button, .ytSearchboxComponentMicButton) {
-  background: color-mix(in srgb, var(--ytg-bg1) 12%, rgba(18, 14, 8, 0.10)) !important;
-  background-color: color-mix(in srgb, var(--ytg-bg1) 12%, rgba(18, 14, 8, 0.10)) !important;
-  border: 1px solid color-mix(in srgb, var(--ytg-a) 35%, rgba(255, 255, 255, 0.15)) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 40%, rgba(255, 255, 255, 0.15)) !important;
   border-radius: 50% !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
-  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: none !important;
+  transition: transform .2s ease, border-color .2s ease, background-color .2s ease !important;
 }
 html[data-ytg-on] :is(#voice-search-button:hover, .ytSearchboxComponentMicButton:hover) {
   transform: scale(1.08) !important;
+  background: color-mix(in srgb, var(--ytg-a) 20%, transparent) !important;
   border-color: var(--ytg-a) !important;
-  box-shadow: 0 0 16px color-mix(in srgb, var(--ytg-a) 60%, transparent) !important;
+  box-shadow: none !important;
 }
 
 /* Search input text and placeholder: crisp high contrast */
@@ -577,13 +579,44 @@ html[data-ytg-on] :is(ytd-guide-entry-renderer[active], ytd-mini-guide-entry-ren
   font-weight: 700 !important;
 }
 
-html[data-ytg-on] ytd-guide-section-renderer #guide-section-title {
+/* Sidebar "Subscriptions" and "You" section buttons & headers: Vibrant active theme color */
+html[data-ytg-on] :is(
+  ytd-guide-section-renderer,
+  yt-guide-section-renderer,
+  ytd-guide-entry-renderer,
+  ytd-guide-renderer,
+  tp-yt-app-drawer
+) :is(
+  #guide-section-title,
+  h3,
+  a[href*="subscriptions"],
+  a[href*="/you"],
+  [aria-label*="Subscriptions" i],
+  [aria-label*="You" i]
+) {
   color: var(--ytg-a) !important;
   -webkit-text-fill-color: var(--ytg-a) !important;
   font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+}
+
+html[data-ytg-on] :is(
+  ytd-guide-section-renderer,
+  yt-guide-section-renderer,
+  ytd-guide-entry-renderer,
+  ytd-guide-renderer,
+  tp-yt-app-drawer
+) :is(
+  #guide-section-title,
+  h3,
+  a[href*="subscriptions"],
+  a[href*="/you"],
+  [aria-label*="Subscriptions" i],
+  [aria-label*="You" i]
+) :is(yt-formatted-string, span, yt-icon, svg, path) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  fill: var(--ytg-a) !important;
 }
 
 /* ========== High-Contrast Theme Arrows & Navigation Across YouTube ========== */
@@ -627,13 +660,20 @@ html[data-ytg-on] :is(
   transform: scale(1.1) !important;
 }
 
-/* Masthead Top Icons (1: Hamburger / Guide menu button - 100% visible transparent, NO black box) */
-html[data-ytg-on] ytd-masthead :is(
+/* Masthead Top Icons (1: Hamburger / Guide menu button "those three lines" - 100% visible transparent, themed) */
+html[data-ytg-on] :is(
+  ytd-masthead,
+  tp-yt-app-drawer,
+  ytd-guide-renderer,
+  ytd-app,
+  #masthead
+) :is(
   #guide-button,
   #guide-button button,
   #guide-button yt-icon-button,
   #guide-button tp-yt-paper-icon-button,
   #guide-icon,
+  [aria-label*="Guide" i],
   ytd-notification-topbar-button-renderer,
   ytd-notification-topbar-button-renderer button,
   #notification-button,
@@ -646,23 +686,37 @@ html[data-ytg-on] ytd-masthead :is(
   box-shadow: none !important;
 }
 
-html[data-ytg-on] ytd-masthead :is(
+html[data-ytg-on] :is(
+  ytd-masthead,
+  tp-yt-app-drawer,
+  ytd-guide-renderer,
+  ytd-app,
+  #masthead
+) :is(
   #guide-button button,
+  [aria-label*="Guide" i] button,
   #buttons yt-icon-button button
 ):hover {
   background: color-mix(in srgb, var(--ytg-a) 18%, transparent) !important;
   border-radius: 50% !important;
 }
 
-html[data-ytg-on] ytd-masthead :is(
+html[data-ytg-on] :is(
+  ytd-masthead,
+  tp-yt-app-drawer,
+  ytd-guide-renderer,
+  ytd-app,
+  #masthead
+) :is(
   #guide-button,
+  #guide-icon,
+  [aria-label*="Guide" i],
   ytd-notification-topbar-button-renderer,
   #notification-button,
   #buttons yt-icon-button
-) :is(svg, path, yt-icon, .yt-spec-button-shape-next__icon) {
+) :is(svg, path, yt-icon, .yt-spec-button-shape-next__icon, span, div) {
   fill: var(--ytg-a) !important;
   color: var(--ytg-a) !important;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.75)) !important;
 }
 
 /* Thumbnails */
@@ -709,39 +763,45 @@ html[data-ytg-on] :is(ytd-thumbnail, yt-thumbnail-view-model, ytd-playlist-thumb
   font-weight: 700 !important;
 }
 
-/* Sleek theme scrollbar for entire page, body, guide drawer & all elements */
+/* Complete Removal of Scrollbars Everywhere (No ugly Windows/custom scrollbars) */
 html[data-ytg-on],
 html[data-ytg-on] body,
 html[data-ytg-on] * {
-  scrollbar-width: thin !important;
-  scrollbar-color: color-mix(in srgb, var(--ytg-a) 55%, transparent) transparent !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }
+
 html[data-ytg-on]::-webkit-scrollbar,
-html[data-ytg-on] *::-webkit-scrollbar {
-  width: 6px !important;
-  height: 6px !important;
+html[data-ytg-on] *::-webkit-scrollbar,
+html[data-ytg-on] :is(
+  tp-yt-iron-dropdown,
+  ytd-popup-container,
+  ytd-multi-page-menu-renderer,
+  ytd-guide-renderer,
+  #guide-inner-content,
+  #sections,
+  #items,
+  .ytp-popup,
+  .ytp-settings-menu,
+  .ytp-panel,
+  .ytp-panel-menu
+)::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
 }
+
 html[data-ytg-on]::-webkit-scrollbar-track,
-html[data-ytg-on] *::-webkit-scrollbar-track {
-  background: transparent !important;
-}
+html[data-ytg-on] *::-webkit-scrollbar-track,
 html[data-ytg-on]::-webkit-scrollbar-thumb,
-html[data-ytg-on] *::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--ytg-a) 55%, rgba(255,255,255,0.18)) !important;
-  border-radius: 999px !important;
-}
-html[data-ytg-on]::-webkit-scrollbar-thumb:hover,
-html[data-ytg-on] *::-webkit-scrollbar-thumb:hover {
-  background: var(--ytg-a) !important;
-  box-shadow: 0 0 8px var(--ytg-a) !important;
-}
+html[data-ytg-on] *::-webkit-scrollbar-thumb,
 html[data-ytg-on]::-webkit-scrollbar-corner,
-html[data-ytg-on] *::-webkit-scrollbar-corner {
-  background: transparent !important;
-}
+html[data-ytg-on] *::-webkit-scrollbar-corner,
 html[data-ytg-on]::-webkit-scrollbar-button,
 html[data-ytg-on] *::-webkit-scrollbar-button {
   display: none !important;
+  background: transparent !important;
   width: 0 !important;
   height: 0 !important;
 }
@@ -761,6 +821,18 @@ html[data-ytg-on] .ytp-settings-menu {
   box-shadow: inset 0 1px 0 var(--ytg-edge);
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
+}
+
+/* Account popup & menu length: naturally expand height to fit content without ugly scrollbars */
+html[data-ytg-on] :is(
+  ytd-multi-page-menu-renderer,
+  ytd-multi-page-menu-renderer #sections,
+  ytd-popup-container tp-yt-iron-dropdown,
+  ytd-popup-container tp-yt-iron-dropdown #contentWrapper
+) {
+  max-height: calc(100vh - 75px) !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }
 /* Three-dots menu buttons on comments, videos, watch metadata: completely transparent (no black circular button) */
 html[data-ytg-on] :is(
@@ -1709,10 +1781,7 @@ html[data-ytg-on] .ytp-popup, html[data-ytg-on] .ytp-settings-menu {
   background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.02) 50%), var(--ytg-pop) !important;
   -webkit-backdrop-filter: blur(22px) saturate(1.35); backdrop-filter: blur(22px) saturate(1.35);
 }
-/* search button = same glass circle as the mic */
-html[data-ytg-on] .ytSearchboxComponentSearchButton, html[data-ytg-on] #search-icon-legacy {
-  background: var(--ytg-fill) !important; border: 1px solid var(--ytg-edge) !important; box-shadow: var(--ytg-shine) !important; border-radius: 999px !important;
-}
+
 /* chip-bar scroll arrows: 100% transparent, no dark box or gradient */
 html[data-ytg-on] ytd-feed-filter-chip-bar-renderer #left-arrow, html[data-ytg-on] ytd-feed-filter-chip-bar-renderer #right-arrow,
 html[data-ytg-on] yt-chip-cloud-renderer #left-arrow, html[data-ytg-on] yt-chip-cloud-renderer #right-arrow,
@@ -2666,21 +2735,15 @@ html[data-ytg-on] :is(.ytp-popup, .ytp-settings-menu, .ytp-panel, .ytp-contextme
   box-shadow: 0 8px 32px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.22) !important;
 }
 
-/* Eliminate ugly Windows scrollbar in player menus — replace with sleek, transparent scrollbar */
+/* Eliminate scrollbars in player menus */
 html[data-ytg-on] :is(.ytp-popup, .ytp-settings-menu, .ytp-panel, .ytp-panel-menu) {
-  scrollbar-width: thin !important;
-  scrollbar-color: color-mix(in srgb, var(--ytg-a) 45%, transparent) transparent !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }
 html[data-ytg-on] :is(.ytp-popup, .ytp-settings-menu, .ytp-panel, .ytp-panel-menu)::-webkit-scrollbar {
-  width: 4px !important;
-  height: 4px !important;
-}
-html[data-ytg-on] :is(.ytp-popup, .ytp-settings-menu, .ytp-panel, .ytp-panel-menu)::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--ytg-a) 45%, transparent) !important;
-  border-radius: 4px !important;
-}
-html[data-ytg-on] :is(.ytp-popup, .ytp-settings-menu, .ytp-panel, .ytp-panel-menu)::-webkit-scrollbar-track {
-  background: transparent !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* Quality & Settings menu items: active theme highlight ONLY on hover / cursor movement */
