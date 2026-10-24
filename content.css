@@ -245,26 +245,14 @@ html[data-ytg-on] :is(
   filter: drop-shadow(0 1px 3px rgba(0,0,0,0.85)) !important;
 }
 
-/* ---------- Suggestion Chips: Pill-Curved, STRICT ZERO Outer Border, NO Selection/Hover Jump Animation ---------- */
+/* ---------- Suggestion Chips: Pill-Curved, ZERO Outer Border, Visible Transparent Glass, Smooth Natural Scrolling ---------- */
 html[data-ytg-on] :is(
   yt-chip-cloud-chip-renderer,
-  chip-shape,
-  .ytChipShapeChip,
-  .ytChipShapeInactive,
-  .ytChipShapeActive,
-  yt-related-chip-cloud-renderer,
-  ytd-feed-filter-chip-bar-renderer,
-  #chips,
-  #chips-wrapper,
-  #chips-content,
-  iron-selector
+  chip-shape
 ) :is(
-  *,
   button,
   .yt-spec-button-shape-next,
-  .ytChipShapeChip,
-  chip-shape,
-  yt-chip-cloud-chip-renderer
+  .ytChipShapeChip
 ) {
   border: none !important;
   border-width: 0 !important;
@@ -274,48 +262,23 @@ html[data-ytg-on] :is(
   outline-width: 0 !important;
   outline-color: transparent !important;
   border-radius: 999px !important;
-  transform: none !important;
 }
 
 html[data-ytg-on] :is(
   yt-chip-cloud-chip-renderer,
-  chip-shape,
-  .ytChipShapeChip,
-  .ytChipShapeInactive,
-  .ytChipShapeActive,
-  yt-related-chip-cloud-renderer,
-  ytd-feed-filter-chip-bar-renderer,
-  #chips,
-  #chips-wrapper,
-  #chips-content,
-  iron-selector
+  chip-shape
 ) :is(
-  *,
   button,
   .yt-spec-button-shape-next,
-  .ytChipShapeChip,
-  chip-shape,
-  yt-chip-cloud-chip-renderer
+  .ytChipShapeChip
 )::before,
 html[data-ytg-on] :is(
   yt-chip-cloud-chip-renderer,
-  chip-shape,
-  .ytChipShapeChip,
-  .ytChipShapeInactive,
-  .ytChipShapeActive,
-  yt-related-chip-cloud-renderer,
-  ytd-feed-filter-chip-bar-renderer,
-  #chips,
-  #chips-wrapper,
-  #chips-content,
-  iron-selector
+  chip-shape
 ) :is(
-  *,
   button,
   .yt-spec-button-shape-next,
-  .ytChipShapeChip,
-  chip-shape,
-  yt-chip-cloud-chip-renderer
+  .ytChipShapeChip
 )::after {
   border: none !important;
   border-width: 0 !important;
@@ -325,27 +288,26 @@ html[data-ytg-on] :is(
   box-shadow: none !important;
 }
 
-/* Inactive suggestion chips: smooth pill-curved background, soft shadow, ZERO outer border, NO jump */
+/* Inactive suggestion chips: clean visible transparent liquid glass, NO dark black, NO heavy drop shadow */
 html[data-ytg-on] :is(
   .ytChipShapeInactive,
   yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
   chip-shape:not([selected]),
   #chips yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
   ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer:not([selected])
-) :is(button, .ytChipShapeChip, .yt-spec-button-shape-next, chip-shape, yt-chip-cloud-chip-renderer) {
-  background: color-mix(in srgb, var(--ytg-bg1) 58%, rgba(20, 16, 10, 0.50)) !important;
-  background-color: color-mix(in srgb, var(--ytg-bg1) 58%, rgba(20, 16, 10, 0.50)) !important;
+) :is(button, .ytChipShapeChip, .yt-spec-button-shape-next) {
+  background: color-mix(in srgb, var(--ytg-a) 12%, rgba(255, 255, 255, 0.08)) !important;
+  background-color: color-mix(in srgb, var(--ytg-a) 12%, rgba(255, 255, 255, 0.08)) !important;
   border: none !important;
   border-width: 0 !important;
   border-style: none !important;
   border-color: transparent !important;
   outline: none !important;
   border-radius: 999px !important;
-  transform: none !important;
   -webkit-backdrop-filter: blur(14px) !important;
   backdrop-filter: blur(14px) !important;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35) !important;
-  transition: background-color .2s ease, box-shadow .2s ease !important;
+  box-shadow: none !important;
+  transition: background-color .2s ease, opacity .2s ease !important;
 }
 
 /* Suggestion chips text: Theme-wise text color matching the active theme */
@@ -356,30 +318,26 @@ html[data-ytg-on] :is(
   #chips yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
   ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer:not([selected])
 ) :is(*, span, .ytChipShapeText, #text, yt-formatted-string) {
-  color: color-mix(in srgb, var(--ytg-a) 75%, #ffffff) !important;
-  -webkit-text-fill-color: color-mix(in srgb, var(--ytg-a) 75%, #ffffff) !important;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+  color: color-mix(in srgb, var(--ytg-a) 80%, #ffffff) !important;
+  -webkit-text-fill-color: color-mix(in srgb, var(--ytg-a) 80%, #ffffff) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75) !important;
   opacity: 1 !important;
   font-weight: 500 !important;
   background: transparent !important;
   transition: color .2s ease !important;
 }
 
-/* Hover state: steady background tint, NO scaling, ZERO border */
+/* Hover state: clean transparent glass tint, ZERO heavy shadow */
 html[data-ytg-on] :is(
   .ytChipShapeInactive,
   yt-chip-cloud-chip-renderer:not([selected]):not(.iron-selected),
   chip-shape:not([selected]),
   ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer:not([selected])
-):hover :is(button, .ytChipShapeChip, .yt-spec-button-shape-next, chip-shape, yt-chip-cloud-chip-renderer) {
-  transform: none !important;
-  background: color-mix(in srgb, var(--ytg-a) 25%, rgba(20, 16, 10, 0.65)) !important;
+):hover :is(button, .ytChipShapeChip, .yt-spec-button-shape-next) {
+  background: color-mix(in srgb, var(--ytg-a) 24%, rgba(255, 255, 255, 0.14)) !important;
   border: none !important;
-  border-width: 0 !important;
-  border-style: none !important;
-  border-color: transparent !important;
   outline: none !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
+  box-shadow: none !important;
 }
 
 html[data-ytg-on] :is(
@@ -392,7 +350,7 @@ html[data-ytg-on] :is(
   -webkit-text-fill-color: #ffffff !important;
 }
 
-/* Active / Selected suggestion chip (e.g. "All"): Vibrant theme pill, ZERO border, NO jump animation */
+/* Active / Selected suggestion chip (e.g. "All" or active topic): Vibrant theme pill, ZERO border */
 html[data-ytg-on] :is(
   .ytChipShapeActive,
   [aria-selected="true"],
@@ -410,16 +368,12 @@ html[data-ytg-on] :is(
   chip-shape[selected],
   #chips yt-chip-cloud-chip-renderer[selected],
   ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer[selected]
-) :is(button, .ytChipShapeChip, .yt-spec-button-shape-next, yt-chip-cloud-chip-renderer, chip-shape) {
+) :is(button, .ytChipShapeChip, .yt-spec-button-shape-next) {
   background: linear-gradient(135deg, color-mix(in srgb, var(--ytg-a) 60%, #fff), var(--ytg-a) 70%, color-mix(in srgb, var(--ytg-a) 70%, #000)) !important;
   background-color: var(--ytg-a) !important;
   border: none !important;
-  border-width: 0 !important;
-  border-style: none !important;
-  border-color: transparent !important;
   outline: none !important;
-  transform: none !important;
-  box-shadow: 0 3px 12px color-mix(in srgb, var(--ytg-a) 40%, transparent), 0 2px 6px rgba(0,0,0,0.3) !important;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--ytg-a) 40%, transparent) !important;
   border-radius: 999px !important;
 }
 
@@ -438,7 +392,22 @@ html[data-ytg-on] :is(
   background: transparent !important;
 }
 
-/* Next / Previous arrows in the suggestion chips line: theme icon color, pill/circle shape, NO outer box */
+html[data-ytg-on] :is(
+  .ytChipShapeActive,
+  [aria-selected="true"],
+  .iron-selected,
+  yt-chip-cloud-chip-renderer[selected],
+  chip-shape[selected],
+  #chips yt-chip-cloud-chip-renderer[selected],
+  ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer[selected]
+) :is(*, span, .ytChipShapeText, #text, yt-formatted-string) {
+  color: #0b0906 !important;
+  -webkit-text-fill-color: #0b0906 !important;
+  font-weight: 700 !important;
+  background: transparent !important;
+}
+
+/* Next / Previous arrows in the suggestion chips line (2 & 3): 100% visible transparent glass, NO dark black box, NO heavy shadow */
 html[data-ytg-on] :is(
   #chips-wrapper,
   ytd-feed-filter-chip-bar-renderer,
@@ -446,6 +415,8 @@ html[data-ytg-on] :is(
   #chips-content
 ) :is(#left-arrow, #right-arrow, #left-arrow-button, #right-arrow-button) {
   background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
   box-shadow: none !important;
   border: none !important;
 }
@@ -463,6 +434,8 @@ html[data-ytg-on] :is(
   #chips-content
 ) :is(#left-arrow, #right-arrow, #left-arrow-button, #right-arrow-button)::after {
   display: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 html[data-ytg-on] :is(
@@ -471,15 +444,15 @@ html[data-ytg-on] :is(
   yt-chip-cloud-renderer,
   #chips-content
 ) :is(#left-arrow, #right-arrow, #left-arrow-button, #right-arrow-button) button {
-  background: color-mix(in srgb, var(--ytg-bg1) 65%, rgba(20, 16, 10, 0.6)) !important;
-  background-color: color-mix(in srgb, var(--ytg-bg1) 65%, rgba(20, 16, 10, 0.6)) !important;
+  background: transparent !important;
+  background-color: transparent !important;
   border: none !important;
   border-width: 0 !important;
   border-radius: 50% !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35), 0 0 8px color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
-  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition: transform .2s ease, background-color .2s ease !important;
 }
 
 html[data-ytg-on] :is(
@@ -488,9 +461,9 @@ html[data-ytg-on] :is(
   yt-chip-cloud-renderer,
   #chips-content
 ) :is(#left-arrow, #right-arrow, #left-arrow-button, #right-arrow-button) button:hover {
-  transform: scale(1.1) !important;
-  background: color-mix(in srgb, var(--ytg-a) 25%, rgba(20, 16, 10, 0.7)) !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), 0 0 14px color-mix(in srgb, var(--ytg-a) 55%, transparent) !important;
+  transform: scale(1.12) !important;
+  background: color-mix(in srgb, var(--ytg-a) 20%, transparent) !important;
+  box-shadow: none !important;
 }
 
 html[data-ytg-on] :is(
@@ -501,7 +474,7 @@ html[data-ytg-on] :is(
 ) :is(#left-arrow, #right-arrow, #left-arrow-button, #right-arrow-button) :is(svg, path, yt-icon, .yt-spec-button-shape-next__icon) {
   fill: var(--ytg-a) !important;
   color: var(--ytg-a) !important;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.85)) !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.65)) !important;
   transition: fill .3s ease, color .3s ease !important;
 }
 
@@ -654,7 +627,33 @@ html[data-ytg-on] :is(
   transform: scale(1.1) !important;
 }
 
-/* Masthead Top Icons (Burger menu, notifications bell, avatar) */
+/* Masthead Top Icons (1: Hamburger / Guide menu button - 100% visible transparent, NO black box) */
+html[data-ytg-on] ytd-masthead :is(
+  #guide-button,
+  #guide-button button,
+  #guide-button yt-icon-button,
+  #guide-button tp-yt-paper-icon-button,
+  #guide-icon,
+  ytd-notification-topbar-button-renderer,
+  ytd-notification-topbar-button-renderer button,
+  #notification-button,
+  #buttons yt-icon-button,
+  #buttons yt-icon-button button
+) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html[data-ytg-on] ytd-masthead :is(
+  #guide-button button,
+  #buttons yt-icon-button button
+):hover {
+  background: color-mix(in srgb, var(--ytg-a) 18%, transparent) !important;
+  border-radius: 50% !important;
+}
+
 html[data-ytg-on] ytd-masthead :is(
   #guide-button,
   ytd-notification-topbar-button-renderer,
@@ -826,20 +825,22 @@ html[data-ytg-on] :is(
   filter: drop-shadow(0 0 6px var(--ytg-a)) !important;
 }
 
-/* ========== YouTube Masthead "+ Create" Button: Water Droplet Ripple Animation ========== */
-@keyframes ytg-droplet-ripple {
+/* ========== YouTube Masthead "+ Create" Button: Smooth, Slow, Gentle Aura (NO excessive spread, NO abrupt snap) ========== */
+@keyframes ytg-create-gentle-aura {
   0% {
-    transform: scale(0.96);
-    opacity: 0.85;
-    box-shadow: 0 0 4px var(--ytg-a), inset 0 0 2px var(--ytg-a);
+    transform: scale(1);
+    opacity: 0.12;
+    box-shadow: 0 0 4px color-mix(in srgb, var(--ytg-a) 25%, transparent);
   }
-  40% {
-    opacity: 0.55;
+  50% {
+    transform: scale(1.03, 1.08);
+    opacity: 0.75;
+    box-shadow: 0 0 12px color-mix(in srgb, var(--ytg-a) 55%, transparent), 0 0 3px var(--ytg-a);
   }
   100% {
-    transform: scale(1.36, 1.68);
-    opacity: 0;
-    box-shadow: 0 0 18px transparent, inset 0 0 8px transparent;
+    transform: scale(1);
+    opacity: 0.12;
+    box-shadow: 0 0 4px color-mix(in srgb, var(--ytg-a) 25%, transparent);
   }
 }
 
@@ -862,13 +863,13 @@ html[data-ytg-on] ytd-masthead :is(
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
   animation: none !important;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--ytg-a) 32%, transparent), 0 2px 8px rgba(0,0,0,0.35) !important;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--ytg-a) 28%, transparent), 0 2px 6px rgba(0,0,0,0.3) !important;
   transition: border-color .28s ease, box-shadow .28s ease !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
 
-/* Water Droplet Concentric Ripples Expanding Outward Around the Create Button */
+/* Gentle Aura breathing smoothly and slowly around the Create button without spreading out far */
 html[data-ytg-on] ytd-masthead button[aria-label*="Create" i]::before,
 html[data-ytg-on] ytd-masthead yt-button-shape:has(path[d*="M14 10"]):not(:has(button[aria-label*="Create" i]))::before {
   content: "" !important;
@@ -878,19 +879,12 @@ html[data-ytg-on] ytd-masthead yt-button-shape:has(path[d*="M14 10"]):not(:has(b
   pointer-events: none !important;
   border: 1.5px solid var(--ytg-a) !important;
   z-index: 0 !important;
-  animation: ytg-droplet-ripple 2.8s cubic-bezier(0.12, 0.5, 0.35, 1) infinite !important;
+  animation: ytg-create-gentle-aura 4.5s ease-in-out infinite !important;
 }
 
 html[data-ytg-on] ytd-masthead button[aria-label*="Create" i]::after,
-html[data-ytg-on] ytd-masthead yt-button-shape:has(path[d*="M14 10"]):not(:has(button[aria-label*="Create" i]))::after {
-  content: "" !important;
-  position: absolute !important;
-  inset: -1px !important;
-  border-radius: 999px !important;
-  pointer-events: none !important;
-  border: 1.5px solid var(--ytg-a) !important;
-  z-index: 0 !important;
-  animation: ytg-droplet-ripple 2.8s cubic-bezier(0.12, 0.5, 0.35, 1) 1.4s infinite !important;
+html[data-ytg-on] ytd-masthead yt-button-shape:has(path[d*="M14 10"])::after {
+  display: none !important;
 }
 
 html[data-ytg-on] ytd-masthead :is(
@@ -1719,14 +1713,14 @@ html[data-ytg-on] .ytp-popup, html[data-ytg-on] .ytp-settings-menu {
 html[data-ytg-on] .ytSearchboxComponentSearchButton, html[data-ytg-on] #search-icon-legacy {
   background: var(--ytg-fill) !important; border: 1px solid var(--ytg-edge) !important; box-shadow: var(--ytg-shine) !important; border-radius: 999px !important;
 }
-/* chip-bar scroll arrows: no dark box */
+/* chip-bar scroll arrows: 100% transparent, no dark box or gradient */
 html[data-ytg-on] ytd-feed-filter-chip-bar-renderer #left-arrow, html[data-ytg-on] ytd-feed-filter-chip-bar-renderer #right-arrow,
 html[data-ytg-on] yt-chip-cloud-renderer #left-arrow, html[data-ytg-on] yt-chip-cloud-renderer #right-arrow,
 html[data-ytg-on] #left-arrow-button, html[data-ytg-on] #right-arrow-button, html[data-ytg-on] #chips-content #left-arrow, html[data-ytg-on] #chips-content #right-arrow {
-  background: transparent !important; box-shadow: none !important;
+  background: transparent !important; background-color: transparent !important; background-image: none !important; box-shadow: none !important; border: none !important;
 }
 html[data-ytg-on] #left-arrow::before, html[data-ytg-on] #right-arrow::before, html[data-ytg-on] #left-arrow::after, html[data-ytg-on] #right-arrow::after,
-html[data-ytg-on] #left-arrow-button::before, html[data-ytg-on] #right-arrow-button::before { display: none !important; }
+html[data-ytg-on] #left-arrow-button::before, html[data-ytg-on] #right-arrow-button::before { display: none !important; background: transparent !important; }
 /* progress bar: bright, no black */
 html[data-ytg-on] .ytp-progress-list { background: rgba(255,255,255,.30) !important; }
 html[data-ytg-on] .ytp-load-progress { background: rgba(255,255,255,.45) !important; }
@@ -2282,6 +2276,45 @@ html[data-ytg-on] {
   --yt-spec-button-chip-background-hover: color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
 }
 
+/* Remove any separator lines or dividers between channel name and subscribe button */
+html[data-ytg-on] :is(
+  #owner,
+  ytd-video-owner-renderer,
+  #upload-info,
+  #channel-name,
+  #subscribe-button,
+  ytd-subscribe-button-renderer
+) {
+  border: none !important;
+  border-right: none !important;
+  border-left: none !important;
+}
+
+html[data-ytg-on] :is(#owner, #subscribe-button, ytd-subscribe-button-renderer) :is(
+  yt-button-shape,
+  yt-button-view-model
+) {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-ytg-on] :is(#owner, #subscribe-button, ytd-subscribe-button-renderer, ytd-video-owner-renderer) :is(
+  #divider,
+  [class*="divider"],
+  [class*="separator"],
+  yt-button-shape:empty,
+  button:empty:not(:has(svg)):not(:has(yt-icon)):not(:has(span))
+) {
+  display: none !important;
+  border: none !important;
+  background: transparent !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 html[data-ytg-on] :is(
   #subscribe-button,
   ytd-subscribe-button-renderer,
@@ -2307,9 +2340,7 @@ html[data-ytg-on] :is(
   .yt-spec-button-shape-next,
   .yt-spec-button-shape-next--filled,
   .yt-spec-button-shape-next--tonal,
-  .yt-spec-button-shape-next--mono,
-  yt-button-shape,
-  yt-button-shape button
+  .yt-spec-button-shape-next--mono
 ) {
   background: transparent !important;
   background-color: transparent !important;
