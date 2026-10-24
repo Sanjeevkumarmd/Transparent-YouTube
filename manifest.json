@@ -1,12 +1,13 @@
 {
   "manifest_version": 3,
   "name": "YT Gold Glass",
-  "version": "10.1.1",
+  "version": "10.1.2",
   "description": "Premium transparent glassmorphism, dynamic themes, cinematic animations, live customization studio, and ad-blocking for YouTube.",
   "permissions": [
     "storage",
     "unlimitedStorage",
-    "declarativeNetRequest"
+    "declarativeNetRequest",
+    "tabs"
   ],
   "host_permissions": [
     "https://www.youtube.com/*",

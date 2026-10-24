@@ -597,7 +597,11 @@ initWheelNavigation();
 function openFullscreenTab() {
   const isDevOpen = $("viewDev") && !$("viewDev").hidden;
   const url = chrome.runtime.getURL(`popup.html?fullscreen=1${isDevOpen ? "&view=dev" : ""}`);
-  chrome.tabs.create({ url });
+  if (typeof chrome !== "undefined" && chrome.tabs && chrome.tabs.create) {
+    chrome.tabs.create({ url });
+  } else {
+    window.open(url, "_blank");
+  }
 }
 if ($("fullTabBtn")) $("fullTabBtn").addEventListener("click", openFullscreenTab);
 if ($("devFullTabBtn")) $("devFullTabBtn").addEventListener("click", openFullscreenTab);
