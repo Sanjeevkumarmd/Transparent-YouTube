@@ -290,6 +290,25 @@
   setInterval(clearShortsLetterbox, 800);
   document.addEventListener("yt-navigate-finish", clearShortsLetterbox);
 
+  // ---- Mini-Guide & Sidebar: Ensure 100% transparent glass with live animated wallpaper visible ----
+  function clearMiniSidebar() {
+    if (!s.enabled) return;
+    const mg = document.querySelector("ytd-mini-guide-renderer");
+    if (mg) {
+      if (mg.style.backgroundColor !== "transparent") {
+        mg.style.setProperty("background", "transparent", "important");
+        mg.style.setProperty("background-color", "transparent", "important");
+      }
+      const items = mg.querySelector("#items");
+      if (items && items.style.backgroundColor !== "transparent") {
+        items.style.setProperty("background", "transparent", "important");
+        items.style.setProperty("background-color", "transparent", "important");
+      }
+    }
+  }
+  setInterval(clearMiniSidebar, 800);
+  document.addEventListener("yt-navigate-finish", clearMiniSidebar);
+
   // ---- Universal Scrollbar Killer across Shadow DOM and Main Document ----
   const scrollbarKillerStyle = Object.assign(document.createElement("style"), {
     id: "ytg-scrollbar-killer",
