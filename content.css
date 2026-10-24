@@ -352,7 +352,7 @@ html[data-ytg-on] :is(
   -webkit-text-fill-color: #ffffff !important;
 }
 
-/* Active / Selected suggestion chip (e.g. "All" or active topic): Vibrant theme pill, ZERO border */
+/* Active / Selected suggestion chip: Theme BORDER, Transparent glass, ZERO solid fill */
 html[data-ytg-on] :is(
   .ytChipShapeActive,
   [aria-selected="true"],
@@ -370,12 +370,13 @@ html[data-ytg-on] :is(
   chip-shape[selected],
   #chips yt-chip-cloud-chip-renderer[selected],
   ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer[selected]
-) :is(button, .ytChipShapeChip, .yt-spec-button-shape-next) {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--ytg-a) 60%, #fff), var(--ytg-a) 70%, color-mix(in srgb, var(--ytg-a) 70%, #000)) !important;
-  background-color: var(--ytg-a) !important;
-  border: none !important;
+) :is(button, .ytChipShapeChip, .yt-spec-button-shape-next, yt-chip-cloud-chip-renderer, chip-shape) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 1.5px solid var(--ytg-a) !important;
   outline: none !important;
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--ytg-a) 40%, transparent) !important;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--ytg-a) 45%, transparent), inset 0 0 5px color-mix(in srgb, var(--ytg-a) 20%, transparent) !important;
   border-radius: 999px !important;
 }
 
@@ -388,25 +389,11 @@ html[data-ytg-on] :is(
   #chips yt-chip-cloud-chip-renderer[selected],
   ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer[selected]
 ) :is(*, span, .ytChipShapeText, #text, yt-formatted-string) {
-  color: #0b0906 !important;
-  -webkit-text-fill-color: #0b0906 !important;
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
   font-weight: 700 !important;
   background: transparent !important;
-}
-
-html[data-ytg-on] :is(
-  .ytChipShapeActive,
-  [aria-selected="true"],
-  .iron-selected,
-  yt-chip-cloud-chip-renderer[selected],
-  chip-shape[selected],
-  #chips yt-chip-cloud-chip-renderer[selected],
-  ytd-feed-filter-chip-bar-renderer yt-chip-cloud-chip-renderer[selected]
-) :is(*, span, .ytChipShapeText, #text, yt-formatted-string) {
-  color: #0b0906 !important;
-  -webkit-text-fill-color: #0b0906 !important;
-  font-weight: 700 !important;
-  background: transparent !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
 }
 
 /* Next / Previous arrows in the suggestion chips line (2 & 3): 100% visible transparent glass, NO dark black box, NO heavy shadow */
@@ -509,34 +496,37 @@ html[data-ytg-on] ytd-playlist-panel-renderer {
 html[data-ytg-on] ytd-comments#comments,
 html[data-ytg-on] ytd-engagement-panel-section-list-renderer { padding: 12px 16px; }
 
-/* Sidebar items & container: Frosted Liquid Glass with High Contrast in All Themes */
+/* Sidebar items & container: Frosted Liquid Glass, Reduced Blur for Live Background, NO Black Box */
 html[data-ytg-on] :is(
   ytd-guide-renderer #guide-content,
   #guide-content.ytd-app,
   ytd-mini-guide-renderer
 ) {
-  background: color-mix(in srgb, var(--ytg-bg1) 40%, rgba(15, 12, 8, 0.65)) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  background: color-mix(in srgb, var(--ytg-bg1) 18%, rgba(15, 12, 8, 0.35)) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   border-right: 1px solid color-mix(in srgb, var(--ytg-a) 25%, rgba(255, 255, 255, 0.12)) !important;
 }
 
 html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer) a.yt-simple-endpoint {
   border-radius: 12px;
+  background: transparent !important;
   transition: all .2s ease !important;
 }
 
-html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer) :is(yt-formatted-string, .title, span) {
-  color: #f2ede2 !important;
-  -webkit-text-fill-color: #f2ede2 !important;
+/* Home, Shorts, Subscriptions, You labels: Active Theme Color */
+html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer) :is(yt-formatted-string, .title, span, #endpoint span) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
 }
 
+/* Home, Shorts, Subscriptions, You icons: Theme colored with clear drop shadow */
 html[data-ytg-on] :is(ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer):not(:has(a[href*="premium"])):not(:has(a[href*="kids"])):not(:has(a[href*="music"])) :is(yt-icon, .yt-spec-button-shape-next__icon) svg :is(path, circle, polygon) {
   fill: var(--ytg-a) !important;
   color: var(--ytg-a) !important;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7)) !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.85)) !important;
   transition: fill .3s ease !important;
 }
 
@@ -1183,31 +1173,51 @@ html[data-ytg-on] .ytSearchboxComponentSuggestion:hover,
 html[data-ytg-on] yt-searchbox [role="option"]:hover,
 html[data-ytg-on] .sbse:hover, html[data-ytg-on] .ytSearchboxComponentSuggestion[aria-selected="true"] { background: rgba(255,255,255,.12) !important; }
 
-/* ---------- Shorts: Full Liquid Glass & Theme-Wise Styling ---------- */
-html[data-ytg-on] ytd-shorts,
-html[data-ytg-on] ytd-shorts #shorts-container,
-html[data-ytg-on] ytd-shorts #shorts-inner-container,
-html[data-ytg-on] ytd-shorts .reel-video-in-sequence,
-html[data-ytg-on] ytd-shorts ytd-reel-video-renderer,
-html[data-ytg-on] ytd-shorts ytd-reel-video-renderer #player-container,
-html[data-ytg-on] ytd-shorts ytd-reel-video-renderer #player-container-inner,
-html[data-ytg-on] ytd-shorts #shorts-player,
-html[data-ytg-on] ytd-shorts .html5-video-player,
-html[data-ytg-on] ytd-shorts .html5-video-container,
-html[data-ytg-on] ytd-shorts #navigation-container,
-html[data-ytg-on] ytd-shorts [class*="cinematic"],
-html[data-ytg-on] ytd-shorts [id*="cinematic"] {
-  background: transparent !important; background-color: transparent !important;
-}
-html[data-ytg-on] ytd-shorts [class*="cinematic"],
-html[data-ytg-on] ytd-shorts [id*="cinematic"] {
+/* ---------- Shorts: Full Liquid Glass, ZERO Black Side Pillars / Letterboxing ---------- */
+html[data-ytg-on] :is(
+  ytd-shorts,
+  #shorts-container,
+  #shorts-inner-container,
+  ytd-reel-video-renderer,
+  #player-container,
+  #player-container-inner,
+  #player-container.ytd-reel-video-renderer,
+  #shorts-player,
+  .html5-video-player,
+  .html5-video-container,
+  video.video-stream,
+  video.html5-main-video,
+  ytd-page-manager:has(ytd-shorts),
+  #page-manager:has(ytd-shorts),
+  .reel-video-in-sequence,
+  #navigation-container,
+  [class*="cinematic"],
+  [id*="cinematic"],
+  ytd-reel-player-overlay-renderer,
+  #overlay
+) {
   background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
   box-shadow: none !important;
 }
-html[data-ytg-on] ytd-shorts::before, html[data-ytg-on] ytd-shorts::after,
-html[data-ytg-on] ytd-shorts ytd-reel-video-renderer::before, html[data-ytg-on] ytd-shorts ytd-reel-video-renderer::after {
+
+html[data-ytg-on] :is(
+  ytd-shorts,
+  #shorts-container,
+  ytd-reel-video-renderer,
+  #player-container,
+  #shorts-player
+)::before,
+html[data-ytg-on] :is(
+  ytd-shorts,
+  #shorts-container,
+  ytd-reel-video-renderer,
+  #player-container,
+  #shorts-player
+)::after {
+  display: none !important;
   background: transparent !important;
-  border: none !important;
 }
 
 /* 1. Shorts Player Top Controls (Play/Pause, Mute, CC, Settings, Fullscreen) */
@@ -1368,10 +1378,10 @@ html[data-ytg-on] ytd-shorts #actions :is(
   .yt-spec-button-shape-with-label__label,
   ytd-like-button-renderer span
 ) {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9) !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   font-size: 11.5px !important;
 }
 
@@ -1477,6 +1487,43 @@ html[data-ytg-on] :is(
   font-weight: 600 !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
   transition: color .2s ease, text-shadow .2s ease;
+}
+
+/* Shorts Shelf on Home & Browse: Title text in active theme color */
+html[data-ytg-on] :is(
+  ytd-rich-shelf-renderer[is-shorts],
+  ytd-rich-shelf-renderer:has(yt-icon[icon*="shorts"]),
+  ytd-rich-shelf-renderer:has(#title-icon),
+  ytd-reel-shelf-renderer
+) :is(#title, #title-text, h2, span.ytd-rich-shelf-renderer, #title-container yt-formatted-string) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85) !important;
+  font-weight: 700 !important;
+}
+
+/* Shorts Icon inside play triangle symbol: Active theme color (retaining the official red outer badge) */
+html[data-ytg-on] :is(
+  ytd-rich-shelf-renderer,
+  ytd-reel-shelf-renderer,
+  #title-icon,
+  ytd-guide-entry-renderer:has(a[title="Shorts"]),
+  ytd-mini-guide-entry-renderer:has(a[title="Shorts"])
+) svg :is(
+  polygon,
+  path:nth-child(2),
+  path[d*="M10 "],
+  path[d*="10 8.5"],
+  path[d*="10 6.6"],
+  path[d*="10L10"],
+  path[d*="10 15"],
+  path[fill="#fff"],
+  path[fill="#ffffff"],
+  path[fill="#FFF"],
+  path[fill="#FFFFFF"]
+) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
 }
 
 /* Hover highlight on video titles: lights up with the active theme color */
@@ -1747,18 +1794,16 @@ html[data-ytg-on] ytd-guide-section-renderer, html[data-ytg-on] #guide-content, 
 html[data-ytg-on] ytd-watch-metadata, html[data-ytg-on] #above-the-fold, html[data-ytg-on] ytd-comments-header-renderer,
 html[data-ytg-on] ytd-masthead #container, html[data-ytg-on] #masthead-container, html[data-ytg-on] ytd-mini-guide-renderer,
 html[data-ytg-on] #frosted-glass, html[data-ytg-on] #chips-wrapper { border: 0 !important; border-color: transparent !important; box-shadow: none !important; }
-html[data-ytg-on] ytd-guide-section-renderer:not(:last-child)::after, html[data-ytg-on] ytd-popup-container ytd-notification-renderer::after {
-  content: ""; display: block; height: 1px; margin: 6px 12px 0;
-  background: linear-gradient(90deg, transparent, var(--ytg-edge), transparent);
+html[data-ytg-on] ytd-guide-section-renderer::after, html[data-ytg-on] ytd-popup-container ytd-notification-renderer::after {
+  display: none !important;
 }
 html[data-ytg-on] ytd-popup-container ytd-notification-renderer { border-bottom: 0 !important; }
 html[data-ytg-on] tp-yt-app-drawer #contentContainer {
-  background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(15,12,7,0.40)) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(1.4) !important;
-  backdrop-filter: blur(24px) saturate(1.4) !important;
-  border-right: 1px solid color-mix(in srgb, var(--ytg-a) 30%, rgba(255,255,255,0.15)) !important;
+  background: color-mix(in srgb, var(--ytg-bg1) 18%, rgba(15, 12, 8, 0.35)) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(1.2) !important;
+  backdrop-filter: blur(8px) saturate(1.2) !important;
+  border-right: 1px solid color-mix(in srgb, var(--ytg-a) 25%, rgba(255, 255, 255, 0.12)) !important;
   box-shadow: 4px 0 24px rgba(0,0,0,0.35) !important;
-}
 }
 html[data-ytg-on] ytd-popup-container tp-yt-iron-dropdown #contentWrapper, html[data-ytg-on] .ytp-popup, html[data-ytg-on] .ytp-settings-menu {
   background:
@@ -1979,7 +2024,7 @@ html[data-ytg-on] .ytp-chrome-controls :is(.ytp-time-display, .ytp-time-current,
   font-weight: 600 !important;
   text-shadow: 0 1px 3px rgba(0,0,0,0.85) !important;
 }
-html[data-ytp-chrome-top] .ytp-button, html[data-ytg-on] ytd-shorts #actions span { color: #fff !important; text-shadow: 0 1px 2px rgba(0,0,0,.7); }
+html[data-ytp-chrome-top] .ytp-button, html[data-ytg-on] ytd-shorts #actions span { color: var(--ytg-a) !important; -webkit-text-fill-color: var(--ytg-a) !important; text-shadow: 0 1px 2px rgba(0,0,0,.7); }
 /* watch title: still (no animation), brighter gold, soft backing + fine dark edge for readability */
 html[data-ytg-on] h1.ytd-watch-metadata, html[data-ytg-on] .ytp-title-link { animation: none !important; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.75)); }
 
@@ -2016,8 +2061,84 @@ html[data-ytg-on] { --ytg-tsh: 0 1px 3px rgba(0,0,0,.55); --ytg-icon-soft: var(-
 html[data-ytg-on][data-ytg-mode="light"] { --ytg-tsh: 0 1px 2px rgba(255,255,255,.7); }
 html[data-ytg-on] :is(#metadata-line span, ytd-video-meta-block, #channel-name a, .yt-content-metadata-view-model-wiz__metadata-text, .yt-content-metadata-view-model__metadata-text, #owner-sub-count) { color: color-mix(in srgb, var(--ytg-text) 88%, transparent) !important; }
 /* watch title backing: very soft dark haze, no edges */
-/* premium theme icons: share, more (...), sidebar, top bar, menus */
-html[data-ytg-on] :is(ytd-watch-metadata, ytd-menu-renderer, ytd-guide-renderer, ytd-mini-guide-renderer, ytd-masthead #end, ytd-popup-container, #above-the-fold, ytd-comments) :is(yt-icon, .yt-spec-button-shape-next__icon, button) svg :is(path, circle, polygon) { fill: var(--ytg-a) !important; color: var(--ytg-a) !important; }
+/* Universal Theme-Wise Icons Across YouTube: Menus, Account Drawer, Panels, Popups, Sidebar */
+html[data-ytg-on] :is(
+  ytd-popup-container,
+  ytd-multi-page-menu-renderer,
+  yt-multi-page-menu-section-renderer,
+  ytd-menu-popup-renderer,
+  ytd-compact-link-renderer,
+  ytd-menu-service-item-renderer,
+  ytd-account-item-renderer,
+  tp-yt-paper-item,
+  tp-yt-paper-listbox,
+  tp-yt-iron-dropdown,
+  ytd-guide-renderer,
+  ytd-mini-guide-renderer,
+  #guide,
+  #menu,
+  #sections,
+  #items,
+  ytd-watch-metadata,
+  ytd-menu-renderer,
+  #above-the-fold,
+  ytd-comments,
+  ytd-playlist-panel-renderer,
+  ytd-reel-player-overlay-renderer
+):not(:has(a[href*="premium"])):not(:has(a[href*="kids"])):not(:has(a[href*="music"])) :is(
+  yt-icon,
+  .yt-spec-button-shape-next__icon,
+  .yt-icon-shape,
+  tp-yt-iron-icon
+) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
+
+html[data-ytg-on] :is(
+  ytd-popup-container,
+  ytd-multi-page-menu-renderer,
+  yt-multi-page-menu-section-renderer,
+  ytd-menu-popup-renderer,
+  ytd-compact-link-renderer,
+  ytd-menu-service-item-renderer,
+  ytd-account-item-renderer,
+  tp-yt-paper-item,
+  tp-yt-paper-listbox,
+  tp-yt-iron-dropdown,
+  ytd-guide-renderer,
+  ytd-mini-guide-renderer,
+  #guide,
+  #menu,
+  #sections,
+  #items,
+  ytd-watch-metadata,
+  ytd-menu-renderer,
+  #above-the-fold,
+  ytd-comments,
+  ytd-playlist-panel-renderer,
+  ytd-reel-player-overlay-renderer
+):not(:has(a[href*="premium"])):not(:has(a[href*="kids"])):not(:has(a[href*="music"])) :is(
+  yt-icon,
+  .yt-spec-button-shape-next__icon,
+  .yt-icon-shape,
+  tp-yt-iron-icon
+) :is(div, svg, path, circle, polygon, rect, g, use) {
+  fill: var(--ytg-a) !important;
+  color: var(--ytg-a) !important;
+}
+
+/* Completely remove top navigation loading line under masthead / notification button */
+html[data-ytg-on] :is(
+  yt-page-navigation-progress,
+  #progress.yt-page-navigation-progress,
+  .yt-page-navigation-progress
+) {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  height: 0 !important;
+}
 
 /* YouTube Official Topbar Logo: Official Red Play Button with Pure Gold Play Triangle */
 html[data-ytg-on] ytd-topbar-logo-renderer #logo-icon svg g:first-child path:first-child,

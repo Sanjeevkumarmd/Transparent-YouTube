@@ -260,6 +260,61 @@
     }
   }, 120);
 
+  // ---- Shorts letterbox killer: ensure side pillars around vertical video are completely transparent ----
+  function clearShortsLetterbox() {
+    if (!s.enabled) return;
+    const isShorts = location.pathname.startsWith("/shorts") || !!document.querySelector("ytd-shorts");
+    if (!isShorts) return;
+    const selectors = [
+      "ytd-shorts",
+      "#shorts-container",
+      "#shorts-inner-container",
+      "ytd-reel-video-renderer",
+      "#player-container",
+      "#player-container-inner",
+      "#shorts-player",
+      "ytd-shorts .html5-video-player",
+      "ytd-shorts .html5-video-container",
+      "ytd-shorts video.video-stream",
+      "ytd-shorts video.html5-main-video"
+    ];
+    selectors.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => {
+        if (el && el.style.backgroundColor !== "transparent") {
+          el.style.setProperty("background-color", "transparent", "important");
+          el.style.setProperty("background", "transparent", "important");
+        }
+      });
+    });
+  }
+  setInterval(clearShortsLetterbox, 800);
+  document.addEventListener("yt-navigate-finish", clearShortsLetterbox);
+
+  // ---- Universal Scrollbar Killer across Shadow DOM and Main Document ----
+  const scrollbarKillerStyle = Object.assign(document.createElement("style"), {
+    id: "ytg-scrollbar-killer",
+    textContent: `
+      html[data-ytg-on], html[data-ytg-on] body, html[data-ytg-on] * {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      }
+      html[data-ytg-on]::-webkit-scrollbar,
+      html[data-ytg-on] *::-webkit-scrollbar,
+      html[data-ytg-on] *::-webkit-scrollbar-track,
+      html[data-ytg-on] *::-webkit-scrollbar-thumb,
+      html[data-ytg-on] *::-webkit-scrollbar-corner,
+      html[data-ytg-on] *::-webkit-scrollbar-button {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        background: transparent !important;
+      }
+    `
+  });
+  if (!document.getElementById("ytg-scrollbar-killer")) {
+    (document.head || root).appendChild(scrollbarKillerStyle);
+  }
+
   // ---- Tag YouTube's "New" badges and Subscribe/Subscribed buttons for theme matching ----
   function updateButtonsAndBadges() {
     if (!s.enabled) return;
