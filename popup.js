@@ -453,8 +453,6 @@ function toggleDev(force) {
   document.body.classList.toggle("dev", show); $("devbtn").hidden = show;
   const t = $("toast"); if (t) { t.textContent = show ? "Customize" : ""; t.classList.toggle("on", show); }
 }
-  const t = $("toast"); if (t) { t.textContent = show ? "Customize" : ""; t.classList.toggle("on", show); }
-}
 let clicks = 0, clickTimer = 0;
 $("logo").addEventListener("click", () => {
   clicks++; clearTimeout(clickTimer); clickTimer = setTimeout(() => (clicks = 0), 2000);

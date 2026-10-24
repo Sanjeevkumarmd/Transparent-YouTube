@@ -147,7 +147,8 @@
   }
 
   function stage(el, s, mode, img) {
-    if (!el.firstChild) {
+    if (!el) return;
+    if (!el.children || el.children.length < 5) {
       el.innerHTML = '<div class="wall"></div><div class="img"></div><div class="dim"></div><div class="a1"></div><div class="a2"></div>';
     }
     const r = resolve(s), wall = el.children[0], im = el.children[1];
