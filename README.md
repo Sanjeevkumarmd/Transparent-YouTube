@@ -1,28 +1,29 @@
-# ✨ Gold Glass v10.1.3 — Premium Transparent Glass UI & Dynamic Themes
+# ✨ Gold Glass v10.1.4 — Premium Transparent Glass UI & Dynamic Themes
 
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-gold?style=for-the-badge&logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/mv3/intro/)
-[![Version](https://img.shields.io/badge/Version-10.1.3-d4af37?style=for-the-badge)](manifest.json)
+[![Version](https://img.shields.io/badge/Version-10.1.4-d4af37?style=for-the-badge)](manifest.json)
 [![Platform](https://img.shields.io/badge/Browser-Chrome%20%7C%20Edge%20%7C%20Brave-blue?style=for-the-badge)](https://www.google.com/chrome/)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge)](LICENSE)
 
-> **Gold Glass v10.1.3**: A futuristic, liquid-glass visual theme and enhancement suite for YouTube. Experience seamless translucent glassmorphism, instant clear theme carousels, live 16:9 customization preview, cinematic ambient animations, and real-time fine-tuning.
+> **Gold Glass v10.1.4**: A futuristic, liquid-glass visual theme and enhancement suite for YouTube. Experience seamless translucent glassmorphism, horizontal instant clear theme carousels, live 16:9 customization preview, cinematic ambient animations, and real-time fine-tuning.
 
 ---
 
-## 🌟 What's New in v10.1.3
+## 🌟 What's New in v10.1.4
 
-### ⚡ Lightweight, Fast & Zero-Lag Popup
-- **Compact 440px Dimensions**: Perfectly fitted to Chrome's native extension popup dimensions without horizontal scrollbars or page overflow.
-- **Removed Fullscreen & 2.0 Design**: Eliminated heavy dual-view DOM trees and fullscreen buttons, restoring blazing-fast, buttery smooth responsiveness when switching themes.
+### 🎛️ Horizontal Desktop Extension Interface
+- **Wide Horizontal Layout**: Sized to `760px × 530px` — restored the wide layout giving the 16:9 preview, themes carousel, animation cards, and speed controls room to breathe without vertical crowding or right-side horizontal page scrolling.
 - **Gen Z Curved Borders**: Modern 16px–18px rounded pill aesthetics with liquid glass refraction.
-- **Gold Selection Glow**: Selected theme card features an elevated gold border (`#ffd700`) and glow; selected animation card displays gold text and borders.
+- **Selected Gold Glow**: Active theme displays an elevated gold border (`#ffd700`) and amber glow; active animation card displays a gold border and gold text.
 - **Pop-In / Pop-Out Center Badge**: Smooth animated pop-in and pop-out preview badge in the center of the live 16:9 canvas when switching themes or animations.
 
-### 🎬 Player & UI Fixes
-- **High-Contrast Player Settings Menu**: Dark liquid frosted glass (`rgba(22, 16, 10, 0.90)`) with 32px blur, pure white option labels (`#ffffff`), and gold accents ensures Quality and playback settings are 100% readable even over pure white video backgrounds.
-- **Subscribe Button Separator Removed**: Cleanly stripped the vertical divider line in the Subscribe / Notification bell segmented pill.
-- **Single-Line Microphone Tooltip**: Tooltips for "Search with your voice" and other top bar controls now strictly render on a single horizontal line without awkward vertical wrapping.
-- **Create Button Hover Stabilized**: Fixed hover behavior to scale gently without rotation or unwanted menu popups.
+### 💡 Video Player & UI Enhancements
+- **Hover-Only Single-Line Tooltips**: Removed forced-display rules on tooltips. "Search with your voice", "Notifications", and player tooltips now strictly show on hover and disappear cleanly on mouse-out, formatted in a single horizontal line.
+- **Removed Like/Dislike Row Glow**: Completely removed pulsing glow animations and neon box-shadows when moving the cursor over Like, Dislike, Share, Save, and top action buttons.
+- **Permanent Subscribe Separator Removal**: Stripped all inner vertical separator lines and divider borders on the Subscribe and notification bell segmented buttons.
+- **Precise Seeking Theme Color**: The "^ Pull up for precise seeking" prompt and arrow are styled in the active theme accent color.
+- **75% Transparent Liquid Settings Menu**: Player settings and quality menu now use 25% dark, 75% transparent liquid fluid glass (`backdrop-filter: blur(20px)`) with crisp white labels and gold accents.
+- **Instant Ambient Mode Sync & Dotted Borders**: Ambient radiance switches instantaneously to the active theme color with zero delay in normal, theater, and fullscreen modes, accented with delicate dotted theme separator borders around the player.
 
 ### 🎬 Dedicated GPU Ambient Animations
 - **Firefly**: Organic golden embers swaying softly across the background.

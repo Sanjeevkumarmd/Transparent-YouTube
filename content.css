@@ -1848,13 +1848,21 @@ html[data-ytg-on] ytd-watch-flexy :is(#player-container-inner, .html5-video-play
   box-shadow: none !important;
 }
 
-/* 2. Ambient light behind the video: enlarged, rich, theme-radiant glow */
-html[data-ytg-ambient] ytd-watch-flexy:not([fullscreen]) :is(#player-container-outer, #player-theater-container, #player-full-bleed-container) {
+/* 2. Ambient light behind the video: instantaneous rich theme radiance */
+html[data-ytg-ambient] :is(
+  ytd-watch-flexy:not([fullscreen]) :is(#player-container-outer, #player-theater-container, #player-full-bleed-container),
+  ytd-watch-flexy[theater]:not([fullscreen]) :is(#player-theater-container, #player-full-bleed-container),
+  .html5-video-player.ytp-fullscreen
+) {
   position: relative;
   isolation: isolate;
   overflow: visible !important;
 }
-html[data-ytg-ambient] ytd-watch-flexy:not([fullscreen]) :is(#player-container-outer, #player-theater-container, #player-full-bleed-container)::before {
+
+html[data-ytg-ambient] :is(
+  ytd-watch-flexy:not([fullscreen]) :is(#player-container-outer, #player-theater-container, #player-full-bleed-container),
+  ytd-watch-flexy[theater]:not([fullscreen]) :is(#player-theater-container, #player-full-bleed-container)
+)::before {
   content: "";
   position: absolute;
   inset: -140px -220px;
@@ -1862,16 +1870,39 @@ html[data-ytg-ambient] ytd-watch-flexy:not([fullscreen]) :is(#player-container-o
   pointer-events: none;
   background: radial-gradient(ellipse at center, color-mix(in srgb, var(--ytg-v, var(--ytg-a)) 75%, transparent) 0%, color-mix(in srgb, var(--ytg-a) 40%, transparent) 45%, transparent 75%) !important;
   filter: blur(48px);
-  opacity: 0.9;
-  transition: opacity .3s ease, filter .3s ease;
+  opacity: 0.92;
+  transition: opacity .15s ease, filter .15s ease;
 }
 
-/* In Theater Mode: extra enlarged ambient radiance filling the margins without separator lines */
+/* In Theater Mode: extra enlarged ambient radiance filling the margins */
 html[data-ytg-ambient] ytd-watch-flexy[theater]:not([fullscreen]) :is(#player-theater-container, #player-full-bleed-container)::before {
   inset: -120px -320px !important;
   background: radial-gradient(ellipse at center, color-mix(in srgb, var(--ytg-v, var(--ytg-a)) 80%, transparent) 0%, color-mix(in srgb, var(--ytg-a) 45%, transparent) 50%, transparent 80%) !important;
   filter: blur(60px) !important;
   opacity: 0.95 !important;
+}
+
+/* In Fullscreen Mode: Ambient edge glow */
+html[data-ytg-ambient] .html5-video-player.ytp-fullscreen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: inset 0 0 50px color-mix(in srgb, var(--ytg-v, var(--ytg-a)) 40%, transparent) !important;
+  transition: box-shadow .15s ease;
+}
+
+/* Elegant Dotted Separator Borders around Video Player in Normal, Theater, and Fullscreen */
+html[data-ytg-on] :is(
+  ytd-watch-flexy:not([fullscreen]) #player-container-inner,
+  ytd-watch-flexy[theater]:not([fullscreen]) #player-theater-container #movie_player,
+  .html5-video-player:not(.ytp-fullscreen)
+) {
+  border: 1.5px dotted color-mix(in srgb, var(--ytg-a) 45%, rgba(255, 255, 255, 0.18)) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 /* ---------- Simple layout: banners / end cards only (Shorts stay) ---------- */
@@ -2392,13 +2423,17 @@ html[data-ytg-on] :is(
   box-shadow: 0 0 16px color-mix(in srgb, var(--ytg-a) 55%, transparent), 0 2px 12px rgba(0, 0, 0, 0.45) !important;
 }
 
-/* ========== Like & Dislike Buttons: Normal Frosted Pill (NO Neon Animation), Themed Icons & Liked Count ========== */
+/* ========== Like & Dislike Buttons & Action Row: Normal Frosted Pill (NO Neon Animation / Glow), Themed Icons & Liked Count ========== */
 html[data-ytg-on] :is(
   ytd-segmented-like-dislike-button-renderer,
   segmented-like-dislike-button-view-model,
   ytd-like-button-renderer,
   like-button-view-model,
-  dislike-button-view-model
+  dislike-button-view-model,
+  #top-level-buttons-computed,
+  #top-level-buttons-computed ytd-button-renderer,
+  ytd-menu-renderer,
+  ytd-watch-metadata #actions
 ) {
   animation: none !important;
   box-shadow: none !important;
@@ -2406,7 +2441,14 @@ html[data-ytg-on] :is(
 
 html[data-ytg-on] :is(
   ytd-segmented-like-dislike-button-renderer,
-  segmented-like-dislike-button-view-model
+  segmented-like-dislike-button-view-model,
+  ytd-like-button-renderer,
+  like-button-view-model,
+  dislike-button-view-model,
+  #top-level-buttons-computed,
+  #top-level-buttons-computed ytd-button-renderer,
+  ytd-menu-renderer,
+  ytd-watch-metadata #actions
 ) :is(
   button,
   yt-button-shape button,
@@ -2414,6 +2456,29 @@ html[data-ytg-on] :is(
 ) {
   animation: none !important;
   box-shadow: none !important;
+}
+
+/* On Cursor Hover: strictly NO glowing animation or neon box-shadow */
+html[data-ytg-on] :is(
+  ytd-segmented-like-dislike-button-renderer,
+  segmented-like-dislike-button-view-model,
+  ytd-like-button-renderer,
+  like-button-view-model,
+  dislike-button-view-model,
+  #top-level-buttons-computed,
+  #top-level-buttons-computed ytd-button-renderer,
+  ytd-menu-renderer,
+  ytd-watch-metadata #actions,
+  #actions.ytd-watch-metadata
+) :is(
+  button:hover,
+  yt-button-shape button:hover,
+  .yt-spec-button-shape-next:hover,
+  ytd-button-renderer:hover
+) {
+  animation: none !important;
+  box-shadow: none !important;
+  filter: none !important;
 }
 
 /* Thumbs Up & Thumbs Down Icons: Clean Active Theme Color, Transparent icon containers */
@@ -2692,6 +2757,39 @@ html[data-ytg-on] :is(
   transition: all .2s ease !important;
 }
 
+/* PERMANENTLY REMOVE vertical separator bar and inner borders on Subscribe / Bell segmented button */
+html[data-ytg-on] :is(#subscribe-button, ytd-subscribe-button-renderer, yt-subscribe-button-view-model, #owner) :is(
+  .yt-spec-button-shape-next--segmented-start,
+  .yt-spec-button-shape-next__segmented-left-button,
+  button:first-of-type
+) {
+  border-right: none !important;
+}
+html[data-ytg-on] :is(#subscribe-button, ytd-subscribe-button-renderer, yt-subscribe-button-view-model, #owner) :is(
+  .yt-spec-button-shape-next--segmented-end,
+  .yt-spec-button-shape-next__segmented-right-button,
+  button:last-of-type:not(:first-of-type)
+) {
+  border-left: none !important;
+}
+html[data-ytg-on] :is(#subscribe-button, ytd-subscribe-button-renderer, yt-subscribe-button-view-model, #owner) :is(
+  .yt-spec-button-shape-next__separator,
+  [class*="separator"],
+  [class*="divider"],
+  #divider,
+  ::before,
+  ::after
+) {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  border: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 /* Eliminate touch feedback pseudo-fills */
 html[data-ytg-on] :is(
   #subscribe-button,
@@ -2704,7 +2802,7 @@ html[data-ytg-on] :is(
   border: none !important;
 }
 
-/* Hover: glowing theme highlight */
+/* Hover: subtle frosted highlight without neon glow */
 html[data-ytg-on] :is(
   #subscribe-button,
   ytd-subscribe-button-renderer,
@@ -2729,7 +2827,8 @@ html[data-ytg-on] :is(
   background: color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
   background-color: color-mix(in srgb, var(--ytg-a) 25%, transparent) !important;
   border-color: var(--ytg-a) !important;
-  box-shadow: 0 0 16px color-mix(in srgb, var(--ytg-a) 50%, transparent) !important;
+  box-shadow: none !important;
+  animation: none !important;
 }
 
 /* Text inside Subscribe / Subscribed */
@@ -2993,14 +3092,14 @@ html[data-ytg-on] ytd-masthead :is(#start, #center, #end) :is(yt-icon, button, .
 }
 
 /* ========== Player settings menu & quality selection ========== */
-/* Rich dark liquid frosted glass with high contrast — 100% crystal legible even over white videos */
+/* 25% dark, 75% transparent liquid-fluid glass with refined blur */
 html[data-ytg-on] :is(.ytp-popup, .ytp-settings-menu, .ytp-panel, .ytp-contextmenu) {
-  background: linear-gradient(145deg, rgba(22, 16, 10, 0.90), rgba(12, 9, 5, 0.96)) !important;
-  -webkit-backdrop-filter: blur(32px) saturate(1.6) !important;
-  backdrop-filter: blur(32px) saturate(1.6) !important;
-  border: 1px solid color-mix(in srgb, var(--ytg-a) 48%, rgba(255,255,255,.24)) !important;
+  background: linear-gradient(145deg, rgba(22, 16, 10, 0.25), rgba(12, 9, 5, 0.28)) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.4) !important;
+  backdrop-filter: blur(20px) saturate(1.4) !important;
+  border: 1px solid color-mix(in srgb, var(--ytg-a) 45%, rgba(255,255,255,.20)) !important;
   border-radius: 16px !important;
-  box-shadow: 0 12px 42px rgba(0,0,0,0.72), inset 0 1px 0 rgba(255,255,255,.22) !important;
+  box-shadow: 0 10px 32px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,.18) !important;
 }
 
 /* Eliminate scrollbars in player menus */
@@ -3081,29 +3180,67 @@ html[data-ytg-on] .ytp-menuitem[aria-checked="false"] .ytp-menuitem-toggle-check
   border-color: rgba(255,255,255,0.35) !important;
 }
 
-/* ========== Microphone & Universal Top-Bar Tooltips: Strictly Single-Line Horizontal, No Wrapping ========== */
-html[data-ytg-on] tp-yt-paper-tooltip,
-html[data-ytg-on] tp-yt-paper-tooltip #tooltip,
-html[data-ytg-on] .tp-yt-paper-tooltip,
-html[data-ytg-on] .ytp-tooltip,
-html[data-ytg-on] .ytp-tooltip-text,
-html[data-ytg-on] [role="tooltip"],
-html[data-ytg-on] #voice-search-button tp-yt-paper-tooltip,
-html[data-ytg-on] #voice-search-button tp-yt-paper-tooltip #tooltip {
+/* ========== Precise Seeking Prompt ("^ Pull up for precise seeking"): Themed Text Color ========== */
+html[data-ytg-on] :is(
+  .ytp-fine-scrubbing-hint,
+  .ytp-fine-scrubbing-hint-text,
+  .ytp-fine-scrubbing-edu,
+  .ytp-tooltip-fine-scrubbing,
+  [class*="fine-scrubbing"],
+  [class*="precise-seeking"]
+) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  fill: var(--ytg-a) !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 10px color-mix(in srgb, var(--ytg-a) 60%, transparent) !important;
+}
+html[data-ytg-on] :is(
+  .ytp-fine-scrubbing-hint,
+  .ytp-fine-scrubbing-hint-text,
+  .ytp-fine-scrubbing-edu,
+  .ytp-tooltip-fine-scrubbing,
+  [class*="fine-scrubbing"],
+  [class*="precise-seeking"]
+) :is(span, div, svg, path, p) {
+  color: var(--ytg-a) !important;
+  -webkit-text-fill-color: var(--ytg-a) !important;
+  fill: var(--ytg-a) !important;
+}
+
+/* ========== Universal Top-Bar & Player Tooltips: Single-Line Horizontal, Visible ONLY on Cursor Hover ========== */
+html[data-ytg-on] :is(
+  tp-yt-paper-tooltip #tooltip,
+  .tp-yt-paper-tooltip #tooltip,
+  .ytp-tooltip-text,
+  #voice-search-button tp-yt-paper-tooltip #tooltip
+) {
   white-space: nowrap !important;
   max-width: none !important;
   min-width: max-content !important;
   width: auto !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
   word-break: normal !important;
   overflow-wrap: normal !important;
   border-radius: 8px !important;
   padding: 5px 12px !important;
   font-size: 12px !important;
   line-height: 1.3 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Tooltips strictly hide when cursor moves away or when hidden */
+html[data-ytg-on] tp-yt-paper-tooltip[hidden],
+html[data-ytg-on] tp-yt-paper-tooltip.hidden,
+html[data-ytg-on] tp-yt-paper-tooltip[aria-hidden="true"],
+html[data-ytg-on] [role="tooltip"][hidden],
+html[data-ytg-on] [role="tooltip"][aria-hidden="true"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html[data-ytg-on] tp-yt-paper-tooltip {
+  pointer-events: none !important;
 }
 html[data-ytg-on] .ytp-panel-header,
 html[data-ytg-on] .ytp-panel-title,

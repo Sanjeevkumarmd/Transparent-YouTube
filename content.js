@@ -60,7 +60,12 @@
     flag("data-ytg-nocomments", s.hideComments);
     root.setAttribute("data-ytg-icons", s.iconMode);
     setCursor(s.cursorColor === "gold" ? s.gold : v["--ytg-a"], s.cursor);
-    if (!s.glow && !s.ambient) root.style.removeProperty("--ytg-v");
+    if (!s.glow && !s.ambient) {
+      root.style.removeProperty("--ytg-v");
+    } else if (v["--ytg-a"]) {
+      // Instantly switch ambient radiance color with active theme without 1-2s delay
+      root.style.setProperty("--ytg-v", v["--ytg-a"]);
+    }
     if (!s.glow) root.style.setProperty("--ytg-p", "var(--ytg-a)");
     if (!root.style.getPropertyValue("--ytg-ui")) root.style.setProperty("--ytg-ui", "color-mix(in srgb, var(--ytg-p) 80%, #fff)");
     YTG.stage(stage, s, m, img);
